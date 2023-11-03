@@ -11,7 +11,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: Colors.indigo[200],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -33,7 +33,7 @@ class WelcomePage extends StatelessWidget {
             controller: _controller,
             count: 3,
             effect: JumpingDotEffect(
-              activeDotColor: Colors.deepPurple,
+              activeDotColor: Colors.indigo,
               dotColor: Colors.deepPurple.shade100,
               dotHeight: 15,
               dotWidth: 15,
