@@ -1,7 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +29,6 @@ class _GenotpState extends State<Genotp> {
 
   @override
   Widget build(BuildContext context) {
-    
     phoneController.selection = TextSelection.fromPosition(
       TextPosition(
         offset: phoneController.text.length,
@@ -44,7 +42,6 @@ class _GenotpState extends State<Genotp> {
               padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
               child: Column(
                 children: [
-
                   Container(
                     width: 200,
                     height: 200,
@@ -151,20 +148,25 @@ class _GenotpState extends State<Genotp> {
                     ),
                   ),
                   //login button
-                   const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      )
-                    : CustomButton(
-                        text: "Login",
-                        onPressed: () => Navigator.pop(context,OtpPage),
-                    ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : CustomButton(
+                            text: "Login",
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OtpPage()),
+                              );
+                            }),
                   ),
                 ],
               ),
@@ -174,6 +176,4 @@ class _GenotpState extends State<Genotp> {
       ),
     );
   }
-
-
 }
