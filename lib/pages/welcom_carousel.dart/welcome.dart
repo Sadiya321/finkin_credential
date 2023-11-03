@@ -1,7 +1,7 @@
 
-import 'package:finkin_credential/welcom_carousel.dart/page1.dart';
-import 'package:finkin_credential/welcom_carousel.dart/page2.dart';
-import 'package:finkin_credential/welcom_carousel.dart/page3.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
