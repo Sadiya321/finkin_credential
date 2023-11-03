@@ -1,10 +1,10 @@
-import 'package:finkin_credential/pages/otp_page.dart';
-import 'package:finkin_credential/welcom_carousel.dart/page1.dart';
-import 'package:finkin_credential/welcom_carousel.dart/page2.dart';
-import 'package:finkin_credential/welcom_carousel.dart/page3.dart';
-import 'package:finkin_credential/welcom_carousel.dart/welcome.dart';
+import 'package:finkin_credential/pages/otp/otp_page.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
+import 'package:finkin_credential/pages/welcom_carousel.dart/welcome.dart';
 import 'package:flutter/material.dart';
-import '../pages/gen_OTP.dart';
+import '../pages/otp/gen_OTP.dart';
 
 class MyRoutes {
   static String genotpRoute = "/genotp";

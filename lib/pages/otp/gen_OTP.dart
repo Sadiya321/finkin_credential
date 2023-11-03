@@ -1,5 +1,5 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:finkin_credential/pages/otp_page.dart';
+import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 
 import 'package:flutter/material.dart';
