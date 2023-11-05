@@ -2,7 +2,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Genotp extends StatefulWidget {
   const Genotp({Key? key}) : super(key: key);

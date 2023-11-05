@@ -1,13 +1,9 @@
-
-import 'package:finkin_credential/utils/utils.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 
 class OtpPage extends StatefulWidget {
- 
-   const OtpPage({Key? key}) : super(key: key);
+  const OtpPage({Key? key}) : super(key: key);
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -19,7 +15,7 @@ class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     final isLoading = false;
-       
+
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
