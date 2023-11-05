@@ -1,3 +1,4 @@
+import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
 
 class Page1 extends StatelessWidget {
@@ -6,13 +7,13 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 164, 176, 245),
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            color: Colors.indigo,
+            color: AppColor.primary,
           ),
         ),
       ),

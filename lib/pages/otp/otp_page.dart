@@ -1,6 +1,10 @@
+import 'package:finkin_credential/pages/agent_screen/agent.dart';
+import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/utils/utils.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({Key? key}) : super(key: key);
@@ -21,23 +25,23 @@ class _OtpPageState extends State<OtpPage> {
       height: 56,
       textStyle: const TextStyle(
         fontSize: 20,
-        color: Color.fromRGBO(30, 60, 87, 1),
+        color:AppColor.primary,
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromRGBO(28, 32, 33, 1.0)),
+        border: Border.all( color: AppColor.primary,),
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
+      border: Border.all( color: AppColor.primary,),
       borderRadius: BorderRadius.circular(8),
     );
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Colors.grey,
+        color: AppColor.primary,
       ),
     );
 
@@ -51,7 +55,7 @@ class _OtpPageState extends State<OtpPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Colors.purple.shade200,
+            color: AppColor.primary,
           ),
         ),
         textStyle: const TextStyle(
@@ -67,15 +71,13 @@ class _OtpPageState extends State<OtpPage> {
     );
 
     CustomButton verifyButton = CustomButton(
-      text: "Verify",
-      onPressed: () {
-        // if (otpCode != null) {
-        //   verifyOtp(context, otpCode!);
-        // } else {
-        //   showSnackBar(context, "Enter 6 digit otp code");
-        // }
-      },
-    );
+        text: "Verify",
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AgentPage()),
+          );
+        });
 
     return Scaffold(
       body: Container(
@@ -84,7 +86,7 @@ class _OtpPageState extends State<OtpPage> {
         child: isLoading == true
             ? const Center(
                 child: CircularProgressIndicator(
-                  color: Colors.purple,
+                  color: AppColor.primary,
                 ),
               )
             : SingleChildScrollView(
@@ -101,7 +103,7 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                     const SizedBox(height: 10),
                     Image.asset(
-                      "rout/images/OTP1.png",
+                      " ",
                       width: 260,
                       height: 260,
                     ),
@@ -127,7 +129,7 @@ class _OtpPageState extends State<OtpPage> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black38,
+                        color: AppColor.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -136,7 +138,7 @@ class _OtpPageState extends State<OtpPage> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.purple,
+                        color: AppColor.primary,
                       ),
                     ),
                   ],

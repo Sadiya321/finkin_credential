@@ -2,6 +2,7 @@ import 'package:finkin_credential/pages/otp/gen_OTP.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
+import 'package:finkin_credential/res/app_color.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -35,7 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[200],
+       backgroundColor: AppColor.secondary,
       body: Stack(
         children: [
           Column(
@@ -63,9 +64,9 @@ class _WelcomePageState extends State<WelcomePage> {
               SmoothPageIndicator(
                 controller: _controller,
                 count: numberOfPages,
-                effect: JumpingDotEffect(
-                  activeDotColor: Colors.indigo,
-                  dotColor: Colors.deepPurple.shade100,
+                effect: const JumpingDotEffect(
+                  activeDotColor: AppColor.primary,
+                  dotColor: AppColor.textLight,
                   dotHeight: 15,
                   dotWidth: 15,
                   spacing: 16,
@@ -80,10 +81,11 @@ class _WelcomePageState extends State<WelcomePage> {
               bottom: 16, // Adjust the bottom value as needed
               right: 16, // Adjust the right value as needed
               child: SizedBox(
-                width: 80,
-                height: 50,
+                width: 120,
+                height: 40,
                 child: CustomButton(
-                  text: "Next",
+                  text: "Get Started",
+                 
                   onPressed: () {
                     Navigator.push(
                       context,

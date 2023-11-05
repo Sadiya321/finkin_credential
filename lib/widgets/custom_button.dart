@@ -1,3 +1,4 @@
+import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -10,8 +11,8 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+          foregroundColor: MaterialStateProperty.all<Color>(AppColor.textLight),
+          backgroundColor: MaterialStateProperty.all<Color>(AppColor.primary),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
