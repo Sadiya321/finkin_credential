@@ -1,3 +1,4 @@
+import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
@@ -10,6 +11,9 @@ class MyRoutes {
   static String genotpRoute = "/genotp";
   static String OtpPageRoute = "/OtpPage";
   static String page1 = "/page1";
+   static String page2 = "/page2";
+    static String page3 = "/page3";
+     static String agent= "/agent";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -27,6 +31,8 @@ class MyRoutes {
        
        case '/page3':
        return MaterialPageRoute(builder: (context) => const Page3());
+        case '/agent':
+        return MaterialPageRoute(builder: (context) => AgentPage());
       default:
         return MaterialPageRoute(builder: (context) =>  WelcomePage());
     }

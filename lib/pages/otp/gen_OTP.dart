@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:finkin_credential/pages/otp/otp_page.dart';
+import 'package:finkin_credential/res/app_color.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,9 +47,9 @@ class _GenotpState extends State<Genotp> {
                     width: 200,
                     height: 200,
                     padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.purple.shade50,
+                      color: AppColor.secondary,
                     ),
                     child: Image.asset(
                       " ",
@@ -67,7 +68,7 @@ class _GenotpState extends State<Genotp> {
                     "Add your phone number. We'll send you a verification code",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black38,
+                      color: AppColor.textdivider,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -76,11 +77,12 @@ class _GenotpState extends State<Genotp> {
                   TextFormField(
                     keyboardType:
                         TextInputType.number, // Added keyboardType property
-                    cursorColor: const Color.fromARGB(255, 63, 81, 181),
+                    cursorColor:  AppColor.primary, 
                     controller: phoneController,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: AppColor.textPrimary, 
                     ),
                     onChanged: (value) {
                       setState(() {
@@ -89,18 +91,18 @@ class _GenotpState extends State<Genotp> {
                     },
                     decoration: InputDecoration(
                       hintText: "Enter phone number",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
-                        color: Colors.grey.shade600,
+                        color: AppColor.textdivider, 
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: AppColor.textdivider),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: AppColor.textdivider),
                       ),
                       prefixIcon: Container(
                         padding: const EdgeInsets.all(12.0),
@@ -122,8 +124,8 @@ class _GenotpState extends State<Genotp> {
                             "${selectedCountry.flagEmoji} + ${selectedCountry.phoneCode}",
                             style: const TextStyle(
                               fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                              color: AppColor.textPrimary,
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
@@ -136,11 +138,11 @@ class _GenotpState extends State<Genotp> {
                               margin: const EdgeInsets.all(10.0),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.green,
+                                color: AppColor.icon,
                               ),
                               child: const Icon(
                                 Icons.done,
-                                color: Colors.white,
+                                color: AppColor.textLight,
                                 size: 20,
                               ),
                             )
@@ -155,7 +157,7 @@ class _GenotpState extends State<Genotp> {
                     child: _isLoading
                         ? const Center(
                             child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: AppColor.textLight,
                             ),
                           )
                         : CustomButton(
@@ -164,7 +166,7 @@ class _GenotpState extends State<Genotp> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => OtpPage()),
+                                    builder: (context) => const OtpPage()),
                               );
                             }),
                   ),
@@ -176,4 +178,6 @@ class _GenotpState extends State<Genotp> {
       ),
     );
   }
+  
+
 }
