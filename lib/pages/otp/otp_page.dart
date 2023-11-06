@@ -1,3 +1,4 @@
+import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
@@ -77,7 +78,7 @@ class _OtpPageState extends State<OtpPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AgentForm()),
+            MaterialPageRoute(builder: (context) => const AgentPage()),
           );
         });
 

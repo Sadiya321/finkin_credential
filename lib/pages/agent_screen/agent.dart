@@ -146,6 +146,7 @@ class _AgentPageState extends State<AgentPage> {
             SizedBox(height: 16.0), // Add some spacing
             ElevatedButton(
               onPressed: _handleContinueButtonClick,
+              
               child: Text(
                 'Continue',
                 style: TextStyle(
@@ -153,6 +154,7 @@ class _AgentPageState extends State<AgentPage> {
                   color: AppColor.textLight,
                 ),
               ),
+              
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
                   buttonColor, // Use the buttonColor state variable
