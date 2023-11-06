@@ -29,6 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: AppColor.textLight,
       bottomNavigationBar: 
       CurvedNavigationBar(
+        animationDuration:Duration(milliseconds: 300) ,
          buttonBackgroundColor: AppColor.icon,
 backgroundColor: AppColor.textLight,
         height: 50,

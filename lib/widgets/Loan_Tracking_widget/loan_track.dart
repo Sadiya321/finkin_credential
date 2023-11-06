@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LoanTrack extends StatelessWidget {
   final String imageAsset;
   final String userName;
   final String loanType;
-  final String date;
+  final DateTime date;
   final IconData icon1;
   final IconData icon2;
   final String status;
@@ -28,7 +29,7 @@ class LoanTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final formattedDate = DateFormat.yMMMd().format(date);
 
     return GestureDetector(
       onTap: onPressed,
@@ -37,7 +38,7 @@ class LoanTrack extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-  color: Colors.white,
+  color: AppColor.textLight,
   borderRadius: BorderRadius.circular(26),
   border: Border.all(
     color: Colors.black,
@@ -90,20 +91,43 @@ class LoanTrack extends StatelessWidget {
                   ],
                 ),
               ),
+               const SizedBox(
+                        width: 18,
+                      ),
+              Row(
+                      children: [
+                        Icon(
+                            icon1,
+                            color: AppColor.icon,
+                          ),
+                      ],
+                    ),
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
-                      icon1,
-                      color: AppColor.primary, // Change the color as needed
+                    
+                   Column(
+                    children: [
+                      // Icon(
+                      //   icon1,
+                      //   color: Colors.blue,
+                      // ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                    Text(
+                      formattedDate, // Display the formatted date
+                      style: const TextStyle(fontSize: 12),
                     ),
                     Text(
                       status,
                       style: TextStyle(fontSize: 12),
                     ),
                   ],
-                ),
+                   ),
+                  ],
+                )
               ),
             ],
           ),
