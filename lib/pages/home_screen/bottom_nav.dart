@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/pages/home_screen/approved_screen.dart';
@@ -21,14 +22,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const AccountScreen(),
   ];
   int _selectedIndex = 0;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.textLight,
-      bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: AppColor.icon,
-        backgroundColor: AppColor.textLight,
+      bottomNavigationBar: 
+      CurvedNavigationBar(
+        animationDuration:Duration(milliseconds: 300) ,
+         buttonBackgroundColor: AppColor.icon,
+backgroundColor: AppColor.textLight,
         height: 50,
         color: AppColor.primary,
         index: _selectedIndex,

@@ -1,5 +1,6 @@
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/res/image_asset.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               CircleAvatar(
                                 backgroundImage: AssetImage(
-                                    "lib/res/assets/images/pop.jpeg"),
+                                    "assets/images/pop.jpeg"),
                                 radius: 50,
                               ),
                             ],
