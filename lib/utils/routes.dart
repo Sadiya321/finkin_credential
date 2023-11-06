@@ -32,7 +32,7 @@ class MyRoutes {
        case '/page3':
        return MaterialPageRoute(builder: (context) => const Page3());
         case '/agent':
-        return MaterialPageRoute(builder: (context) => AgentPage());
+        return MaterialPageRoute(builder: (context) => const AgentPage());
       default:
         return MaterialPageRoute(builder: (context) =>  WelcomePage());
     }
