@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 
 import '../../widgets/Loan_Tracking_widget/loan_track.dart';
 
@@ -20,8 +21,8 @@ class LoanScreen extends StatelessWidget {
             userName: 'John Doe',
             loanType: 'Personal Loan',
             date: '2023-11-06',
-            icon1: 'your_icon_data_as_string',
-            icon2: 'your_icon2_data_as_string',
+            icon1: FontAwesome.hourglass_2,
+            icon2: Icons.ice_skating,
             status: 'Approved',
             onPressed: () {
               // Handle onTap

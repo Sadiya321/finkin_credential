@@ -5,8 +5,8 @@ class LoanTrack extends StatelessWidget {
   final String userName;
   final String loanType;
   final String date;
-  final String icon1;
-  final String icon2;
+  final IconData icon1;
+  final IconData icon2;
   final String status;
   final Function() onPressed;
 
@@ -87,7 +87,7 @@ class LoanTrack extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Icon(
-                      IconData(int.parse(icon1), fontFamily: 'MaterialIcons'),
+                      icon1,
                       color: Colors.blue, // Change the color as needed
                     ),
                     Text(
