@@ -1,9 +1,10 @@
-import 'package:finkin_credential/pages/otp/gen_OTP.dart';
+import 'package:finkin_credential/pages/login_screen/login_screen.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
 import 'package:finkin_credential/res/app_color.dart';
-import 'package:finkin_credential/widgets/custom_button.dart';
+import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -61,18 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
 
               // dot indicators
-              SmoothPageIndicator(
-                controller: _controller,
-                count: numberOfPages,
-                effect: const JumpingDotEffect(
-                  activeDotColor: AppColor.primary,
-                  dotColor: AppColor.textLight,
-                  dotHeight: 15,
-                  dotWidth: 15,
-                  spacing: 16,
-                  jumpScale: 3,
-                ),
-              ),
+              
               const SizedBox(height: 20),
             ],
           ),
@@ -90,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Genotp(),
+                        builder: (context) => const VerificationScreen(),
                       ),
                     );
                   },

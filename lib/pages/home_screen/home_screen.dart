@@ -2,6 +2,7 @@ import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:finkin_credential/res/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final PageController _controller = PageController();
+  final int numberOfPages = 3; // Total number of pages
+  int currentPage = 0; 
   @override
   void initState() {
     super.initState();
@@ -18,8 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // String formattedDate = DateFormat('dd MMM, yyyy').format(DateTime.now());
-
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: SafeArea(
@@ -29,11 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
-                   const SizedBox(height: 50,),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                     
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                 color: AppColor.textLight,
+                                color: AppColor.textLight,
                                 fontSize: 26,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -53,17 +56,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                 color: AppColor.textLight,
+                                color: AppColor.textLight,
                                 fontSize: 26,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                             Text(
+                            Text(
                               'Good Morning Sir!',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                 color: AppColor.textdivider,
+                                color: AppColor.textdivider,
                                 fontSize: 18,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -86,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    "assets/images/pop.jpeg"),
+                                backgroundImage:
+                                    AssetImage("assets/images/pop.jpeg"),
                                 radius: 50,
                               ),
                             ],
@@ -100,12 +103,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(
-              height: 100,
+              height: 100, 
             ),
+
+
+
+            SmoothPageIndicator(
+                controller: _controller,
+                count: numberOfPages,
+                effect: const JumpingDotEffect(
+                  activeDotColor: AppColor.icon,
+                  dotColor: AppColor.textLight,
+                  dotHeight: 5,
+                  dotWidth: 5,
+                  spacing: 6,
+                  jumpScale: 3,
+                ),
+              ),
+
+
+
+            
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                  color:AppColor.textLight,
+                  color: AppColor.textLight,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.zero,
                     topRight: Radius.zero,

@@ -1,18 +1,18 @@
 import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color.dart';
-import 'package:finkin_credential/widgets/custom_button.dart';
+import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpPage extends StatefulWidget {
-  const OtpPage({Key? key}) : super(key: key);
+class VerificationScreen extends StatefulWidget {
+  const VerificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<OtpPage> createState() => _OtpPageState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _OtpPageState extends State<OtpPage> {
+class _VerificationScreenState extends State<VerificationScreen> {
   String? otpCode;
 
   @override
