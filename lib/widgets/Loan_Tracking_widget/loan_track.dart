@@ -73,7 +73,7 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                             maxLines: 2,
                             softWrap: false,
                             overflow: TextOverflow.ellipsis,
@@ -100,6 +100,7 @@ class LoanTrack extends StatelessWidget {
                             icon1,
                             color: AppColor.icon,
                           ),
+                          
                       ],
                     ),
               Container(
