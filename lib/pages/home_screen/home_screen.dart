@@ -28,9 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
+                   const SizedBox(height: 50,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                     
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                                 color: AppColor.textLight,
+                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -50,9 +52,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                                 color: AppColor.textLight,
+                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                             Text(
+                              'Good Morning Sir!',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                 color: AppColor.textdivider,
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
@@ -91,9 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: const BorderRadius.only(
+                decoration: const BoxDecoration(
+                  color:AppColor.textLight,
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.zero,
                     topRight: Radius.zero,
                   ),
