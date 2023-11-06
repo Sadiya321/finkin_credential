@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +22,6 @@ class LoanTrack extends StatelessWidget {
     required this.icon1,
     required this.icon2,
     required this.status,
-    
   });
 
   @override
@@ -38,13 +35,14 @@ class LoanTrack extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-  color: AppColor.textLight,
-  borderRadius: BorderRadius.circular(26),
-  border: Border.all(
-    color: Colors.black,
-    width: 1.0, // Adjust the width as needed for the thickness of the border
- 
-  ),),
+            color: AppColor.textLight,
+            borderRadius: BorderRadius.circular(26),
+            border: Border.all(
+              color: Colors.black,
+              width:
+                  1.0, // Adjust the width as needed for the thickness of the border
+            ),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -58,7 +56,7 @@ class LoanTrack extends StatelessWidget {
                         height: 48,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image:AssetImage(imageAsset),
+                            image: AssetImage(imageAsset),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -73,14 +71,15 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             softWrap: false,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             loanType,
-                            style: TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 10),
                             softWrap: false,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
@@ -91,24 +90,22 @@ class LoanTrack extends StatelessWidget {
                   ],
                 ),
               ),
-               const SizedBox(
-                        width: 18,
-                      ),
+              const SizedBox(
+                width: 18,
+              ),
               Row(
-                      children: [
-                        Icon(
-                            icon1,
-                            color: AppColor.icon,
-                          ),
-                          
-                      ],
-                    ),
+                children: [
+                  Icon(
+                    icon1,
+                    color: AppColor.icon,
+                  ),
+                ],
+              ),
               Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    
-                   Column(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Column(
                     children: [
                       // Icon(
                       //   icon1,
@@ -117,19 +114,18 @@ class LoanTrack extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                    Text(
-                      formattedDate, // Display the formatted date
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      status,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                   ),
-                  ],
-                )
-              ),
+                      Text(
+                        formattedDate, // Display the formatted date
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      Text(
+                        status,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ],
+              )),
             ],
           ),
         ),
