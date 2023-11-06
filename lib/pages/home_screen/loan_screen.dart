@@ -11,17 +11,16 @@ class LoanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //sdasda
-        title: Text('Another Page'),
+        title: const Text('Another Page'),
       ),
       body: Column(
         children: [
-          // Use the LoanTrack widget here
+          // Using LoanTrack widget
           LoanTrack(
             imageAsset: 'your_image_url',
             userName: 'John Doe',
             loanType: 'Personal Loan',
-            date: '2023-11-06',
+            date: DateTime(DateTime.daysPerWeek),
             icon1: FontAwesome.hourglass_2,
             icon2: Icons.ice_skating,
             status: 'Approved',

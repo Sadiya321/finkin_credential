@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LoanTrack extends StatelessWidget {
   final String imageAsset;
   final String userName;
   final String loanType;
-  final String date;
+  final DateTime date;
   final IconData icon1;
   final IconData icon2;
   final String status;
@@ -24,8 +25,7 @@ class LoanTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(userName + loanType + imageAsset);
-
+    final formattedDate = DateFormat.yMMMd().format(date);
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
@@ -49,7 +49,7 @@ class LoanTrack extends StatelessWidget {
                         height: 48,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(imageAsset),
+                            image: AssetImage(imageAsset),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -64,14 +64,14 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             maxLines: 2,
                             softWrap: false,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             loanType,
-                            style: TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 10),
                             softWrap: false,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
@@ -86,13 +86,17 @@ class LoanTrack extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
-                      icon1,
-                      color: Colors.blue, // Change the color as needed
+                    Text(
+                      formattedDate, // Display the formatted date
+                      style: const TextStyle(fontSize: 12),
                     ),
+                    // Icon(
+                    //   icon1,
+                    //   color: Colors.blue, // Change the color as needed
+                    // ),
                     Text(
                       status,
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
