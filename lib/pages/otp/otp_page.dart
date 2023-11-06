@@ -1,10 +1,8 @@
-import 'package:finkin_credential/pages/agent_screen/agent.dart';
+import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color.dart';
-import 'package:finkin_credential/utils/utils.dart';
 import 'package:finkin_credential/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({Key? key}) : super(key: key);
@@ -25,17 +23,21 @@ class _OtpPageState extends State<OtpPage> {
       height: 56,
       textStyle: const TextStyle(
         fontSize: 20,
-        color:AppColor.primary,
+        color: AppColor.primary,
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
-        border: Border.all( color: AppColor.primary,),
+        border: Border.all(
+          color: AppColor.primary,
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all( color: AppColor.primary,),
+      border: Border.all(
+        color: AppColor.primary,
+      ),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -75,7 +77,7 @@ class _OtpPageState extends State<OtpPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AgentPage()),
+            MaterialPageRoute(builder: (context) => const AgentForm()),
           );
         });
 

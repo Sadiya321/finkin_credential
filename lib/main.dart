@@ -1,9 +1,6 @@
-import 'package:finkin_credential/pages/otp/gen_OTP.dart';
-import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   runApp(const MyApp());
