@@ -11,41 +11,41 @@ import '../pages/otp/gen_OTP.dart';
 
 class MyRoutes {
   static String genotpRoute = "/genotp";
-  static String OtpPageRoute = "/OtpPage";
+  static String otpPageRoute = "/OtpPage";
   static String page1 = "/page1";
-   static String page2 = "/page2";
-    static String page3 = "/page3";
-     static String agent= "/agent";
-      static String Form= "/AgentForm";
-      static String NavBAr= "/BottomNavBar";
-      static String Home= "/HomeScreen";
+  static String page2 = "/page2";
+  static String page3 = "/page3";
+  static String agent = "/agent";
+  static String form = "/AgentForm";
+  static String navBAr = "/BottomNavBar";
+  static String home = "/HomeScreen";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case '/genotp':
         return MaterialPageRoute(builder: (context) => const Genotp());
-        case '/page1':
+      case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
-      
+
       case '/OtpPage':
-       return MaterialPageRoute(builder: (context) => const OtpPage());
-                
-  case '/page2':
-       return MaterialPageRoute(builder: (context) =>  const Page2());
-       
-       case '/page3':
-       return MaterialPageRoute(builder: (context) => const Page3());
-        case '/agent':
+        return MaterialPageRoute(builder: (context) => const OtpPage());
+
+      case '/page2':
+        return MaterialPageRoute(builder: (context) => const Page2());
+
+      case '/page3':
+        return MaterialPageRoute(builder: (context) => const Page3());
+      case '/agent':
         return MaterialPageRoute(builder: (context) => const AgentPage());
-         case '/Form':
-        return MaterialPageRoute(builder: (context) =>  AgentForm());
-         case '/Home':
-        return MaterialPageRoute(builder: (context) =>  HomeScreen());
-         case '/NavBAr':
-        return MaterialPageRoute(builder: (context) => BottomNavBar());
+      case '/form':
+        return MaterialPageRoute(builder: (context) => const AgentForm());
+      case '/home':
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
+      case '/navBAr':
+        return MaterialPageRoute(builder: (context) => const BottomNavBar());
       default:
-        return MaterialPageRoute(builder: (context) =>  HomeScreen());
+        return MaterialPageRoute(builder: (context) => const BottomNavBar());
     }
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
 
 class LoanTrack extends StatelessWidget {
@@ -25,18 +28,22 @@ class LoanTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(userName + loanType + imageAsset);
+    
 
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 12.0),
+        padding: const EdgeInsets.all(8.0),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(26),
+  border: Border.all(
+    color: Colors.black,
+    width: 1.0, // Adjust the width as needed for the thickness of the border
+ 
+  ),),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -44,13 +51,13 @@ class LoanTrack extends StatelessWidget {
                 child: Row(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(22),
                       child: Container(
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(imageAsset),
+                            image:AssetImage(imageAsset),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -89,7 +96,7 @@ class LoanTrack extends StatelessWidget {
                   children: [
                     Icon(
                       icon1,
-                      color: Colors.blue, // Change the color as needed
+                      color: AppColor.primary, // Change the color as needed
                     ),
                     Text(
                       status,
