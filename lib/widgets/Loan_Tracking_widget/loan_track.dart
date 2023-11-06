@@ -9,7 +9,6 @@ class LoanTrack extends StatelessWidget {
   final String icon2;
   final String status;
   final Function() onPressed;
-  final void Function() onCancelPressed;
 
   const LoanTrack({
     super.key,
@@ -17,7 +16,6 @@ class LoanTrack extends StatelessWidget {
     required this.userName,
     required this.loanType,
     required this.onPressed,
-    required this.onCancelPressed,
     required this.date,
     required this.icon1,
     required this.icon2,
@@ -85,24 +83,18 @@ class LoanTrack extends StatelessWidget {
                 ),
               ),
               Container(
-                child: PopupMenuButton<String>(
-                  itemBuilder: (context) {
-                    return [
-                      const PopupMenuItem<String>(
-                        value: 'Cancel',
-                        child: Text('Cancel'),
-                      ),
-                    ];
-                  },
-                  onSelected: (value) {
-                    if (value == 'Cancel') {
-                      onCancelPressed();
-                    }
-                    {
-                      onCancelPressed();
-                    }
-                  },
-                  child: const Icon(Icons.more_horiz),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      IconData(int.parse(icon1), fontFamily: 'MaterialIcons'),
+                      color: Colors.blue, // Change the color as needed
+                    ),
+                    Text(
+                      status,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
                 ),
               ),
             ],
