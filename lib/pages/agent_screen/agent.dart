@@ -1,3 +1,4 @@
+import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class CustomRadio extends StatelessWidget {
   final ValueChanged<String?> onChanged;
   final Color activeColor;
   final Color backgroundColor;
-  final double textFontSize; 
+  final double textFontSize;
 
   CustomRadio({
     required this.value,
@@ -15,7 +16,7 @@ class CustomRadio extends StatelessWidget {
     required this.onChanged,
     required this.activeColor,
     this.backgroundColor = Colors.transparent,
-    this.textFontSize = 18.0, 
+    this.textFontSize = 18.0,
   });
 
   @override
@@ -33,7 +34,8 @@ class CustomRadio extends StatelessWidget {
               height: 18.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: groupValue == value ? backgroundColor : AppColor.textLight,
+                color:
+                    groupValue == value ? backgroundColor : AppColor.textLight,
               ),
               child: Center(
                 child: Container(
@@ -41,7 +43,8 @@ class CustomRadio extends StatelessWidget {
                   height: 14.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: groupValue == value ? activeColor : AppColor.textLight,
+                    color:
+                        groupValue == value ? activeColor : AppColor.textLight,
                   ),
                 ),
               ),
@@ -89,7 +92,13 @@ class _AgentPageState extends State<AgentPage> {
         buttonColor = AppColor.icon;
       });
 
-      // Handle the continue button click (e.g., navigate to the next screen)
+      // Navigate to the next screen
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              const AgentForm(), // Replace 'NextScreen' with the actual screen you want to navigate to
+        ),
+      );
     } else {
       setState(() {
         errorMessage = "Select your category !"; // Set the error message
@@ -119,7 +128,7 @@ class _AgentPageState extends State<AgentPage> {
               groupValue: selectedAgentType,
               onChanged: _handleCustomRadioChange,
               activeColor: AppColor.icon,
-              textFontSize: 20.0, 
+              textFontSize: 20.0,
             ),
             CustomRadio(
               value: 'Agent',
@@ -133,7 +142,6 @@ class _AgentPageState extends State<AgentPage> {
               onChanged: _handleCustomRadioChange,
               activeColor: AppColor.icon,
             ),
-
 
             SizedBox(height: 16.0), // Add some spacing
             ElevatedButton(
@@ -157,7 +165,7 @@ class _AgentPageState extends State<AgentPage> {
                 child: Text(
                   errorMessage!,
                   style: TextStyle(
-                     fontSize: 18.0,
+                    fontSize: 18.0,
                     color: AppColor.textLight,
                   ),
                 ),
