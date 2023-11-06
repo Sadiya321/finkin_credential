@@ -11,6 +11,7 @@ class LoanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //sdasda
         title: Text('Another Page'),
       ),
       body: Column(
