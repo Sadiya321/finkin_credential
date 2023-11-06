@@ -1,4 +1,7 @@
 import 'package:finkin_credential/pages/agent_screen/agent.dart';
+import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
+import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
+
 import 'package:finkin_credential/pages/otp/otp_page.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
@@ -14,6 +17,8 @@ class MyRoutes {
    static String page2 = "/page2";
     static String page3 = "/page3";
      static String agent= "/agent";
+      static String Form= "/AgentForm";
+      static String NavBAr= "/BottomNavBar";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -33,6 +38,10 @@ class MyRoutes {
        return MaterialPageRoute(builder: (context) => const Page3());
         case '/agent':
         return MaterialPageRoute(builder: (context) => const AgentPage());
+         case '/Form':
+        return MaterialPageRoute(builder: (context) =>  AgentForm());
+         case '/NavBAr':
+        return MaterialPageRoute(builder: (context) => BottomNavBar());
       default:
         return MaterialPageRoute(builder: (context) =>  WelcomePage());
     }
