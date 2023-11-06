@@ -1,17 +1,17 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:finkin_credential/pages/otp/otp_page.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/res/app_color.dart';
-import 'package:finkin_credential/widgets/custom_button.dart';
+import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
-class Genotp extends StatefulWidget {
-  const Genotp({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<Genotp> createState() => _GenotpState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _GenotpState extends State<Genotp> {
+class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
   final TextEditingController phoneController = TextEditingController();
   Country selectedCountry = Country(
@@ -165,7 +165,7 @@ class _GenotpState extends State<Genotp> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const OtpPage()),
+                                    builder: (context) => const LoginScreen()),
                               );
                             }),
                   ),

@@ -1,7 +1,7 @@
 import 'package:finkin_credential/res/app_color.dart';
 import 'package:finkin_credential/res/image_asset.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/Loan_Tracking_widget/loan_track.dart';
+import '../../shared/widgets/Loan_Tracking_widget/loan_track.dart';
 
 class LoanScreen extends StatelessWidget {
   const LoanScreen({Key? key}) : super(key: key);

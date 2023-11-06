@@ -2,12 +2,12 @@ import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
-import 'package:finkin_credential/pages/otp/otp_page.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
 import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
 import 'package:flutter/material.dart';
-import '../pages/otp/gen_OTP.dart';
+import '../pages/login_screen/login_screen.dart';
 
 class MyRoutes {
   static String genotpRoute = "/genotp";
@@ -24,12 +24,12 @@ class MyRoutes {
     final args = settings.arguments;
     switch (settings.name) {
       case '/genotp':
-        return MaterialPageRoute(builder: (context) => const Genotp());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
       case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
 
       case '/OtpPage':
-        return MaterialPageRoute(builder: (context) => const OtpPage());
+        return MaterialPageRoute(builder: (context) => const VerificationScreen());
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());
