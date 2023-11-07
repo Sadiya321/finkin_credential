@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
-import 'package:finkin_credential/pages/home_screen/approved_screen.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:finkin_credential/pages/home_screen/loan_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
