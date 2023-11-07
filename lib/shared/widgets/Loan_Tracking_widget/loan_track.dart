@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +70,7 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             softWrap: false,
@@ -132,6 +131,7 @@ class LoanTrack extends StatelessWidget {
                   )
                 ],
               )),
+              
           
       ),
     );
