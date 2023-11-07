@@ -1,6 +1,6 @@
 import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
-import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';

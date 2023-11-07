@@ -3,14 +3,15 @@ import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:finkin_credential/welcome_carousal/page1.dart';
+import 'package:finkin_credential/welcome_carousal/page2.dart';
+import 'package:finkin_credential/welcome_carousal/page3.dart';
 
+import 'package:flutter/material.dart';
 import '../pages/login_screen/login_screen.dart';
-import '../welcome_carousal/page1.dart';
-import '../welcome_carousal/page2.dart';
-import '../welcome_carousal/page3.dart';
 
 class MyRoutes {
+  static String genotpRoute = "/genotp";
   static String otpPageRoute = "/OtpPage";
   static String page1 = "/page1";
   static String page2 = "/page2";
@@ -29,8 +30,7 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const Page1());
 
       case '/OtpPage':
-        return MaterialPageRoute(
-            builder: (context) => const VerificationScreen());
+        return MaterialPageRoute(builder: (context) => const VerificationScreen());
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());

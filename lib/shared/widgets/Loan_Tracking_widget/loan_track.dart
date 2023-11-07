@@ -1,4 +1,7 @@
-import 'package:finkin_credential/res/app_color.dart';
+import 'dart:io';
+
+import 'package:finkin_credential/res/app_color/app_color.dart';
+import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,22 +10,19 @@ class LoanTrack extends StatelessWidget {
   final String userName;
   final String loanType;
   final DateTime date;
-  final IconData icon1;
-  final IconData icon2;
-  final String status;
+  final IconData icon;
+  final LoanStatus status;
   final Function() onPressed;
 
-  const LoanTrack({
-    super.key,
-    required this.imageAsset,
-    required this.userName,
-    required this.loanType,
-    required this.onPressed,
-    required this.date,
-    required this.icon1,
-    required this.icon2,
-    required this.status,
-  });
+  const LoanTrack(
+      {super.key,
+      required this.imageAsset,
+      required this.userName,
+      required this.loanType,
+      required this.onPressed,
+      required this.date,
+      required this.icon,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             softWrap: false,
@@ -79,7 +79,7 @@ class LoanTrack extends StatelessWidget {
                           ),
                           Text(
                             loanType,
-                            style: const TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 10),
                             softWrap: false,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
@@ -93,42 +93,46 @@ class LoanTrack extends StatelessWidget {
               const SizedBox(
                 width: 18,
               ),
-              Row(
-                children: [
-                  Icon(
-                    icon1,
-                    color: AppColor.icon,
-                  ),
-                ],
-              ),
               Container(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      // Icon(
-                      //   icon1,
-                      //   color: Colors.blue,
-                      // ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        formattedDate, // Display the formatted date
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      Text(
-                        status,
-                        style: TextStyle(fontSize: 12),
+                      Icon(
+                        icon,
+                        color: AppColor.icon,
                       ),
                     ],
                   ),
                 ],
+                  ),
+              ),
+                  
+                  const SizedBox(
+                    width: 2,
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          formattedDate,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          status.name,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               )),
-            ],
-          ),
-        ),
+          
       ),
     );
   }
