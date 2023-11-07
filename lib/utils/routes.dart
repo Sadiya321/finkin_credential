@@ -3,9 +3,10 @@ import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
-import 'package:finkin_credential/pages/welcom_carousel.dart/page1.dart';
-import 'package:finkin_credential/pages/welcom_carousel.dart/page2.dart';
-import 'package:finkin_credential/pages/welcom_carousel.dart/page3.dart';
+import 'package:finkin_credential/welcome_carousal/page1.dart';
+import 'package:finkin_credential/welcome_carousal/page2.dart';
+import 'package:finkin_credential/welcome_carousal/page3.dart';
+
 import 'package:flutter/material.dart';
 import '../pages/login_screen/login_screen.dart';
 

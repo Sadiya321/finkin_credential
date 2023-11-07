@@ -1,4 +1,4 @@
-import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {

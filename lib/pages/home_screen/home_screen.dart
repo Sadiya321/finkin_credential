@@ -1,6 +1,6 @@
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
-import 'package:finkin_credential/res/app_color.dart';
-import 'package:finkin_credential/res/image_asset.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
+import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -15,6 +15,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final PageController _controller = PageController();
   final int numberOfPages = 3; // Total number of pages
   int currentPage = 0; 
+  final List<String> imageAssets = [
+  'assets/images/image1.jpg',
+  'assets/images/image2.jpg',
+  'assets/images/image3.jpg',
+];
+
   @override
   void initState() {
     super.initState();
@@ -105,25 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 100, 
             ),
-
-
-
-            SmoothPageIndicator(
-                controller: _controller,
-                count: numberOfPages,
-                effect: const JumpingDotEffect(
-                  activeDotColor: AppColor.icon,
-                  dotColor: AppColor.textLight,
-                  dotHeight: 5,
-                  dotWidth: 5,
-                  spacing: 6,
-                  jumpScale: 3,
-                ),
-              ),
-
-
-
-            
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -144,6 +131,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 40,
                       ),
+                      
+
+
+                      
+
+
+
+
+
                     ],
                   ),
                 ),

@@ -1,5 +1,5 @@
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
-import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomRadio extends StatelessWidget {

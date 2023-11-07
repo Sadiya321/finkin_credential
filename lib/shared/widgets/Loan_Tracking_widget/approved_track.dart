@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:finkin_credential/res/app_color/app_color.dart';
-import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -10,8 +9,9 @@ class LoanTrack extends StatelessWidget {
   final String userName;
   final String loanType;
   final DateTime date;
-  final IconData icon;
-  final LoanStatus status;
+  final IconData icon1;
+  final IconData icon2;
+  final String status;
   final Function() onPressed;
 
   const LoanTrack({
@@ -21,8 +21,10 @@ class LoanTrack extends StatelessWidget {
     required this.loanType,
     required this.onPressed,
     required this.date,
-    required this.icon,
-    required this.status
+    required this.icon1,
+    required this.icon2,
+    required this.status,
+    
   });
 
   @override
@@ -92,33 +94,35 @@ class LoanTrack extends StatelessWidget {
                const SizedBox(
                         width: 18,
                       ),
-            
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              Row(
+                      children: [
+                        Icon(
+                            icon1,
+                            color: AppColor.icon,
+                          ),
+                          
+                      ],
+                    ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  
+                 Column(
                   children: [
-                    
-                   Column(
-                    children: [
-                      Icon(
-                        icon,
-                        color: Colors.blue,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                    Text(
-                      formattedDate, // Display the formatted date
-                      style: const TextStyle(fontSize: 12),
+                    const SizedBox(
+                      width: 12,
                     ),
-                    Text(
-                      status.name,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                   ),
-                  ],
-                )
+                  Text(
+                    formattedDate, 
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  Text(
+                    status,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ],
+                 ),
+                ],
               ),
             ],
           ),

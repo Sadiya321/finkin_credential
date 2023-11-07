@@ -4,7 +4,8 @@ import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/pages/home_screen/approved_screen.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:finkin_credential/pages/home_screen/loan_screen.dart';
-import 'package:finkin_credential/res/app_color.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
+import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -17,8 +18,8 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   List screens = [
     const HomeScreen(),
-    const LoanScreen(),
-    const ApprovedScreen(),
+    const LoanScreen(title: 'Loan Tracking',),
+    const LoanScreen(title: 'Approved', status: LoanStatus.approved,),
     const AccountScreen(),
   ];
   int _selectedIndex = 0;
