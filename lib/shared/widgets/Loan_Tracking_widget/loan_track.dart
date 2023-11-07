@@ -14,16 +14,15 @@ class LoanTrack extends StatelessWidget {
   final LoanStatus status;
   final Function() onPressed;
 
-  const LoanTrack({
-    super.key,
-    required this.imageAsset,
-    required this.userName,
-    required this.loanType,
-    required this.onPressed,
-    required this.date,
-    required this.icon,
-    required this.status
-  });
+  const LoanTrack(
+      {super.key,
+      required this.imageAsset,
+      required this.userName,
+      required this.loanType,
+      required this.onPressed,
+      required this.date,
+      required this.icon,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +35,14 @@ class LoanTrack extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-  color: AppColor.textLight,
-  borderRadius: BorderRadius.circular(26),
-  border: Border.all(
-    color: Colors.black,
-    width: 1.0, // Adjust the width as needed for the thickness of the border
- 
-  ),),
+            color: AppColor.textLight,
+            borderRadius: BorderRadius.circular(26),
+            border: Border.all(
+              color: Colors.black,
+              width:
+                  1.0, // Adjust the width as needed for the thickness of the border
+            ),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -56,7 +56,7 @@ class LoanTrack extends StatelessWidget {
                         height: 48,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image:AssetImage(imageAsset),
+                            image: AssetImage(imageAsset),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -71,7 +71,8 @@ class LoanTrack extends StatelessWidget {
                         children: [
                           Text(
                             userName,
-                            style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             softWrap: false,
                             overflow: TextOverflow.ellipsis,
@@ -89,40 +90,49 @@ class LoanTrack extends StatelessWidget {
                   ],
                 ),
               ),
-               const SizedBox(
-                        width: 18,
-                      ),
-            
+              const SizedBox(
+                width: 18,
+              ),
               Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    
-                   Column(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
                     children: [
                       Icon(
                         icon,
-                        color: Colors.blue,
+                        color: AppColor.icon,
                       ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                    Text(
-                      formattedDate, // Display the formatted date
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      status.name,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                   ),
-                  ],
-                )
+                    ],
+                  ),
+                ],
+                  ),
               ),
-            ],
-          ),
-        ),
+                  
+                  const SizedBox(
+                    width: 2,
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          formattedDate,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          status.name,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              )),
+          
       ),
     );
   }

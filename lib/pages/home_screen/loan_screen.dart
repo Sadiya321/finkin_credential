@@ -51,7 +51,6 @@ class LoanScreen extends StatelessWidget {
             icon: loan.icon,
             status: loan.status,
             onPressed: () {
-              // Add your onPressed callback logic here
             },
           );
         }),
@@ -67,91 +66,3 @@ final loanItems = [
   LoanModel(image: ImageAsset.pop, userName: 'Roshan', loanType: 'Personal loan', date: DateTime.now(), status: LoanStatus.denied ),
 
 ];
-
-// [
-//       const SizedBox(height: 16.0), 
-//       LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Roshan',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.hourglass_top_outlined, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'John Doe',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.hourglass_top_outlined, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Asifa',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.hourglass_top_outlined, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Deepti',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.hourglass_top_outlined, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Sadiya',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.hourglass_top_outlined, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Danish',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.cancel, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//        LoanTrack(
-//         imageAsset: "assets/images/pop.jpeg",
-//         userName: 'Prashma',
-//         loanType: 'Personal Loan',
-//         date: DateTime.now(),
-//         icon1: Icons.check_circle, 
-//         icon2: Icons.check_circle, 
-//         status: 'Approved',
-//         onPressed: () {
-//           // Add your onPressed callback logic here
-//         },
-//       ),
-//     ]
