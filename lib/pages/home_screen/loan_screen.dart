@@ -19,43 +19,76 @@ class LoanScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0), 
-        child: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(180),
-              bottomRight: Radius.circular(120),
-            ),
-            color: AppColor.primary,
-          ),
-          child: AppBar(
-            title: Center(child: Text(title)),
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent, 
-            elevation: 0, 
-          ),
-        ),
-      ),
+      appBar: title == 'Approved' ? _buildApprovedAppBar() : _buildRegularAppBar(),
       
-      body: SafeArea(
+      body: SafeArea( 
         child: ListView.builder(
           itemCount: filteredItems.length,
           itemBuilder: (context, index) {
-          final loan = filteredItems[index];
-          return LoanTrack(
-            imageAsset: loan.image,
-            userName: loan.userName,
-            loanType: loan.loanType,
-            date: loan.date,
-            icon: loan.icon,
-            status: loan.status,
-            onPressed: () {
-            },
-          );
-        }),
-
+            final loan = filteredItems[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: LoanTrack(
+                imageAsset: loan.image,
+                userName: loan.userName,
+                loanType: loan.loanType,
+                date: loan.date,
+                icon: loan.icon,
+                status: loan.status,
+                onPressed: () {
+                },
+              ),
+            );
+          }),
       ),
+    );
+  }
+
+  PreferredSizeWidget _buildRegularAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(60.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+          color: AppColor.primary,
+        ),
+        child: AppBar(
+          title: Center(child: Text(title)),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
+      
+    );
+  }
+  
+
+  PreferredSizeWidget _buildApprovedAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(280.0), // Increase the height
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(80),
+            bottomRight: Radius.circular(80),
+          ),
+          color: AppColor.primary,
+        ),
+        child: AppBar(
+          title: Center(child: Text(title)),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        
+      ),
+      
+
+      
     );
   }
 }
@@ -63,6 +96,5 @@ class LoanScreen extends StatelessWidget {
 
 final loanItems = [
   LoanModel(image: ImageAsset.pop, userName: 'Roshan', loanType: 'Personal loan', date: DateTime.now(), status: LoanStatus.approved),
-  LoanModel(image: ImageAsset.pop, userName: 'Roshan', loanType: 'Personal loan', date: DateTime.now(), status: LoanStatus.denied ),
-
+  LoanModel(image: ImageAsset.pop, userName: 'Roshan', loanType: 'Personal loan', date: DateTime.now(), status: LoanStatus.denied),
 ];
