@@ -1,8 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:finkin_credential/models/loan_model/grid_model/grid_model.dart';
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
-import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,19 +12,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final PageController _controller = PageController();
-  final int numberOfPages = 3; // Total number of pages
-  int currentPage = 0; 
-  final List<String> imageAssets = [
-  'assets/images/image1.jpg',
-  'assets/images/image2.jpg',
-  'assets/images/image3.jpg',
-];
-
   @override
   void initState() {
     super.initState();
   }
+
+  List<String> imagePaths = [
+    'assets/images/caros.jpg',
+    'assets/images/money.jpg',
+    'assets/images/education.jpg',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,69 +34,56 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 12,
+                            ),
                             Text(
-                              'Hello',
+                              'Hello!',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: AppColor.textLight,
-                                fontSize: 26,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(
+                              height: 8,
+                            ),
                             Text(
-                              'User Name!',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              'Mohammed Hilal ',
                               style: TextStyle(
                                 color: AppColor.textLight,
-                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(
+                              height: 8,
+                            ),
                             Text(
-                              'Good Morning Sir!',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              'Good Morning Sir ',
                               style: TextStyle(
                                 color: AppColor.textdivider,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
                         ),
                       ),
-                      //profile
                       Container(
-                        padding: const EdgeInsets.only(top: 12),
+                        padding: const EdgeInsets.all(12),
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AccountScreen(),
-                              ),
-                            );
-                          },
-                          child: const Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("assets/images/pop.jpeg"),
-                                radius: 50,
-                              ),
-                            ],
+                          onTap: () {},
+                          child: const CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/education.jpg'),
+                            radius: 30,
                           ),
                         ),
                       ),
@@ -109,42 +93,120 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(
-              height: 100, 
+              height: 30,
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                  top: 20, bottom: 0), // Adjust the margin as needed
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  aspectRatio: 3.0,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: true,
+                  autoPlay: true,
+                ),
+                items: imagePaths.map((imagePath) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: const BoxDecoration(
+                          color: AppColor.textLight,
+                        ),
+                        child: Image.asset(
+                          imagePath,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
             ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
                   color: AppColor.textLight,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.zero,
-                    topRight: Radius.zero,
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
                   ),
                 ),
                 padding: const EdgeInsets.all(25),
-                child: const Center(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [],
+                child: Column(
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Explore Categories",
+                          style: TextStyle(
+                            color: AppColor.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10.0,
+                            crossAxisSpacing: 10.0,
+                            childAspectRatio: 1.3,
+                          ),
+                          itemCount: categories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Category category = categories[index];
+                            return GestureDetector(
+                              onTap: () {},
+                              child: Card(
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColor.textLight,
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        category.imagePath,
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        category.text,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColor.primary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      
-
-
-                      
-
-
-
-
-
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
