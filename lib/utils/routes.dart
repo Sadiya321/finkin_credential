@@ -2,6 +2,7 @@ import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
+import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/welcome_carousal/page1.dart';
 import 'package:finkin_credential/welcome_carousal/page2.dart';
@@ -17,9 +18,10 @@ class MyRoutes {
   static String page2 = "/page2";
   static String page3 = "/page3";
   static String agent = "/agent";
-  static String form = "/AgentForm";
+  static String agentform = "/AgentForm";
   static String navBAr = "/BottomNavBar";
   static String home = "/HomeScreen";
+  static String loanform = "/LoanForm";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -30,7 +32,8 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const Page1());
 
       case '/OtpPage':
-        return MaterialPageRoute(builder: (context) => const VerificationScreen());
+        return MaterialPageRoute(
+            builder: (context) => const VerificationScreen());
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());
@@ -39,12 +42,14 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const Page3());
       case '/agent':
         return MaterialPageRoute(builder: (context) => const AgentPage());
-      case '/form':
+      case '/agentform':
         return MaterialPageRoute(builder: (context) => const AgentForm());
       case '/home':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case '/navBAr':
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
+      case '/loanform':
+        return MaterialPageRoute(builder: (context) => const LoanForm());
       default:
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
     }

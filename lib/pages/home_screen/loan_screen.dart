@@ -68,8 +68,9 @@ class LoanScreen extends StatelessWidget {
 
 PreferredSizeWidget _buildApprovedAppBar() {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(120.0),
+    preferredSize: const Size.fromHeight(280.0),
     child: Container(
+      height: 200,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(50),
@@ -78,37 +79,28 @@ PreferredSizeWidget _buildApprovedAppBar() {
         color: AppColor.primary,
       ),
       child: AppBar(
+        toolbarHeight: 65.0,
         title: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
-            child: Expanded( 
-              child: Column(
-                children: [
-                  Text(title),
-                  const SizedBox(height: 10.0),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "This Month ",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "gfdhgf",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        "This Year: ",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Text(title),
+                const SizedBox(height: 10.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "This Month ",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "This Year: ",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

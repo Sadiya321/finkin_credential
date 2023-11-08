@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finkin_credential/models/loan_model/grid_model/grid_model.dart';
 import 'package:finkin_credential/pages/home_screen/account_screen.dart';
+import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -166,7 +167,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             Category category = categories[index];
                             return GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoanForm()),
+                                );
+                              },
                               child: Card(
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(
