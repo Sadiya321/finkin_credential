@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: 20, bottom: 0), 
+                  top: 20, bottom: 0), // Adjust the margin as needed
               child: CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 3.0,

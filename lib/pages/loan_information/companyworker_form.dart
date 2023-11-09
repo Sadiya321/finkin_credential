@@ -1,4 +1,6 @@
 import 'dart:io';
+
+import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -129,19 +131,20 @@ class _CompanyworkerState extends State<Companyworker> {
 
   Widget _buildEmployeeTypeSection() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(width: 20),
+        const SizedBox(width: 10),
         Row(
           children: [
             Expanded(
               child: GestureDetector(
-                // onTap: () {
-                //   Navigator.pop(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const EmploymentForm()),
-                //   );
-                // },
+                onTap: () {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EmploymentForm()),
+                  );
+                },
                 child: _buildEmployeeTypeButton('Submit', AppColor.primary),
               ),
             ),
@@ -153,14 +156,23 @@ class _CompanyworkerState extends State<Companyworker> {
   }
 
   Widget _buildEmployeeTypeButton(String text, Color color) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(200),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          primary: color,
+    return SizedBox(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(200),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            primary: color,
+            minimumSize: Size(10, 30), // Adjust the width and height as needed
+            padding: const EdgeInsets.symmetric(
+                vertical: 5), // Adjust the vertical padding as needed
+          ),
+          child: Text(
+            text,
+            style:
+                const TextStyle(fontSize: 14), // Adjust the font size as needed
+          ),
         ),
-        child: Text(text),
       ),
     );
   }
