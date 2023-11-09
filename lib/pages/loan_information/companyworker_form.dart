@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,16 +32,11 @@ class _CompanyworkerState extends State<Companyworker> {
                   label: 'Monthly Income',
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Please Upload IT Return of 2 Year",
-                  style: TextStyle(fontSize: 15),
-                ),
-                const SizedBox(height: 20),
                 _buildAadharCardUploadSection(),
                 const SizedBox(height: 10),
                 _buildPANCardUploadSection(),
-                const SizedBox(height: 10),
-                _buildEmployeeTypeSection(),
+                const SizedBox(height: 10,),
+                _buildSubmitButton(), // Added Submit Button
               ],
             ),
           ),
@@ -67,7 +60,7 @@ class _CompanyworkerState extends State<Companyworker> {
       children: [
         Expanded(
           child: LabeledTextField(
-            label: 'First Year',
+            label: 'Please Upload Your Form 16',
             suffixWidget: _buildChooseFileButton(_pickedFile, () async {
               final pickedFile =
                   await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -86,7 +79,7 @@ class _CompanyworkerState extends State<Companyworker> {
       children: [
         Expanded(
           child: LabeledTextField(
-            label: 'Second Year',
+            label: 'Upload Your Bank Statement (6 Months - 1 Year)',
             suffixWidget: _buildChooseFileButton(_pickedFile2, () async {
               final pickedFile2 =
                   await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -129,53 +122,30 @@ class _CompanyworkerState extends State<Companyworker> {
     );
   }
 
-  Widget _buildEmployeeTypeSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(width: 10),
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const EmploymentForm()),
-                  );
-                },
-                child: _buildEmployeeTypeButton('Submit', AppColor.primary),
-              ),
-            ),
-            const SizedBox(height: 80),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildEmployeeTypeButton(String text, Color color) {
-    return SizedBox(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(200),
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: color,
-            minimumSize: Size(10, 30), // Adjust the width and height as needed
-            padding: const EdgeInsets.symmetric(
-                vertical: 5), // Adjust the vertical padding as needed
-          ),
-          child: Text(
-            text,
-            style:
-                const TextStyle(fontSize: 14), // Adjust the font size as needed
+Widget _buildSubmitButton() {
+  return Center(
+    child: Container(
+      width: 150, 
+      margin: const EdgeInsets.only(top: 20),
+      child: ElevatedButton(
+        onPressed: () {
+        },
+        style: ElevatedButton.styleFrom(
+          primary: AppColor.primary, 
+          padding: const EdgeInsets.symmetric(vertical: 10), 
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0), 
           ),
         ),
+        child: const Text('Submit', style: TextStyle(fontSize: 16)), 
       ),
-    );
-  }
+    ),
+  );
+}
+
+
+
+
 }
 
 class LabeledTextField extends StatelessWidget {
