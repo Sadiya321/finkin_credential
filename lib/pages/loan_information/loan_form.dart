@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:finkin_credential/pages/loan_information/employment_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,12 +39,13 @@ class _LoanFormState extends State<LoanForm> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSectionTitle('Personal Information'),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 const LabeledTextField(
                   label: 'Full Name',
                   hintText: 'Enter full name as per Aadhar card',
@@ -174,7 +176,7 @@ class _LoanFormState extends State<LoanForm> {
   }
 
   Widget _buildPinCodeAndNationalitySection() {
-    return Row(
+    return const Row(
       children: [
         Expanded(
           child: LabeledTextField(
@@ -182,7 +184,7 @@ class _LoanFormState extends State<LoanForm> {
             hintText: 'Enter your pin code',
           ),
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(
           child: LabeledTextField(
             label: 'Nationality',
@@ -200,7 +202,8 @@ class _LoanFormState extends State<LoanForm> {
           child: LabeledTextField(
             label: 'Upload Your Aadhar Card Photo',
             suffixWidget: _buildChooseFileButton(_pickedFile, () async {
-              final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+              final pickedFile =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
               setState(() {
                 _pickedFile = pickedFile;
               });
@@ -218,7 +221,8 @@ class _LoanFormState extends State<LoanForm> {
           child: LabeledTextField(
             label: 'Upload Your PAN Card Photo',
             suffixWidget: _buildChooseFileButton(_pickedFile2, () async {
-              final pickedFile2 = await ImagePicker().pickImage(source: ImageSource.gallery);
+              final pickedFile2 =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
               setState(() {
                 _pickedFile2 = pickedFile2;
               });
@@ -235,12 +239,12 @@ class _LoanFormState extends State<LoanForm> {
         GestureDetector(
           onTap: onPressed,
           child: Container(
-            padding: const EdgeInsets.all(15),
-            color: Colors.grey.shade200,
-            child: Text(
+            padding: const EdgeInsets.all(20),
+            color: AppColor.subtext,
+            child: const Text(
               'Choose File',
               style: TextStyle(
-                color: Colors.grey.shade700,
+                color: AppColor.textLight,
               ),
             ),
           ),
@@ -250,7 +254,8 @@ class _LoanFormState extends State<LoanForm> {
             margin: const EdgeInsets.all(10),
             child: Image.file(
               File(pickedFile.path),
-              height: 50,
+              height: 40,
+              width: 216,
             ),
           ),
       ],
@@ -268,12 +273,31 @@ class _LoanFormState extends State<LoanForm> {
         Row(
           children: [
             Expanded(
-              child: _buildEmployeeTypeButton('Self Employed', AppColor.primary),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const EmploymentForm()),
+                  );
+                },
+                child:
+                    _buildEmployeeTypeButton('Self Employed', AppColor.primary),
+              ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 40),
             Expanded(
-              child: _buildEmployeeTypeButton('Company Worker', AppColor.primary),
+              child: GestureDetector(
+                // onTap: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => const EmploymentForm()),
+                //   );
+                // },
+                child: _buildEmployeeTypeButton(
+                    'Company Worker', AppColor.primary),
+              ),
             ),
+            const SizedBox(height: 80),
           ],
         ),
       ],
@@ -322,12 +346,12 @@ class LabeledTextField extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,

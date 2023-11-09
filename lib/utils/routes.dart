@@ -2,6 +2,7 @@ import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
+import 'package:finkin_credential/pages/loan_information/employment_form.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/welcome_carousal/page1.dart';
@@ -22,12 +23,15 @@ class MyRoutes {
   static String navBAr = "/BottomNavBar";
   static String home = "/HomeScreen";
   static String loanform = "/LoanForm";
+   static String employmentform = "/EmploymentForm";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case '/genotp':
         return MaterialPageRoute(builder: (context) => const LoginScreen());
+          case '/employmentform':
+        return MaterialPageRoute(builder: (context) => const EmploymentForm());
       case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
 
@@ -53,7 +57,7 @@ class MyRoutes {
       case '/loanform':
         return MaterialPageRoute(builder: (context) => const LoanForm());
       default:
-        return MaterialPageRoute(builder: (context) => const BottomNavBar());
+        return MaterialPageRoute(builder: (context) => const EmploymentForm());
     }
   }
 }

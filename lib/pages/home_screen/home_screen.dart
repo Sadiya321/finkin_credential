@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finkin_credential/models/loan_model/grid_model/grid_model.dart';
-import 'package:finkin_credential/pages/home_screen/account_screen.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: 20, bottom: 0), // Adjust the margin as needed
+                  top: 20, bottom: 0), 
               child: CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 3.0,
