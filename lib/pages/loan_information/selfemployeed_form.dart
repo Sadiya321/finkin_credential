@@ -41,7 +41,6 @@ class _SelfWorkerState extends State<SelfWorker> {
                 const SizedBox(height: 10),
                 _buildPANCardUploadSection(),
                 const SizedBox(height: 10),
-                _buildEmployeeTypeSection(),
               ],
             ),
           ),
@@ -127,30 +126,7 @@ class _SelfWorkerState extends State<SelfWorker> {
     );
   }
 
-  Widget _buildEmployeeTypeSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(width: 20),
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                // onTap: () {
-                //   Navigator.pop(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const EmploymentForm()),
-                //   );
-                // },
-                child: _buildEmployeeTypeButton('Submit', AppColor.primary),
-              ),
-            ),
-            const SizedBox(height: 80),
-          ],
-        ),
-      ],
-    );
-  }
+  
 
   Widget _buildEmployeeTypeButton(String text, Color color) {
     return ClipRRect(

@@ -31,13 +31,12 @@ class _CompanyworkerState extends State<Companyworker> {
                 const LabeledTextField(
                   label: 'Monthly Income',
                 ),
-               
                 const SizedBox(height: 20),
                 _buildAadharCardUploadSection(),
                 const SizedBox(height: 10),
                 _buildPANCardUploadSection(),
-                const SizedBox(height: 10),
-                _buildEmployeeTypeSection(),
+                const SizedBox(height: 10,),
+                _buildSubmitButton(), // Added Submit Button
               ],
             ),
           ),
@@ -123,43 +122,30 @@ class _CompanyworkerState extends State<Companyworker> {
     );
   }
 
-  Widget _buildEmployeeTypeSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(width: 10),
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                // onTap: () {
-                //   Navigator.pop(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const EmploymentForm()),
-                //   );
-                // },
-                child: _buildEmployeeTypeButton('Submit', AppColor.primary),
-              ),
-            ),
-            const SizedBox(height: 80),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildEmployeeTypeButton(String text, Color color) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(200),
+Widget _buildSubmitButton() {
+  return Center(
+    child: Container(
+      width: 150, 
+      margin: const EdgeInsets.only(top: 20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+        },
         style: ElevatedButton.styleFrom(
-          primary: color,
+          primary: AppColor.primary, 
+          padding: const EdgeInsets.symmetric(vertical: 10), 
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0), 
+          ),
         ),
-        child: Text(text),
+        child: const Text('Submit', style: TextStyle(fontSize: 16)), 
       ),
-    );
-  }
+    ),
+  );
+}
+
+
+
+
 }
 
 class LabeledTextField extends StatelessWidget {

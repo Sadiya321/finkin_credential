@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'companyworker_form.dart';
 
 class LoanForm extends StatefulWidget {
   const LoanForm({Key? key}) : super(key: key);
-
   @override
   State<LoanForm> createState() => _LoanFormState();
 }
@@ -101,22 +98,22 @@ class _LoanFormState extends State<LoanForm> {
   }
 
   Widget _buildVerificationButton() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: ElevatedButton(
-        onPressed: () {
-          // Add verification logic here
-          setState(() {
-            isPhoneNumberVerified = true;
-          });
-        },
-        style: ElevatedButton.styleFrom(
-          primary: AppColor.icon,
-        ),
-        child: const Text('Verify'),
+  return ElevatedButton(
+    onPressed: () {
+      // Add verification logic here
+      setState(() {
+        isPhoneNumberVerified = true;
+      });
+    },
+    style: ElevatedButton.styleFrom(
+      primary: AppColor.icon,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
-    );
-  }
+    ),
+    child: const Text('Verify'),
+  );
+}
 
   Widget _buildVerificationCodeSection() {
     return Row(
@@ -132,22 +129,22 @@ class _LoanFormState extends State<LoanForm> {
     );
   }
 
-  Widget _buildSubmitButton() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: ElevatedButton(
-        onPressed: () {
-          setState(() {
-            isPhoneNumberVerified = true;
-          });
-        },
-        style: ElevatedButton.styleFrom(
-          primary: AppColor.primary,
-        ),
-        child: const Text('Submit'),
+Widget _buildSubmitButton() {
+  return ElevatedButton(
+    onPressed: () {
+      setState(() {
+        isPhoneNumberVerified = true;
+      });
+    },
+    style: ElevatedButton.styleFrom(
+      primary: AppColor.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
-    );
-  }
+    ),
+    child: const Text('Submit'),
+  );
+}
 
   Widget _buildDateOfBirthSection() {
     return Row(
@@ -236,7 +233,7 @@ class _LoanFormState extends State<LoanForm> {
   }
 
   Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
-    return Row(
+    return Column(
       children: [
         GestureDetector(
           onTap: onPressed,
@@ -254,13 +251,68 @@ class _LoanFormState extends State<LoanForm> {
         if (pickedFile != null)
           Container(
             margin: const EdgeInsets.all(10),
-            child: Image.file(
-              File(pickedFile.path),
-              height: 40,
-              width: 216,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _showImageDialog(pickedFile);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('View Image'),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  pickedFile.name,
+                  style: const TextStyle(
+                    color: AppColor.textLight,
+                  ),
+                ),
+              ],
             ),
           ),
       ],
+    );
+  }
+
+  void _showImageDialog(XFile pickedFile) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.file(
+                  File(pickedFile.path),
+                  height: 200,
+                  width: 200,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -279,9 +331,7 @@ class _LoanFormState extends State<LoanForm> {
                 onTap: () {
                   Navigator.push(
                     context,
-
                     MaterialPageRoute(builder: (context) => const SelfWorker()),
-
                   );
                 },
                 child:
@@ -291,12 +341,12 @@ class _LoanFormState extends State<LoanForm> {
             const SizedBox(width: 40),
             Expanded(
               child: GestureDetector(
-                // onTap: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const EmploymentForm()),
-                //   );
-                // },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SelfWorker()),
+                  );
+                },
                 child: _buildEmployeeTypeButton(
                     'Company Worker', AppColor.primary),
               ),
@@ -308,23 +358,24 @@ class _LoanFormState extends State<LoanForm> {
     );
   }
 
-  Widget _buildEmployeeTypeButton(String text, Color color) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Companyworker()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          primary: color,
-        ),
-        child: Text(text),
+ Widget _buildEmployeeTypeButton(String text, Color color) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Companyworker()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      primary: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
-    );
-  }
+    ),
+    child: Text(text),
+  );
+}
+
 }
 
 class LabeledTextField extends StatelessWidget {

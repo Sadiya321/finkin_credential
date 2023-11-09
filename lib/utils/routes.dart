@@ -62,7 +62,7 @@ class MyRoutes {
         case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => const Companyworker());
+        return MaterialPageRoute(builder: (context) => const BottomNavBar());
     }
   }
 }
