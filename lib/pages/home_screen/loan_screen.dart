@@ -3,7 +3,6 @@ import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:flutter/material.dart';
-
 import '../../shared/widgets/Loan_Tracking_widget/loan_track.dart';
 
 class LoanScreen extends StatelessWidget {
@@ -67,54 +66,58 @@ class LoanScreen extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildApprovedAppBar() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(210.0),
-      child: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(90),
-            bottomRight: Radius.circular(90),
-          ),
-          color: AppColor.primary,
+PreferredSizeWidget _buildApprovedAppBar() {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(280.0),
+    child: Container(
+      height: 200,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
         ),
-        child: AppBar(
-          title: Center(
+        color: AppColor.primary,
+      ),
+      child: AppBar(
+        toolbarHeight: 65.0,
+        title: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
             child: Column(
               children: [
                 Text(title),
                 const SizedBox(height: 10.0),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildStatusColumn("This Month", Colors.blue, 50.0),
-                    _buildStatusColumn("This Year", Colors.green, 50.0),
+                    Text(
+                      "This Month ",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "This Year: ",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
         ),
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color.fromARGB(0, 236, 75, 75),
+        elevation: 0,
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildStatusColumn(String text, Color color, double width) {
-    return Column(
-      children: [
-        Text(text),
-        const SizedBox(height: 10.0),
-        Container(
-          width: width,
-          height: 10.0,
-          color: color,
-        ),
-      ],
-    );
-  }
+
+
+
+
+
+
 }
 
 final loanItems = [
