@@ -3,6 +3,7 @@ import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:flutter/material.dart';
+
 import '../../shared/widgets/Loan_Tracking_widget/loan_track.dart';
 
 class LoanScreen extends StatelessWidget {
@@ -66,58 +67,53 @@ class LoanScreen extends StatelessWidget {
     );
   }
 
-PreferredSizeWidget _buildApprovedAppBar() {
-  return PreferredSize(
-    preferredSize: const Size.fromHeight(280.0),
-    child: Container(
-      height: 200,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(50),
-          bottomRight: Radius.circular(50),
+  PreferredSizeWidget _buildApprovedAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(280.0),
+      child: Container(
+        height: 200,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+          color: AppColor.primary,
         ),
-        color: AppColor.primary,
-      ),
-      child: AppBar(
-        toolbarHeight: 65.0,
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
-            child: Column(
-              children: [
-                Text(title),
-                const SizedBox(height: 10.0),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "This Month ",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "This Year: ",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
+        child: AppBar(
+          toolbarHeight: 65.0,
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
+              child: Column(
+                children: [
+                  Text(title),
+                  const SizedBox(height: 10.0),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "This Month ",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "This Year: ",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color.fromARGB(0, 236, 75, 75),
+          elevation: 0,
         ),
-        automaticallyImplyLeading: false,
-        backgroundColor: const Color.fromARGB(0, 236, 75, 75),
-        elevation: 0,
       ),
-    ),
-  );
-}
-
-
-
-
-
-
-
+    );
+  }
 }
 
 final loanItems = [

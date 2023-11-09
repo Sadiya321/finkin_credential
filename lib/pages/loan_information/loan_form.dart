@@ -5,6 +5,8 @@ import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'companyworker_form.dart';
+
 class LoanForm extends StatefulWidget {
   const LoanForm({Key? key}) : super(key: key);
 
@@ -277,7 +279,8 @@ class _LoanFormState extends State<LoanForm> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const EmploymentForm()),
+                    MaterialPageRoute(
+                        builder: (context) => const EmploymentForm()),
                   );
                 },
                 child:
@@ -308,7 +311,12 @@ class _LoanFormState extends State<LoanForm> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Companyworker()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           primary: color,
         ),
