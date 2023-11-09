@@ -233,12 +233,12 @@ Widget _buildSubmitButton() {
   }
 
   Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
-    return Column(
+    return Row(
       children: [
         GestureDetector(
           onTap: onPressed,
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(21),
             color: AppColor.subtext,
             child: const Text(
               'Choose File',
@@ -252,6 +252,7 @@ Widget _buildSubmitButton() {
           Container(
             margin: const EdgeInsets.all(10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 ElevatedButton(
                   onPressed: () {
@@ -285,14 +286,14 @@ Widget _buildSubmitButton() {
       builder: (BuildContext context) {
         return Dialog(
           child: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.file(
                   File(pickedFile.path),
-                  height: 200,
-                  width: 200,
+                  height: 500,
+                  width: 500,
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 10),
