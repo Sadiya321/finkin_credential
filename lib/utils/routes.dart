@@ -6,8 +6,8 @@ import 'package:finkin_credential/pages/verification_screen/verification_screen.
 import 'package:finkin_credential/welcome_carousal/page1.dart';
 import 'package:finkin_credential/welcome_carousal/page2.dart';
 import 'package:finkin_credential/welcome_carousal/page3.dart';
-
 import 'package:flutter/material.dart';
+
 import '../pages/login_screen/login_screen.dart';
 
 class MyRoutes {
@@ -30,7 +30,8 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const Page1());
 
       case '/OtpPage':
-        return MaterialPageRoute(builder: (context) => const VerificationScreen());
+        return MaterialPageRoute(
+            builder: (context) => const VerificationScreen());
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());
@@ -42,6 +43,8 @@ class MyRoutes {
       case '/form':
         return MaterialPageRoute(builder: (context) => const AgentForm());
       case '/home':
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
+      case '/':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case '/navBAr':
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
