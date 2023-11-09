@@ -3,14 +3,14 @@ import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EmploymentForm extends StatefulWidget {
-  const EmploymentForm({Key? key}) : super(key: key);
+class SelfWorker extends StatefulWidget {
+  const SelfWorker({Key? key}) : super(key: key);
 
   @override
-  State<EmploymentForm> createState() => _EmploymentFormState();
+  State<SelfWorker> createState() => _SelfWorkerState();
 }
 
-class _EmploymentFormState extends State<EmploymentForm> {
+class _SelfWorkerState extends State<SelfWorker> {
   bool isPhoneNumberVerified = false;
   XFile? _pickedFile;
   XFile? _pickedFile2;

@@ -31,11 +31,7 @@ class _CompanyworkerState extends State<Companyworker> {
                 const LabeledTextField(
                   label: 'Monthly Income',
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Please Upload IT Return of 2 Year",
-                  style: TextStyle(fontSize: 15),
-                ),
+               
                 const SizedBox(height: 20),
                 _buildAadharCardUploadSection(),
                 const SizedBox(height: 10),
@@ -65,7 +61,7 @@ class _CompanyworkerState extends State<Companyworker> {
       children: [
         Expanded(
           child: LabeledTextField(
-            label: 'First Year',
+            label: 'Please Upload Your Form 16',
             suffixWidget: _buildChooseFileButton(_pickedFile, () async {
               final pickedFile =
                   await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -84,7 +80,7 @@ class _CompanyworkerState extends State<Companyworker> {
       children: [
         Expanded(
           child: LabeledTextField(
-            label: 'Second Year',
+            label: 'Upload Your Bank Statement (6 Months - 1 Year)',
             suffixWidget: _buildChooseFileButton(_pickedFile2, () async {
               final pickedFile2 =
                   await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -131,7 +127,7 @@ class _CompanyworkerState extends State<Companyworker> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(width: 20),
+        const SizedBox(width: 10),
         Row(
           children: [
             Expanded(

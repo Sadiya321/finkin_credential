@@ -2,6 +2,7 @@ import 'package:finkin_credential/pages/agent_screen/agent.dart';
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
+import 'package:finkin_credential/pages/loan_information/companyworker_form.dart';
 import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
@@ -23,15 +24,17 @@ class MyRoutes {
   static String navBAr = "/BottomNavBar";
   static String home = "/HomeScreen";
   static String loanform = "/LoanForm";
-   static String employmentform = "/EmploymentForm";
+  static String selfworker = "/SelfWorker";
+  static String companyworker = "/Companyworker";
+   
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case '/genotp':
         return MaterialPageRoute(builder: (context) => const LoginScreen());
-          case '/employmentform':
-        return MaterialPageRoute(builder: (context) => const EmploymentForm());
+          case '/selfworker':
+        return MaterialPageRoute(builder: (context) => const SelfWorker());
       case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
 
@@ -54,8 +57,10 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
       case '/loanform':
         return MaterialPageRoute(builder: (context) => const LoanForm());
+        case '/companyworker':
+        return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => const EmploymentForm());
+        return MaterialPageRoute(builder: (context) => const Companyworker());
     }
   }
 }
