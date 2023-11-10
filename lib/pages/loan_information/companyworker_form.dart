@@ -1,17 +1,16 @@
 import 'dart:io';
-
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CompanyWorker extends StatefulWidget {
-  const CompanyWorker({Key? key}) : super(key: key);
+class Companyworker extends StatefulWidget {
+  const Companyworker({Key? key}) : super(key: key);
 
   @override
-  State<CompanyWorker> createState() => _CompanyWorkerState();
+  State<Companyworker> createState() => _CompanyworkerState();
 }
 
-class _CompanyWorkerState extends State<CompanyWorker> {
+class _CompanyworkerState extends State<Companyworker> {
   bool isPhoneNumberVerified = false;
   XFile? _pickedFile;
   XFile? _pickedFile2;
@@ -39,7 +38,7 @@ class _CompanyWorkerState extends State<CompanyWorker> {
                 const SizedBox(
                   height: 10,
                 ),
-                _buildSubmitButton(), // Added Submit Button
+                _buildSubmitButton(),
               ],
             ),
           ),
@@ -96,13 +95,50 @@ class _CompanyWorkerState extends State<CompanyWorker> {
     );
   }
 
+  void _showImageDialog(XFile pickedFile) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.file(
+                  File(pickedFile.path),
+                  height: 500,
+                  width: 500,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
     return Row(
       children: [
         GestureDetector(
           onTap: onPressed,
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(21),
             color: AppColor.subtext,
             child: const Text(
               'Choose File',
@@ -115,10 +151,29 @@ class _CompanyWorkerState extends State<CompanyWorker> {
         if (pickedFile != null)
           Container(
             margin: const EdgeInsets.all(10),
-            child: Image.file(
-              File(pickedFile.path),
-              height: 40,
-              width: 216,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _showImageDialog(pickedFile);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('View Image'),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  pickedFile.name,
+                  style: const TextStyle(
+                    color: AppColor.textLight,
+                  ),
+                ),
+              ],
             ),
           ),
       ],
@@ -154,7 +209,6 @@ class LabeledTextField extends StatelessWidget {
   final TextEditingController? controller;
 
   const LabeledTextField({
-    super.key,
     required this.label,
     this.onTap,
     this.icon,

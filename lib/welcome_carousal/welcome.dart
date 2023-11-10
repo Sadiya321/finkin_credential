@@ -1,3 +1,6 @@
+import 'package:finkin_credential/pages/home_screen/account_screen.dart';
+import 'package:finkin_credential/pages/login_screen/login_screen.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/welcome_carousal/page1.dart';
 import 'package:finkin_credential/welcome_carousal/page2.dart';
 import 'package:finkin_credential/welcome_carousal/page3.dart';
@@ -10,11 +13,10 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: AppColor.secondary,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // page view
           SizedBox(
             height: 500,
             child: PageView(
@@ -26,21 +28,42 @@ class WelcomePage extends StatelessWidget {
               ],
             ),
           ),
-
-          // dot indicators
           SmoothPageIndicator(
             controller: _controller,
-            count: 4,
-            effect: JumpingDotEffect(
-              activeDotColor: Colors.deepPurple,
-              dotColor: Colors.deepPurple.shade100,
-              dotHeight: 20,
-              dotWidth: 20,
-              spacing: 16,
-              //verticalOffset: 50,
+            count: 3,
+            effect: const JumpingDotEffect(
+              activeDotColor: AppColor.primary,
+              dotColor: AppColor.textLight,
+              dotHeight: 12,
+              dotWidth: 12,
+              spacing: 12,
               jumpScale: 3,
             ),
           ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
+
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('Verify'),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

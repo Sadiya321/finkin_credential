@@ -96,8 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 30,
             ),
             Container(
-              margin: const EdgeInsets.only(
-                  top: 20, bottom: 0), // Adjust the margin as needed
+              margin: const EdgeInsets.only(top: 20, bottom: 0),
               child: CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 3.0,
@@ -142,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           "Explore Categories",
                           style: TextStyle(
-                            color: AppColor.primary,
+                            color: AppColor.textPrimary,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -165,17 +164,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: categories.length,
                           itemBuilder: (BuildContext context, int index) {
                             Category category = categories[index];
-                            String categoryTitle = "Your Category Title";
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoanForm(
-                                        title:
-                                            categoryTitle // Pass the category title
-                                        ),
-                                  ),
+                                      builder: (context) => const LoanForm()),
                                 );
                               },
                               child: Card(

@@ -1,4 +1,5 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
                   TextFormField(
                     keyboardType:
-                        TextInputType.number, // Added keyboardType property
+                        TextInputType.number, 
                     cursorColor:  AppColor.primary, 
                     controller: phoneController,
                     style: const TextStyle(
@@ -164,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()),
+                                    builder: (context) => const VerificationScreen()),
                               );
                             }),
                   ),

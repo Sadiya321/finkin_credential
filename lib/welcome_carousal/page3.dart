@@ -1,3 +1,4 @@
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class Page3 extends StatelessWidget {
@@ -12,7 +13,7 @@ class Page3 extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            color: Colors.deepPurple[400],
+            color: AppColor.primary
           ),
         ),
       ),
