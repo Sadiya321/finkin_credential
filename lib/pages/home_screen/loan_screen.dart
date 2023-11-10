@@ -1,9 +1,9 @@
 import 'package:finkin_credential/models/loan_model/loan_model.dart';
+import 'package:finkin_credential/pages/loan_information/infodisplay.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:flutter/material.dart';
-
 import '../../shared/widgets/Loan_Tracking_widget/loan_track.dart';
 
 class LoanScreen extends StatelessWidget {
@@ -38,7 +38,14 @@ class LoanScreen extends StatelessWidget {
                   date: loan.date,
                   icon: loan.icon,
                   status: loan.status,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InfoDisplay(),
+                      ),
+                    );
+                  },
                 ),
               );
             }),

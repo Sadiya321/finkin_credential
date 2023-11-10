@@ -7,11 +7,13 @@ import 'companyworker_form.dart';
 
 class LoanForm extends StatefulWidget {
   const LoanForm({Key? key}) : super(key: key);
+
   @override
   State<LoanForm> createState() => _LoanFormState();
 }
 
 class _LoanFormState extends State<LoanForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isPhoneNumberVerified = false;
   XFile? _pickedFile;
   XFile? _pickedFile2;
@@ -100,7 +102,6 @@ class _LoanFormState extends State<LoanForm> {
   Widget _buildVerificationButton() {
   return ElevatedButton(
     onPressed: () {
-      // Add verification logic here
       setState(() {
         isPhoneNumberVerified = true;
       });
@@ -130,21 +131,24 @@ class _LoanFormState extends State<LoanForm> {
   }
 
 Widget _buildSubmitButton() {
-  return ElevatedButton(
-    onPressed: () {
-      setState(() {
-        isPhoneNumberVerified = true;
-      });
-    },
-    style: ElevatedButton.styleFrom(
-      primary: AppColor.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+    return ElevatedButton(
+      onPressed: () {
+        // Add form validation logic here using _formKey.currentState!.validate()
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            isPhoneNumberVerified = true;
+          });
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        primary: AppColor.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
-    ),
-    child: const Text('Submit'),
-  );
-}
+      child: const Text('Submit'),
+    );
+  }
 
   Widget _buildDateOfBirthSection() {
     return Row(

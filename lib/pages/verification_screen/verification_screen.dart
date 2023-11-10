@@ -1,5 +1,4 @@
 import 'package:finkin_credential/pages/agent_screen/agent.dart';
-import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = false;
+    const isLoading = false;
 
     final defaultPinTheme = PinTheme(
       width: 56,
@@ -123,9 +122,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 50),
-                    otpInputWidget, // Add OTP input here
+                    otpInputWidget, 
                     const SizedBox(height: 25),
-                    verifyButton, // Add Verify button here
+                    verifyButton,
                     const SizedBox(height: 20),
                     const Text(
                       "Didn't receive any code?",
@@ -151,16 +150,4 @@ class _VerificationScreenState extends State<VerificationScreen> {
     );
   }
 
-//   // verify otp
-//   void verifyOtp(BuildContext context, String userOtp) {
-//     final ap = Provider.of<AuthProvider>(context, listen: false);
-//     ap.verifyOtp(
-//       context: context,
-//       verificationId: widget.verificationId,
-//       userOtp: userOtp,
-//       onSuccess: () {
-//         Navigator.push(context, MaterialPageRoute(builder: (_) => Wrapper(user: ap.getCurrentUser(),)));
-//       },
-//     );
-  // }
 }

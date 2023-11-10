@@ -96,8 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 30,
             ),
             Container(
-              margin: const EdgeInsets.only(
-                  top: 20, bottom: 0), 
+              margin: const EdgeInsets.only(top: 20, bottom: 0),
               child: CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 3.0,
@@ -142,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           "Explore Categories",
                           style: TextStyle(
-                            color: AppColor.primary,
+                            color: AppColor.textPrimary,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),

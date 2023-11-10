@@ -35,8 +35,10 @@ class _CompanyworkerState extends State<Companyworker> {
                 _buildAadharCardUploadSection(),
                 const SizedBox(height: 10),
                 _buildPANCardUploadSection(),
-                const SizedBox(height: 10,),
-                _buildSubmitButton(), // Added Submit Button
+                const SizedBox(
+                  height: 10,
+                ),
+                _buildSubmitButton(),
               ],
             ),
           ),
@@ -93,13 +95,50 @@ class _CompanyworkerState extends State<Companyworker> {
     );
   }
 
+  void _showImageDialog(XFile pickedFile) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.file(
+                  File(pickedFile.path),
+                  height: 500,
+                  width: 500,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
     return Row(
       children: [
         GestureDetector(
           onTap: onPressed,
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(21),
             color: AppColor.subtext,
             child: const Text(
               'Choose File',
@@ -112,40 +151,54 @@ class _CompanyworkerState extends State<Companyworker> {
         if (pickedFile != null)
           Container(
             margin: const EdgeInsets.all(10),
-            child: Image.file(
-              File(pickedFile.path),
-              height: 40,
-              width: 216,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _showImageDialog(pickedFile);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('View Image'),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  pickedFile.name,
+                  style: const TextStyle(
+                    color: AppColor.textLight,
+                  ),
+                ),
+              ],
             ),
           ),
       ],
     );
   }
 
-Widget _buildSubmitButton() {
-  return Center(
-    child: Container(
-      width: 150, 
-      margin: const EdgeInsets.only(top: 20),
-      child: ElevatedButton(
-        onPressed: () {
-        },
-        style: ElevatedButton.styleFrom(
-          primary: AppColor.primary, 
-          padding: const EdgeInsets.symmetric(vertical: 10), 
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0), 
+  Widget _buildSubmitButton() {
+    return Center(
+      child: Container(
+        width: 150,
+        margin: const EdgeInsets.only(top: 20),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            primary: AppColor.primary,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
           ),
+          child: const Text('Submit', style: TextStyle(fontSize: 16)),
         ),
-        child: const Text('Submit', style: TextStyle(fontSize: 16)), 
       ),
-    ),
-  );
-}
-
-
-
-
+    );
+  }
 }
 
 class LabeledTextField extends StatelessWidget {
