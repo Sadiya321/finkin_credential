@@ -1,16 +1,17 @@
 import 'dart:io';
+
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Companyworker extends StatefulWidget {
-  const Companyworker({Key? key}) : super(key: key);
+class CompanyWorker extends StatefulWidget {
+  const CompanyWorker({Key? key}) : super(key: key);
 
   @override
-  State<Companyworker> createState() => _CompanyworkerState();
+  State<CompanyWorker> createState() => _CompanyWorkerState();
 }
 
-class _CompanyworkerState extends State<Companyworker> {
+class _CompanyWorkerState extends State<CompanyWorker> {
   bool isPhoneNumberVerified = false;
   XFile? _pickedFile;
   XFile? _pickedFile2;
@@ -35,7 +36,9 @@ class _CompanyworkerState extends State<Companyworker> {
                 _buildAadharCardUploadSection(),
                 const SizedBox(height: 10),
                 _buildPANCardUploadSection(),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 _buildSubmitButton(), // Added Submit Button
               ],
             ),
@@ -122,30 +125,25 @@ class _CompanyworkerState extends State<Companyworker> {
     );
   }
 
-Widget _buildSubmitButton() {
-  return Center(
-    child: Container(
-      width: 150, 
-      margin: const EdgeInsets.only(top: 20),
-      child: ElevatedButton(
-        onPressed: () {
-        },
-        style: ElevatedButton.styleFrom(
-          primary: AppColor.primary, 
-          padding: const EdgeInsets.symmetric(vertical: 10), 
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0), 
+  Widget _buildSubmitButton() {
+    return Center(
+      child: Container(
+        width: 150,
+        margin: const EdgeInsets.only(top: 20),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            primary: AppColor.primary,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
           ),
+          child: const Text('Submit', style: TextStyle(fontSize: 16)),
         ),
-        child: const Text('Submit', style: TextStyle(fontSize: 16)), 
       ),
-    ),
-  );
-}
-
-
-
-
+    );
+  }
 }
 
 class LabeledTextField extends StatelessWidget {
@@ -156,6 +154,7 @@ class LabeledTextField extends StatelessWidget {
   final TextEditingController? controller;
 
   const LabeledTextField({
+    super.key,
     required this.label,
     this.onTap,
     this.icon,

@@ -165,12 +165,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: categories.length,
                           itemBuilder: (BuildContext context, int index) {
                             Category category = categories[index];
+                            String categoryTitle = "Your Category Title";
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoanForm()),
+                                    builder: (context) => LoanForm(
+                                        title:
+                                            categoryTitle // Pass the category title
+                                        ),
+                                  ),
                                 );
                               },
                               child: Card(
