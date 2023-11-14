@@ -47,6 +47,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   carousel_slider: ^4.2.1
   flutter_svg: ^2.0.9
+  horizontal_stepper_flutter: ^1.0.3
  
 
 

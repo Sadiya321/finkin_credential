@@ -15,7 +15,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   List screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const LoanScreen(
       title: 'Loan Tracking',
     ),

@@ -47,11 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 200,
                     padding: const EdgeInsets.all(20.0),
                     decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
+                      shape: BoxShape.rectangle,
                       color: AppColor.secondary,
                     ),
                     child: Image.asset(
-                      " ",
+                      'assets/images/caros.jpg',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(height: 20),

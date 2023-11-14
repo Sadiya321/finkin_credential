@@ -29,6 +29,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColor.primary,
+          
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -100,12 +101,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(left: 8),
-                        child: const Icon(Icons.arrow_back),
                       ),
                     ),
                     const SizedBox(height: 10),
                     Image.asset(
-                      " ",
+                      'assets/images/money.jpg',
                       width: 260,
                       height: 260,
                     ),

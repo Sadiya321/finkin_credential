@@ -50,10 +50,10 @@ class _AgentFormState extends State<AgentForm> {
                   "Welcomed !",
                   style: TextStyle(fontSize: 30, color: Color(0xFF363f93)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter First Name',
                   regexPattern: nameRegex,
@@ -61,7 +61,7 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 5,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter Last Name',
                   regexPattern: nameRegex,
@@ -69,31 +69,31 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 5,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter You Phone Number',
-                  regexPattern: phoneNumberRegex,
+                  // regexPattern: phoneNumberRegex,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter Your Aadhar card Number',
-                  regexPattern: aadharCardRegex,
+                  // regexPattern: aadharCardRegex,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter Your Pan card Number',
-                  regexPattern: panCardRegex,
+                  // regexPattern: panCardRegex,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter Your Email Id',
                   regexPattern: emailRegex,
@@ -101,10 +101,10 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 10,
                 ),
-                LabeledTextField(
+                const LabeledTextField(
                   label: '',
                   hintText: 'Enter Your Address  ',
-                  regexPattern: addressRegex,
+                  // regexPattern: addressRegex,
                 ),
                 SizedBox(
                   height: height * 0.05,

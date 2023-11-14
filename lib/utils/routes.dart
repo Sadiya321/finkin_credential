@@ -58,17 +58,18 @@ class MyRoutes {
       case '/agentform':
         return MaterialPageRoute(builder: (context) => const AgentForm());
       case '/home':
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+        return MaterialPageRoute(builder: (context) =>  HomeScreen());
+        
       case '/navBAr':
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
       case '/infodisplay':
         return MaterialPageRoute(builder: (context) => const InfoDisplay());
       case '/loanform':
-        return MaterialPageRoute(builder: (context) => const LoanForm());
+        return MaterialPageRoute(builder: (context) => const LoanForm(title: '',));
         case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => const BottomNavBar());
+        return MaterialPageRoute(builder: (context) =>  WelcomePage());
     }
   }
 }

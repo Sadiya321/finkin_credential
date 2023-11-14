@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finkin_credential/models/loan_model/grid_model/grid_model.dart';
-import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -164,14 +163,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: categories.length,
                           itemBuilder: (BuildContext context, int index) {
                             Category category = categories[index];
+                            String categoryTitle = "Home Loan";
                             return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoanForm()),
-                                );
-                              },
+                              onTap: () => category.onTap?.call(context),
                               child: Card(
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(

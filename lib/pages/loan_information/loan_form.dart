@@ -1,12 +1,15 @@
 import 'dart:io';
+
 import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 import 'companyworker_form.dart';
 
 class LoanForm extends StatefulWidget {
-  const LoanForm({Key? key}) : super(key: key);
+  final String title;
+  const LoanForm({Key? key, required this.title}) : super(key: key);
 
   @override
   State<LoanForm> createState() => _LoanFormState();
@@ -18,6 +21,7 @@ class _LoanFormState extends State<LoanForm> {
   XFile? _pickedFile;
   XFile? _pickedFile2;
   DateTime? selectedDate;
+  get title => widget.title;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -38,6 +42,18 @@ class _LoanFormState extends State<LoanForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: AppColor.primary,
+          automaticallyImplyLeading: false,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding:
@@ -100,21 +116,21 @@ class _LoanFormState extends State<LoanForm> {
   }
 
   Widget _buildVerificationButton() {
-  return ElevatedButton(
-    onPressed: () {
-      setState(() {
-        isPhoneNumberVerified = true;
-      });
-    },
-    style: ElevatedButton.styleFrom(
-      primary: AppColor.icon,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          isPhoneNumberVerified = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        primary: AppColor.icon,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
-    ),
-    child: const Text('Verify'),
-  );
-}
+      child: const Text('Verify'),
+    );
+  }
 
   Widget _buildVerificationCodeSection() {
     return Row(
@@ -130,10 +146,9 @@ class _LoanFormState extends State<LoanForm> {
     );
   }
 
-Widget _buildSubmitButton() {
+  Widget _buildSubmitButton() {
     return ElevatedButton(
       onPressed: () {
-        // Add form validation logic here using _formKey.currentState!.validate()
         if (_formKey.currentState!.validate()) {
           setState(() {
             isPhoneNumberVerified = true;
@@ -333,24 +348,16 @@ Widget _buildSubmitButton() {
           children: [
             Expanded(
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SelfWorker()),
-                  );
-                },
+              
                 child:
-                    _buildEmployeeTypeButton('Self Employed', AppColor.primary),
+                    _buildCompanyTypeButton('Self Employed', AppColor.primary),
               ),
             ),
             const SizedBox(width: 40),
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SelfWorker()),
-                  );
+                
                 },
                 child: _buildEmployeeTypeButton(
                     'Company Worker', AppColor.primary),
@@ -363,24 +370,40 @@ Widget _buildSubmitButton() {
     );
   }
 
- Widget _buildEmployeeTypeButton(String text, Color color) {
-  return ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Companyworker()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      primary: color,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+  Widget _buildEmployeeTypeButton(String text, Color color) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Companyworker()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
-    ),
-    child: Text(text),
-  );
-}
-
+      child: Text(text),
+    );
+  }
+    Widget _buildCompanyTypeButton(String text, Color color) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SelfWorker()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      child: Text(text),
+    );
+  }
 }
 
 class LabeledTextField extends StatelessWidget {
