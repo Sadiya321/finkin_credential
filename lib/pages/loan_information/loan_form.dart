@@ -23,6 +23,10 @@ class _LoanFormState extends State<LoanForm> {
   DateTime? selectedDate;
   get title => widget.title;
 
+  late AnimationController _controller;
+
+
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -348,7 +352,6 @@ class _LoanFormState extends State<LoanForm> {
           children: [
             Expanded(
               child: GestureDetector(
-              
                 child:
                     _buildCompanyTypeButton('Self Employed', AppColor.primary),
               ),
@@ -356,9 +359,7 @@ class _LoanFormState extends State<LoanForm> {
             const SizedBox(width: 40),
             Expanded(
               child: GestureDetector(
-                onTap: () {
-                
-                },
+                onTap: () {},
                 child: _buildEmployeeTypeButton(
                     'Company Worker', AppColor.primary),
               ),
@@ -387,7 +388,8 @@ class _LoanFormState extends State<LoanForm> {
       child: Text(text),
     );
   }
-    Widget _buildCompanyTypeButton(String text, Color color) {
+
+  Widget _buildCompanyTypeButton(String text, Color color) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -440,6 +442,10 @@ class LabeledTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             border: const OutlineInputBorder(),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.textdivider), // Set to transparent color
+            ),
+
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
@@ -447,6 +453,7 @@ class LabeledTextField extends StatelessWidget {
                   )
                 : suffixWidget,
           ),
+          cursorColor: AppColor.textPrimary, 
         ),
         const SizedBox(height: 10),
       ],

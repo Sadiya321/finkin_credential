@@ -74,173 +74,163 @@ class LoanScreen extends StatelessWidget {
     );
   }
 
-PreferredSizeWidget _buildApprovedAppBar() {
-  return PreferredSize(
-    preferredSize: const Size.fromHeight(280.0),
-    child: Stack(
-      children: [
-        Container(
-          height: 200,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50),
+  PreferredSizeWidget _buildApprovedAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(280.0),
+      child: Stack(
+        children: [
+          Container(
+            height: 200,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+              ),
+              color: AppColor.primary,
             ),
-            color: AppColor.primary,
           ),
-        ),
-        Positioned(
-          top: 10,
-          left: 5,
-          right: 0,
-          child: AppBar(
-            toolbarHeight: 75.0,
-            title: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
-                child: Column(
-                  children: [
-                    Text(title),
-                    const SizedBox(height: 10.0),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "This Month ",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+          Positioned(
+            top: 10,
+            left: 5,
+            right: 0,
+            child: AppBar(
+              toolbarHeight: 75.0,
+              title: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
+                  child: Column(
+                    children: [
+                      Text(title),
+                      const SizedBox(height: 10.0),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "This Month ",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "This Year",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          Text(
+                            "This Year",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              automaticallyImplyLeading: false,
+              backgroundColor: const Color.fromARGB(0, 236, 75, 75),
+              elevation: 0,
             ),
-            automaticallyImplyLeading: false,
-            backgroundColor: const Color.fromARGB(0, 236, 75, 75),
-            elevation: 0,
           ),
-        ),
-       Positioned(
-  bottom: 22,
-  left: 0,
-  right: 0,
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      Container(
-        width: 80,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            color: AppColor.textLight, // Border color
-            width: 1.0, // Border width
-          ),
-        ),
-
-        child:  Center(
-          child: RichText(
-            text: const TextSpan(
+          Positioned(
+            bottom: 22,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextSpan(
-                  text: '21',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green, // Set the color to green
+                Container(
+                  width: 80,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: AppColor.textLight,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Center(
+                    child: RichText(
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '21',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' /',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.textLight,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '25',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                TextSpan(
-                  text: ' /',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.textLight,
+                Container(
+                  width: 80,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: AppColor.textLight,
+                      width: 1.0,
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: '25',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white, // Set the color to white
+                  child: Center(
+                    child: RichText(
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '600',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.icon,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' /',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.textLight,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '700',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-        
-
+        ],
       ),
-      Container(
-        width: 80,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            color: AppColor.textLight, // Border color
-            width: 1.0, // Border width
-          ),
-        ),
-
-
-        child:  Center(
-          child: RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                  text: '600',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green, // Set the color to green
-                  ),
-                ),
-                TextSpan(
-                  text: ' /',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.textLight,
-                  ),
-                ),
-                TextSpan(
-                  text: '700',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white, // Set the color to white
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-
-      ],
-    ),
-  );
+    );
+  }
 }
-
-
-
-}
-
 
 final loanItems = [
   LoanModel(

@@ -187,11 +187,12 @@ class _CompanyworkerState extends State<Companyworker> {
         width: 150,
         margin: const EdgeInsets.only(top: 20),
         child: ElevatedButton(
-          onPressed: () { Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BottomNavBar()),
-                          );},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BottomNavBar()),
+            );
+          },
           style: ElevatedButton.styleFrom(
             primary: AppColor.primary,
             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -237,6 +238,10 @@ class LabeledTextField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: AppColor.textdivider), 
+            ),
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
@@ -244,6 +249,7 @@ class LabeledTextField extends StatelessWidget {
                   )
                 : suffixWidget,
           ),
+          cursorColor: AppColor.textPrimary,
         ),
         const SizedBox(height: 10),
       ],

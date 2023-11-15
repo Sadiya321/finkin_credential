@@ -2,7 +2,6 @@ import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 
-
 class InfoDisplay extends StatefulWidget {
   const InfoDisplay({Key? key}) : super(key: key);
 
@@ -35,9 +34,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                 children: [
                   const InkWell(
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(
-                        'assets/images/money.jpg',
-                      ),
+                      backgroundImage: AssetImage('assets/images/money.jpg'),
                       radius: 50,
                       backgroundColor: AppColor.secondary,
                     ),
@@ -61,8 +58,8 @@ class _InfoDisplayState extends State<InfoDisplay> {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding: const EdgeInsets.all(31),
-                    width: 370,
+                    padding: const EdgeInsets.all(20),
+                    width: 350,
                     decoration: BoxDecoration(
                       color: AppColor.textLight,
                       borderRadius: BorderRadius.circular(15),
@@ -70,9 +67,18 @@ class _InfoDisplayState extends State<InfoDisplay> {
                         color: AppColor.textPrimary,
                         width: 0.5,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColor.textdivider.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
                     child: Column(
                       children: [
+                        const SizedBox(height: 10),
                         const Align(
                           alignment: Alignment.topCenter,
                           child: Text(
@@ -84,11 +90,10 @@ class _InfoDisplayState extends State<InfoDisplay> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15),
                         Center(
                           child: FlutterHorizontalStepper(
-                            titleStyle:
-                                const TextStyle(color: AppColor.primary),
+                            titleStyle: const TextStyle(color: AppColor.primary),
                             steps: const [
                               "Application sent",
                               "Approval Pending",
@@ -125,8 +130,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                 ? AppColor.primary
                                 : AppColor.subtext,
                           ),
-                          child: const Text('Personal Details',
-                              style: TextStyle(fontSize: 13)),
+                          child: const Text('Personal Details', style: TextStyle(fontSize: 13)),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -140,46 +144,189 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                 ? AppColor.subtext
                                 : AppColor.primary,
                           ),
-                          child: const Text('Other Details',
-                              style: TextStyle(fontSize: 13)),
+                          child: const Text('Other Details', style: TextStyle(fontSize: 13)),
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ),const SizedBox(height: 10),
+            ),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
                 color: AppColor.textLight,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ListView(
-                  children: const [
-                    LabeledTextField2(
-                      label: 'Full Name',
-                      hintText: 'Abdul Aleem Sheikh',
-                    ),
-                    SizedBox(height: 10),
-                    LabeledTextField2(
-                      label: 'Email',
-                      hintText: 'aleemsheikh@gmail.com',
-                    ),
-                    SizedBox(height: 10),
-                    LabeledTextField2(
-                      label: 'Phone ',
-                      hintText: '953503521',
-                    ),
-                    SizedBox(height: 10),
-                    LabeledTextField2(
-                      label: 'Date Of Birth ',
-                      hintText: '28/9/2000',
-                    ),
-                    SizedBox(height: 10),
-                    LabeledTextField2(
-                      label: 'Address',
-                      hintText: 'Mangalore',
-                    ),
-                  ],
+                  children: isPersonalDetailsSelected
+                      ? [
+                          const LabeledTextField2(
+                            label: 'Full Name',
+                            hintText: 'Abdul Aleem Sheikh',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Email',
+                            hintText: 'aleemsheikh@gmail.com',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Phone ',
+                            hintText: '953503521',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Date Of Birth ',
+                            hintText: '28/9/2000',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Address',
+                            hintText: 'Mangalore',
+                          ),
+                        ]
+                      : [
+                          const LabeledTextField2(
+                            label: 'Pincode',
+                            hintText: '521707',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Nationality :',
+                            hintText: 'Indian',
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Aadhar Card Number ',
+                            hintText: '9535 0352 1502',
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Aadhar Card Photo',
+                                style: TextStyle(
+                                  color: AppColor.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: const Size(90, 46),
+                                  primary: AppColor.primary,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                ),
+                                child: const Text('View Image'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Pan Card Number',
+                            hintText: 'BNFPS7312J',
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Pan Card Photo',
+                                style: TextStyle(
+                                  color: AppColor.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: const Size(90, 46),
+                                  primary: AppColor.primary,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                ),
+                                child: const Text('View Image'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          const LabeledTextField2(
+                            label: 'Monthly Income ',
+                            hintText: '20,000',
+                          ),
+                          const Text(
+                            'IT Return of Two Years',
+                            style: TextStyle(
+                              color: AppColor.textPrimary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'First Year',
+                                style: TextStyle(
+                                  color: AppColor.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(90, 46),
+                                  primary: AppColor.primary,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                ),
+                                child: const Text('View Image'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Second Year',
+                                style: TextStyle(
+                                  color: AppColor.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: const Size(90, 46),
+                                  primary: AppColor.primary,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                ),
+                                child: const Text('View Image'),
+                              ),
+                            ],
+                          ),
+                        ],
                 ),
               ),
             ),
@@ -188,7 +335,6 @@ class _InfoDisplayState extends State<InfoDisplay> {
       ),
     );
   }
-
 }
 class LabeledTextField2 extends StatelessWidget {
   final IconData? icon;
@@ -222,31 +368,35 @@ class LabeledTextField2 extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextFormField(
-          controller: controller,
-          readOnly: true, // Set readOnly to true to make the text field non-editable
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: const OutlineInputBorder(),
-            suffixIcon: icon != null
-                ? InkWell(
-                    onTap: onTap,
-                    child: Icon(icon),
-                  )
-                : suffixWidget,
-          ),
-          validator: (value) {
-            if (regexPattern != null && value != null) {
-              final RegExp regex = RegExp(regexPattern!);
-              if (!regex.hasMatch(value)) {
-                return 'Invalid format';
-              }
-            }
-            return null;
-          },
-        ),
+  controller: controller,
+  readOnly: true,
+  decoration: InputDecoration(
+    hintText: hintText,
+    
+    border: const OutlineInputBorder(),
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.textdivider),
+    ),
+    suffixIcon: icon != null
+        ? InkWell(
+            onTap: onTap,
+            child: Icon(icon),
+          )
+        : suffixWidget,
+  ),
+  cursorColor: AppColor.textPrimary, 
+  validator: (value) {
+    if (regexPattern != null && value != null) {
+      final RegExp regex = RegExp(regexPattern!);
+      if (!regex.hasMatch(value)) {
+        return 'Invalid format';
+      }
+    }
+    return null;
+  },
+),
         const SizedBox(height: 10),
       ],
     );
   }
 }
-

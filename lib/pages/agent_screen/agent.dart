@@ -76,13 +76,13 @@ class AgentPage extends StatefulWidget {
 
 class _AgentPageState extends State<AgentPage> {
   String? selectedAgentType;
-  Color buttonColor = AppColor.secondary; // Initialize the button color to blue
-  String? errorMessage; // Initialize the error message to null
+  Color buttonColor = AppColor.secondary; 
+  String? errorMessage; 
 
   void _handleCustomRadioChange(String? value) {
     setState(() {
       selectedAgentType = value;
-      errorMessage = null; // Clear the error message
+      errorMessage = null; 
     });
   }
 
@@ -92,16 +92,14 @@ class _AgentPageState extends State<AgentPage> {
         buttonColor = AppColor.icon;
       });
 
-      // Navigate to the next screen
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) =>
-              const AgentForm(), // Replace 'NextScreen' with the actual screen you want to navigate to
+          builder: (context) => const AgentForm(),
         ),
       );
     } else {
       setState(() {
-        errorMessage = "Select your category !"; // Set the error message
+        errorMessage = "Select your category !";
       });
     }
   }
@@ -122,7 +120,7 @@ class _AgentPageState extends State<AgentPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 48.0),
+            const SizedBox(height: 48.0),
             CustomRadio(
               value: 'FreeLancer',
               groupValue: selectedAgentType,
@@ -142,22 +140,19 @@ class _AgentPageState extends State<AgentPage> {
               onChanged: _handleCustomRadioChange,
               activeColor: AppColor.icon,
             ),
-
-            SizedBox(height: 16.0), // Add some spacing
+            SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: _handleContinueButtonClick,
-              
-              child: Text(
+              child: const Text(
                 'Continue',
                 style: TextStyle(
                   fontSize: 18.0,
                   color: AppColor.textLight,
                 ),
               ),
-              
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  buttonColor, // Use the buttonColor state variable
+                  buttonColor,
                 ),
               ),
             ),
@@ -166,7 +161,7 @@ class _AgentPageState extends State<AgentPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   errorMessage!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: AppColor.textLight,
                   ),

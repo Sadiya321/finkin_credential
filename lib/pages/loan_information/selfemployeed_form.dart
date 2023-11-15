@@ -16,7 +16,7 @@ class _SelfWorkerState extends State<SelfWorker> {
   XFile? _pickedFile;
   XFile? _pickedFile2;
 
- @override
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -30,7 +30,8 @@ class _SelfWorkerState extends State<SelfWorker> {
                 _buildSectionTitle('Employment Information'),
                 const SizedBox(height: 20),
                 const LabeledTextField(
-                  label: 'Monthly Income', label2: '',
+                  label: 'Monthly Income',
+                  label2: '',
                 ),
                 const SizedBox(height: 20),
                 _buildAadharCardUploadSection(),
@@ -48,7 +49,7 @@ class _SelfWorkerState extends State<SelfWorker> {
     );
   }
 
- Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(String title) {
     return Text(
       title,
       style: const TextStyle(
@@ -56,17 +57,17 @@ class _SelfWorkerState extends State<SelfWorker> {
         fontWeight: FontWeight.bold,
       ),
     );
-  } 
+  }
 
-   Widget _buildAadharCardUploadSection() {
+  Widget _buildAadharCardUploadSection() {
     return Row(
       children: [
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Expanded(
-
           child: LabeledTextField(
             label2: 'Please Upload IT Return of  2 year',
-            
             label: 'First Year',
             suffixWidget: _buildChooseFileButton(_pickedFile, () async {
               final pickedFile =
@@ -74,23 +75,18 @@ class _SelfWorkerState extends State<SelfWorker> {
               setState(() {
                 _pickedFile = pickedFile;
               });
-            }
-            
-            ),
-            
+            }),
           ),
-         
         ),
-         
       ],
     );
   }
-Widget _buildPANCardUploadSection() {
+
+  Widget _buildPANCardUploadSection() {
     return Row(
       children: [
         Expanded(
           child: LabeledTextField(
-            
             label: 'Second Year',
             suffixWidget: _buildChooseFileButton(_pickedFile2, () async {
               final pickedFile2 =
@@ -98,14 +94,15 @@ Widget _buildPANCardUploadSection() {
               setState(() {
                 _pickedFile2 = pickedFile2;
               });
-            }), label2: '',
+            }),
+            label2: '',
           ),
         ),
       ],
     );
   }
 
-   void _showImageDialog(XFile pickedFile) {
+  void _showImageDialog(XFile pickedFile) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -142,7 +139,7 @@ Widget _buildPANCardUploadSection() {
     );
   }
 
- Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
+  Widget _buildChooseFileButton(XFile? pickedFile, VoidCallback onPressed) {
     return Row(
       children: [
         GestureDetector(
@@ -190,20 +187,18 @@ Widget _buildPANCardUploadSection() {
     );
   }
 
-
-  
-
   Widget _buildSubmitButton() {
     return Center(
       child: Container(
         width: 150,
         margin: const EdgeInsets.only(top: 20),
         child: ElevatedButton(
-          onPressed: () { Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BottomNavBar()),
-                          );},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BottomNavBar()),
+            );
+          },
           style: ElevatedButton.styleFrom(
             primary: AppColor.primary,
             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -221,7 +216,7 @@ Widget _buildPANCardUploadSection() {
 class LabeledTextField extends StatelessWidget {
   final IconData? icon;
   final String label;
-   final String label2;
+  final String label2;
   final VoidCallback? onTap;
   final Widget? suffixWidget;
   final TextEditingController? controller;
@@ -231,7 +226,8 @@ class LabeledTextField extends StatelessWidget {
     this.onTap,
     this.icon,
     this.suffixWidget,
-    this.controller, required this.label2,
+    this.controller,
+    required this.label2,
   });
 
   @override
@@ -239,15 +235,13 @@ class LabeledTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
-          
+        Text(
           label2,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          
           label,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
@@ -258,6 +252,9 @@ class LabeledTextField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.textdivider),
+            ),
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
@@ -265,6 +262,7 @@ class LabeledTextField extends StatelessWidget {
                   )
                 : suffixWidget,
           ),
+          cursorColor: AppColor.textPrimary,
         ),
         const SizedBox(height: 10),
       ],

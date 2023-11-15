@@ -9,13 +9,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   List<String> imagePaths = [
     'assets/images/caros.jpg',
     'assets/images/money.jpg',
@@ -48,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                color: AppColor.textLight,
+                                 color: AppColor.textLight,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -59,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               'Mohammed Hilal ',
                               style: TextStyle(
-                                color: AppColor.textLight,
+                                 color: AppColor.textLight,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -69,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               'Good Morning Sir ',
                               style: TextStyle(
-                                color: AppColor.textdivider,
+                                 color: AppColor.textLight,
                               ),
                             ),
                           ],
@@ -94,118 +88,129 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 30,
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 0),
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 3.0,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                ),
-                items: imagePaths.map((imagePath) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: const BoxDecoration(
-                          color: AppColor.textLight,
-                        ),
-                        child: Image.asset(
-                          imagePath,
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: AppColor.textLight,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                ),
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Explore Categories",
-                          style: TextStyle(
-                            color: AppColor.textPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 130,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: AppColor.textLight,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10.0,
-                            crossAxisSpacing: 10.0,
-                            childAspectRatio: 1.3,
+                      ),
+                      padding: const EdgeInsets.all(25),
+                      child: Column(
+                        children: [
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Explore Categories",
+                                style: TextStyle(
+                                  color: AppColor.primary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
-                          itemCount: categories.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Category category = categories[index];
-                            String categoryTitle = "Home Loan";
-                            return GestureDetector(
-                              onTap: () => category.onTap?.call(context),
-                              child: Card(
-                                elevation: 3,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColor.textLight,
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        category.imagePath,
-                                        width: 60,
-                                        height: 60,
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Expanded(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10.0,
+                                crossAxisSpacing: 10.0,
+                                childAspectRatio: 1.3,
+                              ),
+                              itemCount: categories.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                Category category = categories[index];
+                                String categoryTitle = "Home Loan";
+                                return InkWell(
+                                  onTap: () => category.onTap?.call(context),
+                                  child: Card(
+                                    elevation: 3,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                         color: AppColor.textLight,
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
                                       ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        category.text,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColor.primary,
-                                        ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            category.imagePath,
+                                            width: 60,
+                                            height: 60,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            category.text,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                               color: AppColor.textPrimary,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        aspectRatio: 3.0,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: true,
+                        autoPlay: true,
+                      ),
+                      items: imagePaths.map((imagePath) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: const BoxDecoration(
+                                 color: AppColor.textdivider,
+                              ),
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
                               ),
                             );
                           },
-                        ),
-                      ),
+                        );
+                      }).toList(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),

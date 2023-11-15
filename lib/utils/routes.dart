@@ -14,7 +14,6 @@ import 'package:finkin_credential/welcome_carousal/page3.dart';
 import 'package:finkin_credential/welcome_carousal/welcome.dart';
 import 'package:flutter/material.dart';
 
-
 class MyRoutes {
   static String loginscreen = "/LoginScreen";
   static String verificationscreen = "/VerificationScreen";
@@ -30,14 +29,13 @@ class MyRoutes {
   static String companyworker = "/Companyworker";
   static String welcomepage = "/WelcomePage";
   static String infodisplay = "/InfoDisplay";
-   
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case '/LoginScreen':
         return MaterialPageRoute(builder: (context) => const LoginScreen());
-          case '/selfworker':
+      case '/selfworker':
         return MaterialPageRoute(builder: (context) => const SelfWorker());
       case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
@@ -48,8 +46,8 @@ class MyRoutes {
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());
-        case '/welcomepage':
-        return MaterialPageRoute(builder: (context) =>  WelcomePage());
+      case '/welcomepage':
+        return MaterialPageRoute(builder: (context) => WelcomePage());
 
       case '/page3':
         return MaterialPageRoute(builder: (context) => const Page3());
@@ -58,18 +56,21 @@ class MyRoutes {
       case '/agentform':
         return MaterialPageRoute(builder: (context) => const AgentForm());
       case '/home':
-        return MaterialPageRoute(builder: (context) =>  HomeScreen());
-        
+        return MaterialPageRoute(builder: (context) => HomeScreen());
+
       case '/navBAr':
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
       case '/infodisplay':
         return MaterialPageRoute(builder: (context) => const InfoDisplay());
       case '/loanform':
-        return MaterialPageRoute(builder: (context) => const LoanForm(title: '',));
-        case '/companyworker':
+        return MaterialPageRoute(
+            builder: (context) => const LoanForm(
+                  title: '',
+                ));
+      case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) =>  WelcomePage());
+        return MaterialPageRoute(builder: (context) => const AgentForm());
     }
   }
 }

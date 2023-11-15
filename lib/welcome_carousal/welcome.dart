@@ -59,7 +59,7 @@ class WelcomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: const Text('Verify'),
+                  child: const Text('Get Started'),
                 ),
               ),
             ],
