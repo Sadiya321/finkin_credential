@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_track.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -12,6 +14,20 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  File? _selectedImage;
+
+  void _openGallery() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+      print('Image selected: ${pickedFile.path}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +59,37 @@ class _AccountScreenState extends State<AccountScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        InkWell(
-                          child: Container(
-                            child: const CircleAvatar(
-                              backgroundImage: AssetImage(ImageAsset.pop),
-                              radius: 80,
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            GestureDetector(
+                              onTap: _openGallery,
+                              child: Container(
+                                child: _selectedImage != null
+                                    ? CircleAvatar(
+                                        backgroundImage:
+                                            FileImage(_selectedImage!),
+                                        radius: 80,
+                                      )
+                                    : const CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage(ImageAsset.pop),
+                                        radius: 80,
+                                      ),
+                              ),
                             ),
-                          ),
+                            GestureDetector(
+                              onTap: _openGallery,
+                              child: const Padding(
+                                padding: EdgeInsets.all(11.0),
+                                child: Icon(
+                                  Icons.camera_alt_rounded,
+                                  color: Colors.black,
+                                  size: 40.0,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 25),
                         const Text(
@@ -67,11 +107,10 @@ class _AccountScreenState extends State<AccountScreen> {
                               Accounttrack(
                                 icon: ImageAsset.user,
                                 text: "My Account",
-                                press: () async {
+                                press: () {
                                   _showAccountInfoBottomSheet(context);
                                 },
                               ),
-
                               const SizedBox(height: 10),
                               Accounttrack(
                                   icon: ImageAsset.settings,
@@ -85,7 +124,6 @@ class _AccountScreenState extends State<AccountScreen> {
                                     //   ),
                                     // );
                                   }),
-                              //Help
                               const SizedBox(height: 10),
                               Accounttrack(
                                 icon: ImageAsset.contact,
@@ -94,7 +132,6 @@ class _AccountScreenState extends State<AccountScreen> {
                                   _showContactInfoBottomSheet(context);
                                 },
                               ),
-                              //LogOut
                               const SizedBox(height: 10),
                               Accounttrack(
                                 icon: ImageAsset.logout,
@@ -183,107 +220,142 @@ class _AccountScreenState extends State<AccountScreen> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
-          ),
+        return SingleChildScrollView(
           child: Container(
+            height: MediaQuery.of(context).size.height * 0.8,
             decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              gradient: LinearGradient(
-                colors: [AppColor.combination, AppColor.primary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: Colors.transparent,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Container(
-                      height: 5,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [AppColor.combination, AppColor.primary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Container(
+                        height: 5,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Full Name",
-                      labelStyle: TextStyle(color: Colors.white),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Location",
-                      labelStyle: TextStyle(color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Full Name",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.text,
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(Icons.email, color: Colors.white),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      labelStyle: TextStyle(color: Colors.white),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.location_on,
+                      color: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.credit_card,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Aadhar Card Number",
-                      labelStyle: TextStyle(color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Location",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.number,
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.description,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Pan Card Number",
-                      labelStyle: TextStyle(color: Colors.white),
+                  const ListTile(
+                    leading: Icon(Icons.email, color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.text,
                   ),
-                ),
-                const SizedBox(height: 56),
-              ],
+                  const ListTile(
+                    leading: Icon(
+                      Icons.credit_card,
+                      color: Colors.white,
+                    ),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Aadhar Card Number",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                    ),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.description,
+                      color: Colors.white,
+                    ),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Pan Card Number",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 66),
+                ],
+              ),
             ),
           ),
         );
@@ -331,7 +403,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 150,
                       width: double.infinity,
                       child: Image.asset(
@@ -374,18 +446,12 @@ class _AccountScreenState extends State<AccountScreen> {
                         "8217696772",
                         style: TextStyle(color: AppColor.textdivider),
                       ),
-                      trailing: GestureDetector(onTap: () async {
-                        String telephoneNumber = '+2347012345678';
-                        String telephoneUrl = "tel:$telephoneNumber";
-                        if (await canLaunch(telephoneUrl)) {
-                          await launch(telephoneUrl);
-                        } else {
-                          throw "Error occured trying to call that number.";
-                        }
-                        const Icon(
-                          Icons.call,
-                        );
-                      }),
+                      trailing: GestureDetector(
+                        child: const Icon(
+                          Icons.phone_outlined,
+                          color: AppColor.primary,
+                        ),
+                      ),
                     ),
                   ),
                 ),
