@@ -363,12 +363,13 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  void _showContactInfoBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return Container(
+ void _showContactInfoBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return SingleChildScrollView(
+        child: Container(
           decoration: const BoxDecoration(
             color: Colors.transparent,
           ),
@@ -413,44 +414,131 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                   ),
                 ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "Beeri, Mangalore",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+               const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    ListTile(
+      leading: Icon(
+        Icons.location_on,
+        color: Colors.white,
+      ),
+      title: Padding(
+        padding: EdgeInsets.only(left: 0.1),
+        child: Text(
+          "Address",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.only(left: 25), 
+      child: Text(
+        "Beeri, Mangalore",
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  ],
+),
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColor.textLight,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: AppColor.textdivider,
-                          offset: Offset(0, 2),
-                          blurRadius: 6.0,
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.person_2_outlined,
-                        color: AppColor.primary,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.textLight,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: AppColor.textdivider,
+                            offset: Offset(0, 2),
+                            blurRadius: 6.0,
+                          ),
+                        ],
                       ),
-                      title: const Text(
-                        "8217696772",
-                        style: TextStyle(color: AppColor.textdivider),
-                      ),
-                      trailing: GestureDetector(
-                        child: const Icon(
-                          Icons.phone_outlined,
-                          color: AppColor.primary,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              "Contact Us",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.primary,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.person_2_outlined,
+                              color: AppColor.primary,
+                            ),
+                            title: const Text(
+                              "8217696772",
+                              style: TextStyle(color: AppColor.textdivider),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.message,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                   
+                                  },
+                                ),
+                                const SizedBox(width: 10),
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.phone_outlined,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                    
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.person_2_outlined,
+                              color: AppColor.primary,
+                            ),
+                            title: const Text(
+                              "6363052051",
+                              style: TextStyle(color: AppColor.textdivider),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.chat,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                    
+                                    
+                                  },
+                                ),
+                                const SizedBox(width: 10),
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.phone_outlined,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                    
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -459,8 +547,9 @@ class _AccountScreenState extends State<AccountScreen> {
               ],
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 }
