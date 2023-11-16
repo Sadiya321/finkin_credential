@@ -1,10 +1,8 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:finkin_credential/controller/login_controller.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
   final TextEditingController phoneController = TextEditingController();
-  LoginController controller = Get.find();
   Country selectedCountry = Country(
     phoneCode: "91",
     countryCode: "IN",
@@ -50,11 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 200,
                     padding: const EdgeInsets.all(20.0),
                     decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
+                      shape: BoxShape.rectangle,
                       color: AppColor.secondary,
                     ),
                     child: Image.asset(
-                      " ",
+                      'assets/images/caros.jpg',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -133,7 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      //
                       suffixIcon: phoneController.text.length > 9
                           ? Container(
                               height: 30,
@@ -152,7 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           : null,
                     ),
                   ),
-                  //login button
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
@@ -165,9 +161,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         : CustomButton(
                             text: "Login",
-                            onPressed: () async {
-                              controller.verifyPhone(phoneController.text);
-                              Get.to(VerificationScreen());
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VerificationScreen()),
+                              );
                             }),
                   ),
                 ],

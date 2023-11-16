@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
@@ -32,21 +31,19 @@ class LoanTrack extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: AppColor.textLight,
-            borderRadius: BorderRadius.circular(26),
-            border: Border.all(
-              color: Colors.black,
-              width:
-                  1.0, // Adjust the width as needed for the thickness of the border
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppColor.textLight,
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(
+                color: Colors.black,
+                width: 1.0,
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: Row(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(22),
@@ -64,75 +61,65 @@ class LoanTrack extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            userName,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                            maxLines: 2,
-                            softWrap: false,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            loanType,
-                            style: TextStyle(fontSize: 10),
-                            softWrap: false,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 18,
-              ),
-              Container(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        icon,
-                        color: AppColor.icon,
-                      ),
-                    ],
-                  ),
-                ],
-                  ),
-              ),
-                  
-                  const SizedBox(
-                    width: 2,
-                  ),
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          width: 12,
+                        Text(
+                          userName,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          formattedDate,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        Text(
-                          status.name,
-                          style: TextStyle(fontSize: 12),
+                          loanType,
+                          style: const TextStyle(fontSize: 10),
+                          softWrap: false,
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
                         ),
                       ],
                     ),
-                  )
-                ],
-              )),
-              
-          
+                  ],
+                ),
+                const SizedBox(
+                  width: 18,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          icon,
+                          color: AppColor.icon,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 2,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      formattedDate,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      status.name,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                )
+              ],
+            )),
       ),
     );
   }

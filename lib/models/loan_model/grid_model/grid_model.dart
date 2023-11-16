@@ -14,6 +14,7 @@ List<Category> categories = [
   Category(
     imagePath: ImageAsset.education,
     text: 'Home Loan',
+    
     onTap: (BuildContext context) {
       Navigator.push(
         context,
@@ -73,12 +74,12 @@ List<Category> categories = [
   ),
   Category(
     imagePath: ImageAsset.education,
-    text: ' car Loans',
+    text: ' Car Loans',
     onTap: (BuildContext context) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoanForm(title: 'car Loan'),
+          builder: (context) => const LoanForm(title: 'Car Loan'),
         ),
       );
     },

@@ -23,6 +23,10 @@ class _LoanFormState extends State<LoanForm> {
   DateTime? selectedDate;
   get title => widget.title;
 
+  late AnimationController _controller;
+
+
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -43,8 +47,16 @@ class _LoanFormState extends State<LoanForm> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(title),
-          
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: AppColor.primary,
+          automaticallyImplyLeading: false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -53,13 +65,6 @@ class _LoanFormState extends State<LoanForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Loan Form for $title', // Display the category title in the body
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 _buildSectionTitle('Personal Information'),
                 const SizedBox(height: 20),
                 const LabeledTextField(
@@ -148,7 +153,6 @@ class _LoanFormState extends State<LoanForm> {
   Widget _buildSubmitButton() {
     return ElevatedButton(
       onPressed: () {
-        // Add form validation logic here using _formKey.currentState!.validate()
         if (_formKey.currentState!.validate()) {
           setState(() {
             isPhoneNumberVerified = true;
@@ -348,25 +352,14 @@ class _LoanFormState extends State<LoanForm> {
           children: [
             Expanded(
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SelfWorker()),
-                  );
-                },
                 child:
-                    _buildEmployeeTypeButton('Self Employed', AppColor.primary),
+                    _buildCompanyTypeButton('Self Employed', AppColor.primary),
               ),
             ),
             const SizedBox(width: 40),
             Expanded(
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SelfWorker()),
-                  );
-                },
+                onTap: () {},
                 child: _buildEmployeeTypeButton(
                     'Company Worker', AppColor.primary),
               ),
@@ -384,6 +377,24 @@ class _LoanFormState extends State<LoanForm> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Companyworker()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      child: Text(text),
+    );
+  }
+
+  Widget _buildCompanyTypeButton(String text, Color color) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SelfWorker()),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -431,6 +442,10 @@ class LabeledTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             border: const OutlineInputBorder(),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.textdivider), // Set to transparent color
+            ),
+
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
@@ -438,6 +453,7 @@ class LabeledTextField extends StatelessWidget {
                   )
                 : suffixWidget,
           ),
+          cursorColor: AppColor.textPrimary, 
         ),
         const SizedBox(height: 10),
       ],
