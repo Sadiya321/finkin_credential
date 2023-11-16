@@ -6,14 +6,12 @@ import 'package:flutter/services.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
-
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  // LoginController controller = Get.find();
-  // var auth = FirebaseAuth.instance;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,15 +68,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.user,
                                 text: "My Account",
                                 press: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => MyAccountPage(),
-                                  //   ),
-                                  // );
+                                  _showAccountInfoBottomSheet(context);
                                 },
                               ),
-                              //App Setting
+
                               const SizedBox(height: 10),
                               Accounttrack(
                                   icon: ImageAsset.settings,
@@ -98,12 +91,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.contact,
                                 text: "Contact",
                                 press: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => const HelpPage(),
-                                  //   ),
-                                  // );
+                                  _showContactInfoBottomSheet(context);
                                 },
                               ),
                               //LogOut
@@ -112,10 +100,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.logout,
                                 text: "Log Out",
                                 press: () {
-                                  // auth.signOut();
-                                  // if (auth.currentUser == null) {
-                                  //   Get.to(LoginScreen());
-                                  // }
+                                  _showLogoutConfirmationDialog(context);
                                 },
                               ),
                             ],
@@ -137,26 +122,274 @@ class _AccountScreenState extends State<AccountScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Logout Confirmation"),
-          content: const Text("Do you want to exit the app?"),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("No"),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-            TextButton(
-              child: const Text("Yes"),
-              onPressed: () {
-                // Close the app
-                SystemNavigator.pop();
-              },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Logout Confirmation",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text("Do you want to Log Out?"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        primary: AppColor.primary,
+                      ),
+                      child: const Text("No"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        primary: AppColor.primary,
+                      ),
+                      child: const Text("Yes"),
+                      onPressed: () {
+                        SystemNavigator.pop();
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );
   }
+
+  void _showAccountInfoBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              gradient: LinearGradient(
+                colors: [AppColor.combination, AppColor.primary],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Container(
+                      height: 5,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Full Name",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Location",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.email, color: Colors.white),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.credit_card,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Aadhar Card Number",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.number,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.description,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Pan Card Number",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+                const SizedBox(height: 56),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showContactInfoBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
+        ),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(0),
+              topRight: Radius.circular(0),
+            ),
+            gradient: LinearGradient(
+              colors: [AppColor.combination, AppColor.primary],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 5,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Center(
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    child: Image.asset(
+                      'assets/images/education.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              const ListTile(
+                leading: Icon(
+                  Icons.location_on,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "Beeri, Mangalore",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColor.textLight,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColor.textdivider,
+                        offset: Offset(0, 2),
+                        blurRadius: 6.0,
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.person_2_outlined,
+                      color: AppColor.primary,
+                    ),
+                    title: const Text(
+                      "8217696772",
+                      style: TextStyle(color: AppColor.textdivider),
+                    ),
+                    trailing: GestureDetector(
+                    
+                      child: const Icon(
+                        Icons.phone_outlined,
+                        color: AppColor.primary,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 56),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 }
