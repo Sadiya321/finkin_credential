@@ -1,7 +1,8 @@
-import 'package:finkin_credential/pages/agent_screen/agent.dart';
+import 'package:finkin_credential/controller/login_controller.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -12,7 +13,8 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  String? otpCode;
+  final otp = TextEditingController();
+  LoginController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +67,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      onCompleted: (value) {
-        setState(() {
-          otpCode = value;
-        });
-      },
+      // onCompleted: (value) {
+      //   setState(() {
+      //     otp = value;
+      //   });
+      // },
     );
 
     CustomButton verifyButton = CustomButton(
         text: "Verify",
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AgentPage()),
-          );
+          controller.verifyOTP(otp.text);
         });
 
     return Scaffold(
@@ -122,7 +121,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 50),
-                    otpInputWidget, 
+                    otpInputWidget,
                     const SizedBox(height: 25),
                     verifyButton,
                     const SizedBox(height: 20),
@@ -149,5 +148,4 @@ class _VerificationScreenState extends State<VerificationScreen> {
       ),
     );
   }
-
 }

@@ -1,18 +1,24 @@
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_track.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+import '../../controller/login_controller.dart';
+import '../login_screen/login_screen.dart';
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key});
+  AccountScreen({super.key});
+
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  
-
+  LoginController controller = Get.find();
+  var auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +53,19 @@ class _AccountScreenState extends State<AccountScreen> {
                         InkWell(
                           child: Container(
                             child: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(ImageAsset.pop),
+                              backgroundImage: AssetImage(ImageAsset.pop),
                               radius: 80,
                             ),
                           ),
                         ),
-                      
                         const SizedBox(height: 25),
-                        const Text("User Name Here",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,),),
+                        const Text(
+                          "User Name Here",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -107,7 +117,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.logout,
                                 text: "Log Out",
                                 press: () {
-                                   _showLogoutConfirmationDialog(context);
+                                  auth.signOut();
+                                  if (auth.currentUser == null) {
+                                    Get.to(LoginScreen());
+                                  }
                                 },
                               ),
                             ],
@@ -124,6 +137,7 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
     );
   }
+
   void _showLogoutConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -138,7 +152,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 Navigator.of(context).pop(); // Close the dialog
               },
             ),
-           TextButton(
+            TextButton(
               child: const Text("Yes"),
               onPressed: () {
                 // Close the app

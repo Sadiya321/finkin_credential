@@ -1,8 +1,10 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:finkin_credential/controller/login_controller.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
   final TextEditingController phoneController = TextEditingController();
+  LoginController controller = Get.find();
   Country selectedCountry = Country(
     phoneCode: "91",
     countryCode: "IN",
@@ -74,14 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    keyboardType:
-                        TextInputType.number, 
-                    cursorColor:  AppColor.primary, 
+                    keyboardType: TextInputType.number,
+                    cursorColor: AppColor.primary,
                     controller: phoneController,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColor.textPrimary, 
+                      color: AppColor.textPrimary,
                     ),
                     onChanged: (value) {
                       setState(() {
@@ -93,15 +95,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
-                        color: AppColor.textdivider, 
+                        color: AppColor.textdivider,
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: AppColor.textdivider),
+                        borderSide:
+                            const BorderSide(color: AppColor.textdivider),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: AppColor.textdivider),
+                        borderSide:
+                            const BorderSide(color: AppColor.textdivider),
                       ),
                       prefixIcon: Container(
                         padding: const EdgeInsets.all(12.0),
@@ -161,12 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         : CustomButton(
                             text: "Login",
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const VerificationScreen()),
-                              );
+                            onPressed: () async {
+                              controller.verifyPhone(phoneController.text);
+                              Get.to(VerificationScreen());
                             }),
                   ),
                 ],
@@ -177,6 +178,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  
-
 }

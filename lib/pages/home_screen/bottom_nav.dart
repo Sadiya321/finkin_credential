@@ -15,7 +15,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   List screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const LoanScreen(
       title: 'Loan Tracking',
     ),
@@ -23,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       title: 'Approved',
       status: LoanStatus.approved,
     ),
-    const AccountScreen(),
+    AccountScreen(),
   ];
   int _selectedIndex = 0;
 
