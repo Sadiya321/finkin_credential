@@ -49,6 +49,9 @@ dependencies:
   flutter_svg: ^2.0.9
   horizontal_stepper_flutter: ^1.0.3
   shake: ^2.2.0
+  firebase_core: ^2.22.0
+  firebase_auth: ^4.14.0
+  get: ^4.6.5
  
 
 

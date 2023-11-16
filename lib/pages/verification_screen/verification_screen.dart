@@ -1,9 +1,9 @@
-import 'package:finkin_credential/controller/login_controller.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+
+import '../home_screen/bottom_nav.dart';
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class VerificationScreen extends StatefulWidget {
 
 class _VerificationScreenState extends State<VerificationScreen> {
   final otp = TextEditingController();
-  LoginController controller = Get.find();
+  // LoginController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColor.primary,
-          
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -78,7 +77,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
     CustomButton verifyButton = CustomButton(
         text: "Verify",
         onPressed: () {
-          controller.verifyOTP(otp.text);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomNavBar()),
+          );
         });
 
     return Scaffold(

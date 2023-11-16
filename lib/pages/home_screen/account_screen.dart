@@ -1,24 +1,19 @@
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_track.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-
-import '../../controller/login_controller.dart';
-import '../login_screen/login_screen.dart';
 
 class AccountScreen extends StatefulWidget {
-  AccountScreen({super.key});
+  const AccountScreen({super.key});
 
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  LoginController controller = Get.find();
-  var auth = FirebaseAuth.instance;
+  // LoginController controller = Get.find();
+  // var auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,10 +112,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.logout,
                                 text: "Log Out",
                                 press: () {
-                                  auth.signOut();
-                                  if (auth.currentUser == null) {
-                                    Get.to(LoginScreen());
-                                  }
+                                  // auth.signOut();
+                                  // if (auth.currentUser == null) {
+                                  //   Get.to(LoginScreen());
+                                  // }
                                 },
                               ),
                             ],
