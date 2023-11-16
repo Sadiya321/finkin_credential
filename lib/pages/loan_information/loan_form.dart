@@ -408,6 +408,7 @@ class _LoanFormState extends State<LoanForm> {
   }
 }
 
+
 class LabeledTextField extends StatelessWidget {
   final IconData? icon;
   final String label;

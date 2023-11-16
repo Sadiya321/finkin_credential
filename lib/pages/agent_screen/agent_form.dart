@@ -23,12 +23,6 @@ class _AgentFormState extends State<AgentForm> {
   static const String emailRegex =
       r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
 
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -36,7 +30,7 @@ class _AgentFormState extends State<AgentForm> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
+        preferredSize: Size.fromHeight(80.0),
         child: AppBar(
           backgroundColor: AppColor.textLight,
           elevation: 0,
@@ -192,35 +186,32 @@ class LabeledTextField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-
-
-       TextFormField(
-  controller: controller,
-  decoration: InputDecoration(
-    hintText: hintText,
-    border: const OutlineInputBorder(),
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: AppColor.textdivider),
-    ),
-    suffixIcon: icon != null
-        ? InkWell(
-            onTap: onTap,
-            child: Icon(icon),
-          )
-        : suffixWidget,
-  ),
-  cursorColor: AppColor.textPrimary, 
-  validator: (value) {
-    if (regexPattern != null && value != null) {
-      final RegExp regex = RegExp(regexPattern!);
-      if (!regex.hasMatch(value)) {
-        return 'Invalid format';
-      }
-    }
-    return null;
-  },
-),
-
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hintText,
+            border: const OutlineInputBorder(),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.textdivider),
+            ),
+            suffixIcon: icon != null
+                ? InkWell(
+                    onTap: onTap,
+                    child: Icon(icon),
+                  )
+                : suffixWidget,
+          ),
+          cursorColor: AppColor.textPrimary,
+          validator: (value) {
+            if (regexPattern != null && value != null) {
+              final RegExp regex = RegExp(regexPattern!);
+              if (!regex.hasMatch(value)) {
+                return 'Invalid format';
+              }
+            }
+            return null;
+          },
+        ),
         const SizedBox(height: 10),
       ],
     );
