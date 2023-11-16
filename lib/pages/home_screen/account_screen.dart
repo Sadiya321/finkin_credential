@@ -3,6 +3,7 @@ import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_track.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -11,7 +12,6 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +67,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               Accounttrack(
                                 icon: ImageAsset.user,
                                 text: "My Account",
-                                press: () {
+                                press: () async {
                                   _showAccountInfoBottomSheet(context);
                                 },
                               ),
@@ -292,104 +292,109 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void _showContactInfoBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context) {
-      return Container(
-        decoration: const BoxDecoration(
-          color: Colors.transparent,
-        ),
-        child: Container(
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Container(
           decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(0),
-              topRight: Radius.circular(0),
-            ),
-            gradient: LinearGradient(
-              colors: [AppColor.combination, AppColor.primary],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Colors.transparent,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 5,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(0),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Center(
+              gradient: LinearGradient(
+                colors: [AppColor.combination, AppColor.primary],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/education.jpg',
-                      fit: BoxFit.cover,
+                    height: 5,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-              ),
-              const ListTile(
-                leading: Icon(
-                  Icons.location_on,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Beeri, Mangalore",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.textLight,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: AppColor.textdivider,
-                        offset: Offset(0, 2),
-                        blurRadius: 6.0,
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                    child: Container(
+                      height: 150,
+                      width: double.infinity,
+                      child: Image.asset(
+                        'assets/images/education.jpg',
+                        fit: BoxFit.cover,
                       ),
-                    ],
+                    ),
                   ),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.person_2_outlined,
-                      color: AppColor.primary,
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    "Beeri, Mangalore",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColor.textLight,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: AppColor.textdivider,
+                          offset: Offset(0, 2),
+                          blurRadius: 6.0,
+                        ),
+                      ],
                     ),
-                    title: const Text(
-                      "8217696772",
-                      style: TextStyle(color: AppColor.textdivider),
-                    ),
-                    trailing: GestureDetector(
-                    
-                      child: const Icon(
-                        Icons.phone_outlined,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.person_2_outlined,
                         color: AppColor.primary,
                       ),
+                      title: const Text(
+                        "8217696772",
+                        style: TextStyle(color: AppColor.textdivider),
+                      ),
+                      trailing: GestureDetector(onTap: () async {
+                        String telephoneNumber = '+2347012345678';
+                        String telephoneUrl = "tel:$telephoneNumber";
+                        if (await canLaunch(telephoneUrl)) {
+                          await launch(telephoneUrl);
+                        } else {
+                          throw "Error occured trying to call that number.";
+                        }
+                        const Icon(
+                          Icons.call,
+                        );
+                      }),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 56),
-            ],
+                const SizedBox(height: 56),
+              ],
+            ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 }
