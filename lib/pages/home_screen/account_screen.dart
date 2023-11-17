@@ -6,6 +6,7 @@ import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -447,6 +448,15 @@ class _AccountScreenState extends State<AccountScreen> {
                         style: TextStyle(color: AppColor.textdivider),
                       ),
                       trailing: GestureDetector(
+                        onTap: () async {
+                          String telephoneNumber = '+2347012345678';
+                          String telephoneUrl = "tel:$telephoneNumber";
+                          if (await canLaunch(telephoneUrl)) {
+                            await launch(telephoneUrl);
+                          } else {
+                            throw "Error occured trying to send a message that number.";
+                          }
+                        },
                         child: const Icon(
                           Icons.phone_outlined,
                           color: AppColor.primary,
