@@ -1,6 +1,9 @@
+import 'package:finkin_credential/controller/agent_form_controller.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class AgentForm extends StatefulWidget {
   const AgentForm({Key? key}) : super(key: key);
@@ -11,17 +14,7 @@ class AgentForm extends StatefulWidget {
 
 class _AgentFormState extends State<AgentForm> {
   final formKey = GlobalKey<FormState>();
-  String name = "";
-
-  // Regex pattern for email validation
-  static const String nameRegex = r'^[A-Za-z\s]+$';
-  static const String phoneNumberRegex = r'^\+?[0-9]+$';
-  static const String addressRegex = r'^[A-Za-z0-9\s\-#,./]+$';
-  static const String panCardRegex = r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$';
-  static const String aadharCardRegex = r'^\d{12}$';
-
-  static const String emailRegex =
-      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
+  final AgentFormController controller = Get.put(AgentFormController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,26 +55,29 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 5,
                 ),
-                const LabeledTextField(
+                LabeledTextField(
                   label: 'Enter First Name',
                   hintText: 'Enter First Name',
-                  regexPattern: nameRegex,
+                  regexPattern: AgentFormController.nameRegex,
+                  controller: controller.firstNameController,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                const LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Last Name',
                   hintText: 'Enter Last Name',
-                  regexPattern: nameRegex,
+                  regexPattern: AgentFormController.nameRegex,
+                  controller: controller.lastNameController,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                const LabeledTextField(
-                  label: 'Enter You Phone Number',
-                  hintText: 'Enter You Phone Number',
-                  // regexPattern: phoneNumberRegex,
+                LabeledTextField(
+                  label: 'Enter Phone Number',
+                  hintText: 'Enter Phone Number',
+                  // regexPattern: AgentFormController.,
+                  // controller: controller.firstNameController,
                 ),
                 const SizedBox(
                   height: 10,
