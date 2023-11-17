@@ -415,23 +415,31 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 ),
                const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+  crossAxisAlignment: CrossAxisAlignment.start,
   children: [
-    ListTile(
-      leading: Icon(
-        Icons.location_on,
-        color: Colors.white,
-      ),
-      title: Padding(
-        padding: EdgeInsets.only(left: 0.1),
-        child: Text(
-          "Address",
-          style: TextStyle(color: Colors.white),
-        ),
+    InkWell(
+      
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 4), 
+            child: Icon(
+              Icons.location_on,
+              color: Colors.white,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 4), 
+            child: Text(
+              "Address",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     ),
     Padding(
-      padding: EdgeInsets.only(left: 25), 
+      padding: EdgeInsets.only(left: 30),
       child: Text(
         "Beeri, Mangalore",
         style: TextStyle(color: Colors.white),
@@ -439,6 +447,8 @@ class _AccountScreenState extends State<AccountScreen> {
     ),
   ],
 ),
+
+
 
                 Padding(
                   padding: const EdgeInsets.all(20.0),
