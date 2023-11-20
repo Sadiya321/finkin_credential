@@ -6,6 +6,7 @@ import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -128,7 +129,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               const SizedBox(height: 10),
                               Accounttrack(
                                 icon: ImageAsset.contact,
-                                text: "Contact",
+                                text: "Contact Us",
                                 press: () {
                                   _showContactInfoBottomSheet(context);
                                 },
@@ -219,7 +220,7 @@ class _AccountScreenState extends State<AccountScreen> {
   void _showAccountInfoBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       builder: (BuildContext context) {
         return SingleChildScrollView(
           child: Container(
@@ -365,9 +366,8 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void _showContactInfoBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+    showBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return SingleChildScrollView(
           child: Container(
@@ -441,12 +441,41 @@ class _AccountScreenState extends State<AccountScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 30),
                         child: Text(
-                          "Beeri, Mangalore",
+                          "Beeri, Mangalore 581707",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      InkWell(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
+                                Icons.email,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Text(
+                                "Email",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 30),
+                        child: Text(
+                          "sadiyaayub16@gmai.com",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: SingleChildScrollView(
@@ -501,7 +530,9 @@ class _AccountScreenState extends State<AccountScreen> {
                                       Icons.phone_outlined,
                                       color: AppColor.primary,
                                     ),
-                                    onTap: () {},
+                                    onTap: () {
+                                      _makePhoneCall("6363052051");
+                                    },
                                   ),
                                 ],
                               ),
@@ -531,15 +562,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                       Icons.phone_outlined,
                                       color: AppColor.primary,
                                     ),
-                                    onTap: () async {
-                                      String telephoneNumber = '+2347012345678';
-                                      String telephoneUrl =
-                                          "tel:$telephoneNumber";
-                                      if (await canLaunch(telephoneUrl)) {
-                                        await launch(telephoneUrl);
-                                      } else {
-                                        throw "Error occured trying to call that number.";
-                                      }
+                                    onTap: () {
+                                      _makePhoneCall("6363052051");
                                     },
                                   ),
                                 ],
@@ -558,5 +582,18 @@ class _AccountScreenState extends State<AccountScreen> {
         );
       },
     );
+  }
+
+  void _makePhoneCall(String phoneNumber) async {
+    try {
+      Uri url = Uri.parse("tel:+91$phoneNumber");
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
+      } else {
+        print("Could not launch $url");
+      }
+    } catch (error) {
+      print(error);
+    }
   }
 }

@@ -1,9 +1,9 @@
+import 'package:finkin_credential/controller/agent_form_controller.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/agent_form_controller.dart';
 
 class AgentForm extends StatefulWidget {
   const AgentForm({Key? key}) : super(key: key);
