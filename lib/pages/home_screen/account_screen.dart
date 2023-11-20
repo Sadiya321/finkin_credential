@@ -6,6 +6,7 @@ import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -363,203 +364,199 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
- void _showContactInfoBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context) {
-      return SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
-          ),
+  void _showContactInfoBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
-              ),
-              gradient: LinearGradient(
-                colors: [AppColor.combination, AppColor.primary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: Colors.transparent,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 5,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(0),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Center(
-                    child: SizedBox(
-                      height: 150,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/education.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                gradient: LinearGradient(
+                  colors: [AppColor.combination, AppColor.primary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-               const Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    InkWell(
-      
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 4), 
-            child: Icon(
-              Icons.location_on,
-              color: Colors.white,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 4), 
-            child: Text(
-              "Address",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Padding(
-      padding: EdgeInsets.only(left: 30),
-      child: Text(
-        "Beeri, Mangalore",
-        style: TextStyle(color: Colors.white),
-      ),
-    ),
-  ],
-),
-
-
-
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
                     child: Container(
+                      height: 5,
+                      width: 40,
                       decoration: BoxDecoration(
-                        color: AppColor.textLight,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: AppColor.textdivider,
-                            offset: Offset(0, 2),
-                            blurRadius: 6.0,
-                          ),
-                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Text(
-                              "Contact Us",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: AppColor.primary,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Center(
+                      child: SizedBox(
+                        height: 150,
+                        width: double.infinity,
+                        child: Image.asset(
+                          'assets/images/education.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
+                                Icons.location_on,
+                                color: Colors.white,
                               ),
                             ),
-                          ),
-                          ListTile(
-                            leading: const Icon(
-                              Icons.person_2_outlined,
-                              color: AppColor.primary,
+                            Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Text(
+                                "Address",
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                            title: const Text(
-                              "8217696772",
-                              style: TextStyle(color: AppColor.textdivider),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 30),
+                        child: Text(
+                          "Beeri, Mangalore",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColor.textLight,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: AppColor.textdivider,
+                              offset: Offset(0, 2),
+                              blurRadius: 6.0,
                             ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  child: const Icon(
-                                    Icons.message,
-                                    color: AppColor.primary,
-                                  ),
-                                  onTap: () {
-                                   
-                                  },
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text(
+                                "Contact Us",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColor.primary,
                                 ),
-                                const SizedBox(width: 10),
-                                GestureDetector(
-                                  child: const Icon(
-                                    Icons.phone_outlined,
-                                    color: AppColor.primary,
+                              ),
+                            ),
+                            ListTile(
+                              leading: const Icon(
+                                Icons.person_2_outlined,
+                                color: AppColor.primary,
+                              ),
+                              title: const Text(
+                                "8217696772",
+                                style: TextStyle(color: AppColor.textdivider),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    child: const Icon(
+                                      Icons.message,
+                                      color: AppColor.primary,
+                                    ),
+                                    onTap: () {},
                                   ),
-                                  onTap: () {
-                                    
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(
-                              Icons.person_2_outlined,
-                              color: AppColor.primary,
-                            ),
-                            title: const Text(
-                              "6363052051",
-                              style: TextStyle(color: AppColor.textdivider),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  child: const Icon(
-                                    Icons.chat,
-                                    color: AppColor.primary,
+                                  const SizedBox(width: 10),
+                                  GestureDetector(
+                                    child: const Icon(
+                                      Icons.phone_outlined,
+                                      color: AppColor.primary,
+                                    ),
+                                    onTap: () {},
                                   ),
-                                  onTap: () {
-                                    
-                                    
-                                  },
-                                ),
-                                const SizedBox(width: 10),
-                                GestureDetector(
-                                  child: const Icon(
-                                    Icons.phone_outlined,
-                                    color: AppColor.primary,
-                                  ),
-                                  onTap: () {
-                                    
-                                  },
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                            ListTile(
+                              leading: const Icon(
+                                Icons.person_2_outlined,
+                                color: AppColor.primary,
+                              ),
+                              title: const Text(
+                                "6363052051",
+                                style: TextStyle(color: AppColor.textdivider),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    child: const Icon(
+                                      Icons.chat,
+                                      color: AppColor.primary,
+                                    ),
+                                    onTap: () {},
+                                  ),
+                                  const SizedBox(width: 10),
+                                  GestureDetector(
+                                    child: const Icon(
+                                      Icons.phone_outlined,
+                                      color: AppColor.primary,
+                                    ),
+                                    onTap: () async {
+                                      String telephoneNumber = '+2347012345678';
+                                      String telephoneUrl =
+                                          "tel:$telephoneNumber";
+                                      if (await canLaunch(telephoneUrl)) {
+                                        await launch(telephoneUrl);
+                                      } else {
+                                        throw "Error occured trying to call that number.";
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 56),
-              ],
+                  const SizedBox(height: 56),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 }

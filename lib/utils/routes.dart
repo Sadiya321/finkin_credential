@@ -4,8 +4,8 @@ import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:finkin_credential/pages/loan_information/companyworker_form.dart';
 import 'package:finkin_credential/pages/loan_information/infodisplay.dart';
-import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
+import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/pages/login_screen/login_screen.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/welcome_carousal/page1.dart';
@@ -70,7 +70,7 @@ class MyRoutes {
       case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => const BottomNavBar());
+        return MaterialPageRoute(builder: (context) => const AgentForm());
     }
   }
 }
