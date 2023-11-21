@@ -14,6 +14,11 @@ class Page2 extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Container(
             color: AppColor.primary,
+            child: Image.asset(
+              'assets/images/loan2.jpg',
+              fit: BoxFit.cover, 
+            ),
+
           ),
         ),
       ),

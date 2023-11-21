@@ -222,11 +222,9 @@ class _AccountScreenState extends State<AccountScreen> {
     context: context,
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
-      // double screenHeight = MediaQuery.of(context).size.height;
 
       return SingleChildScrollView(
         child: Container(
-          // height: screenHeight * 0.6,
           decoration: const BoxDecoration(
             color: Colors.transparent,
           ),

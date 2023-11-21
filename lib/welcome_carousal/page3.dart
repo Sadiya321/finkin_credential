@@ -13,7 +13,11 @@ class Page3 extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            color: AppColor.primary
+            color: AppColor.primary,
+             child: Image.asset(
+              'assets/images/loan3.webp',
+              fit: BoxFit.fill, 
+            ),
           ),
         ),
       ),
