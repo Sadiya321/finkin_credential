@@ -25,8 +25,6 @@ class _LoanFormState extends State<LoanForm> {
 
   late AnimationController _controller;
 
-
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -72,7 +70,10 @@ class _LoanFormState extends State<LoanForm> {
                   hintText: 'Enter full name as per Aadhar card',
                 ),
                 const SizedBox(height: 10),
-                const LabeledTextField(label: 'Email'),
+                const LabeledTextField(
+                  label: 'Email',
+                  regex: r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$',
+                ),
                 _buildPhoneNumberSection(),
                 _buildVerificationCodeSection(),
                 _buildDateOfBirthSection(),
@@ -408,7 +409,6 @@ class _LoanFormState extends State<LoanForm> {
   }
 }
 
-
 class LabeledTextField extends StatelessWidget {
   final IconData? icon;
   final String label;
@@ -416,6 +416,7 @@ class LabeledTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? suffixWidget;
   final TextEditingController? controller;
+  final String? regex;
 
   const LabeledTextField({
     required this.label,
@@ -424,6 +425,7 @@ class LabeledTextField extends StatelessWidget {
     this.icon,
     this.suffixWidget,
     this.controller,
+    this.regex,
   });
 
   @override
@@ -440,13 +442,25 @@ class LabeledTextField extends StatelessWidget {
         const SizedBox(height: 5),
         TextFormField(
           controller: controller,
+          onChanged: (value) {
+            if (regex != null) {
+              if (!RegExp(regex!).hasMatch(value)) {
+                // Validation fails
+                controller!.text = value.substring(0, value.length - 1);
+                controller!.selection = TextSelection.fromPosition(
+                  TextPosition(
+                    offset: controller!.text.length,
+                  ),
+                );
+              }
+            }
+          },
           decoration: InputDecoration(
             hintText: hintText,
             border: const OutlineInputBorder(),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.textdivider), // Set to transparent color
+              borderSide: BorderSide(color: AppColor.textdivider),
             ),
-
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
@@ -454,7 +468,7 @@ class LabeledTextField extends StatelessWidget {
                   )
                 : suffixWidget,
           ),
-          cursorColor: AppColor.textPrimary, 
+          cursorColor: AppColor.textPrimary,
         ),
         const SizedBox(height: 10),
       ],

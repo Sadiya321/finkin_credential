@@ -6,7 +6,6 @@ import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
