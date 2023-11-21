@@ -200,7 +200,7 @@ class _CompanyworkerState extends State<Companyworker> {
               borderRadius: BorderRadius.circular(30.0),
             ),
           ),
-          child: const Text('Submit', style: TextStyle(fontSize: 16)),
+          child: const Text('Submit', style: TextStyle(fontSize: 16,color: AppColor.textLight),),
         ),
       ),
     );
@@ -240,7 +240,7 @@ class LabeledTextField extends StatelessWidget {
             border: const OutlineInputBorder(),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                  color: AppColor.textdivider), 
+                  color: AppColor.textLight), 
             ),
             suffixIcon: icon != null
                 ? InkWell(

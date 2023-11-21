@@ -64,13 +64,13 @@ class MyRoutes {
         return MaterialPageRoute(builder: (context) => const InfoDisplay());
       case '/loanform':
         return MaterialPageRoute(
-            builder: (context) => const LoanForm(
+            builder: (context) =>  const LoanForm(
                   title: '',
                 ));
       case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => const BottomNavBar());
+        return MaterialPageRoute(builder: (context) => WelcomePage());
     }
   }
 }
