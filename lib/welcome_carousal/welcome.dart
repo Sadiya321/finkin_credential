@@ -6,8 +6,24 @@ import 'package:finkin_credential/welcome_carousal/page2.dart';
 import 'package:finkin_credential/welcome_carousal/page3.dart';
 import 'package:finkin_credential/pages/login_screen/login_screen.dart';
 
-class WelcomePage extends StatelessWidget {
-  final _controller = PageController();
+class WelcomePage extends StatefulWidget {
+  @override
+  _WelcomePageState createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  final PageController _controller = PageController();
+  int currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {
+        currentPage = _controller.page?.round() ?? 0;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +35,7 @@ class WelcomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            height: screenHeight * 0.6, // Use a fraction of the screen height
+            height: screenHeight * 0.6,
             child: PageView(
               controller: _controller,
               children: const [
@@ -41,24 +57,25 @@ class WelcomePage extends StatelessWidget {
               jumpScale: 3,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(screenHeight * 0.02), // Responsive padding
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: AppColor.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+          if (currentPage == 2) 
+            Padding(
+              padding: EdgeInsets.all(screenHeight * 0.02),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: AppColor.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
+                child: const Text('Get Started', style: TextStyle(color: AppColor.textLight)),
               ),
-              child: const Text('Get Started', style: TextStyle(color: AppColor.textLight)),
             ),
-          ),
         ],
       ),
     );

@@ -16,7 +16,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Loan'),
+        title: const Text('Loan', style: TextStyle(color: AppColor.textLight),),
         backgroundColor: AppColor.primary,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -59,7 +59,8 @@ class _InfoDisplayState extends State<InfoDisplay> {
                   const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.all(20),
-                    width: 350,
+                    height: 180,
+                    width: 345,
                     decoration: BoxDecoration(
                       color: AppColor.textLight,
                       borderRadius: BorderRadius.circular(15),
@@ -78,7 +79,6 @@ class _InfoDisplayState extends State<InfoDisplay> {
                     ),
                     child: Column(
                       children: [
-                        const SizedBox(height: 10),
                         const Align(
                           alignment: Alignment.topCenter,
                           child: Text(
@@ -90,7 +90,6 @@ class _InfoDisplayState extends State<InfoDisplay> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
                         Center(
                           child: FlutterHorizontalStepper(
                             titleStyle: const TextStyle(color: AppColor.primary),
@@ -113,42 +112,52 @@ class _InfoDisplayState extends State<InfoDisplay> {
                     ),
                   ),
                   const SizedBox(height: 10),
+
+                  
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              isPersonalDetailsSelected = true;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(130, 50),
-                            primary: isPersonalDetailsSelected
-                                ? AppColor.primary
-                                : AppColor.subtext,
-                          ),
-                          child: const Text('Personal Details', style: TextStyle(fontSize: 13)),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              isPersonalDetailsSelected = false;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(130, 50),
-                            primary: isPersonalDetailsSelected
-                                ? AppColor.subtext
-                                : AppColor.primary,
-                          ),
-                          child: const Text('Other Details', style: TextStyle(fontSize: 13)),
-                        ),
-                      ],
-                    ),
-                  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      TextButton(
+        onPressed: () {
+          setState(() {
+            isPersonalDetailsSelected = true;
+          });
+        },
+        style: TextButton.styleFrom(
+          fixedSize: const Size(140, 60), 
+          backgroundColor: isPersonalDetailsSelected
+              ? AppColor.primary
+              : AppColor.subtext,
+        ),
+        child: const Text(
+          'Personal Details',
+          style: TextStyle(fontSize: 12, color: AppColor.textLight),
+        ),
+      ),
+      SizedBox(width: 16), 
+      TextButton(
+        onPressed: () {
+          setState(() {
+            isPersonalDetailsSelected = false;
+          });
+        },
+        style: TextButton.styleFrom(
+          fixedSize: const Size(140, 60), 
+          backgroundColor: isPersonalDetailsSelected
+              ? AppColor.subtext
+              : AppColor.primary,
+        ),
+        child: const Text(
+          'Other Details',
+          style: TextStyle(fontSize: 12, color: AppColor.textLight),
+        ),
+      ),
+    ],
+  ),
+),
+
+                  
                 ],
               ),
             ),
@@ -223,7 +232,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                     borderRadius: BorderRadius.circular(25.0),
                                   ),
                                 ),
-                                child: const Text('View Image'),
+                                child: const Text('View Image', style: TextStyle(color:AppColor.textLight),),
                               ),
                             ],
                           ),
@@ -255,7 +264,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                     borderRadius: BorderRadius.circular(25.0),
                                   ),
                                 ),
-                                child: const Text('View Image'),
+                                child: const Text('View Image',style: TextStyle(color:AppColor.textLight),),
                               ),
                             ],
                           ),
@@ -295,7 +304,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                     borderRadius: BorderRadius.circular(25.0),
                                   ),
                                 ),
-                                child: const Text('View Image'),
+                                child: const Text('View Image',style: TextStyle(color:AppColor.textLight),),
                               ),
                             ],
                           ),
@@ -322,7 +331,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
                                     borderRadius: BorderRadius.circular(25.0),
                                   ),
                                 ),
-                                child: const Text('View Image'),
+                                child: const Text('View Image',style: TextStyle(color:AppColor.textLight),),
                               ),
                             ],
                           ),

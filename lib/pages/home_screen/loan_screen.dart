@@ -24,6 +24,7 @@ class LoanScreen extends StatelessWidget {
     return Scaffold(
       appBar:
           title == 'Approved' ? _buildApprovedAppBar() : _buildRegularAppBar(),
+          
       body: SafeArea(
         child: ListView.builder(
             itemCount: filteredItems.length,
@@ -65,7 +66,7 @@ class LoanScreen extends StatelessWidget {
           color: AppColor.primary,
         ),
         child: AppBar(
-          title: Center(child: Text(title)),
+          title: Center(child: Text(title,style: const TextStyle(color: AppColor.textLight),)),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -100,7 +101,7 @@ class LoanScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
                   child: Column(
                     children: [
-                      Text(title),
+                      Text(title,style: TextStyle(color: AppColor.textLight),),
                       const SizedBox(height: 10.0),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -110,6 +111,7 @@ class LoanScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              color: AppColor.textLight,
                             ),
                           ),
                           Text(
@@ -117,6 +119,7 @@ class LoanScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                               color: AppColor.textLight,
                             ),
                           ),
                         ],

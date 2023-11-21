@@ -20,10 +20,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
       title: 'Loan Tracking',
     ),
     const LoanScreen(
-      title: 'Approved',
+      title: 'Approvd',
       status: LoanStatus.approved,
     ),
-    const AccountScreen(),
+     AccountScreen(),
   ];
   int _selectedIndex = 0;
 
