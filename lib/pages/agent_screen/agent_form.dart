@@ -16,6 +16,8 @@ class _AgentFormState extends State<AgentForm> {
   final formKey = GlobalKey<FormState>();
   final AgentFormController controller = Get.put(AgentFormController());
 
+
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -23,7 +25,7 @@ class _AgentFormState extends State<AgentForm> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
+        preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
           backgroundColor: AppColor.textLight,
           elevation: 0,
@@ -67,49 +69,53 @@ class _AgentFormState extends State<AgentForm> {
                 LabeledTextField(
                   label: 'Enter Last Name',
                   hintText: 'Enter Last Name',
-                  regexPattern: AgentFormController.nameRegex,
-                  controller: controller.lastNameController,
+                  // regexPattern: AgentFormController.nameRegex,
+                  // controller: controller.firstNameController,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                LabeledTextField(
+                 LabeledTextField(
                   label: 'Enter Phone Number',
                   hintText: 'Enter Phone Number',
-                  // regexPattern: AgentFormController.,
-                  // controller: controller.firstNameController,
+                  // regexPattern: AgentFormController.phoneNumberRegex,
+                  // controller: controller.phoneNumberController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const LabeledTextField(
+                 LabeledTextField(
                   label: 'Enter Your Aadhar card Number',
                   hintText: 'Enter Your Aadhar card Number',
-                  // regexPattern: aadharCardRegex,
+                //  regexPattern: AgentFormController.aadharCardRegex,
+                //   controller: controller.aadharCardController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const LabeledTextField(
+                 LabeledTextField(
                   label: 'Enter Your Pan card Number',
                   hintText: 'Enter Your Pan card Number',
-                  // regexPattern: panCardRegex,
+                //  regexPattern: AgentFormController.panCardRegex,
+                //   controller: controller.panCardController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const LabeledTextField(
+                  LabeledTextField(
                   label: 'Enter Your Email Id',
                   hintText: 'Enter Your Email Id',
-                  // regexPattern: emailRegex,
+                  // regexPattern: AgentFormController.emailRegex,
+                  // controller: controller.emailController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const LabeledTextField(
+                 LabeledTextField(
                   label: 'Enter Your Address',
                   hintText: 'Enter Your Address ',
-                  // regexPattern: addressRegex,
+                //  regexPattern: AgentFormController.phoneNumberRegex,
+                //   controller: controller.addressController,
                 ),
                 SizedBox(
                   height: height * 0.05,
@@ -127,10 +133,13 @@ class _AgentFormState extends State<AgentForm> {
                           ),
                         ],
                       ),
+
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           const snackBar =
-                              SnackBar(content: Text('Submitting Form'));
+                              SnackBar(content: Text('Submitting Form',style: TextStyle(color: AppColor.textLight),), 
+                              backgroundColor: AppColor.primary, 
+                              );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           Navigator.push(
                             context,
@@ -142,6 +151,7 @@ class _AgentFormState extends State<AgentForm> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 15),
               ],
             ),
           ),

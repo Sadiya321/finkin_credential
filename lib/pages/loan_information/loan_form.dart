@@ -1,14 +1,16 @@
 import 'dart:io';
-
-import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
-import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:get/get.dart';
+import 'package:finkin_credential/controller/loan_form_controller.dart';
+import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
+import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'companyworker_form.dart';
 
 class LoanForm extends StatefulWidget {
   final String title;
+
   const LoanForm({Key? key, required this.title}) : super(key: key);
 
   @override
@@ -16,14 +18,14 @@ class LoanForm extends StatefulWidget {
 }
 
 class _LoanFormState extends State<LoanForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isPhoneNumberVerified = false;
+  final formKey = GlobalKey<FormState>();
+  final LoanFormController controller = Get.put(LoanFormController());
+
   XFile? _pickedFile;
   XFile? _pickedFile2;
   DateTime? selectedDate;
-  get title => widget.title;
 
-  late AnimationController _controller;
+  get title => widget.title;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -42,12 +44,16 @@ class _LoanFormState extends State<LoanForm> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text(
             title,
+            
             style: const TextStyle(
+              color: AppColor.textLight,
               fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
@@ -60,35 +66,27 @@ class _LoanFormState extends State<LoanForm> {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSectionTitle('Personal Information'),
-                const SizedBox(height: 20),
-                const LabeledTextField(
-                  label: 'Full Name',
-                  hintText: 'Enter full name as per Aadhar card',
-                ),
-                const SizedBox(height: 10),
-                const LabeledTextField(
-                  label: 'Email',
-                  regex: r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$',
-                ),
-                _buildPhoneNumberSection(),
-                _buildVerificationCodeSection(),
-                _buildDateOfBirthSection(),
-                const SizedBox(height: 10),
-                _buildAddressSection(),
-                _buildPinCodeAndNationalitySection(),
-                const SizedBox(height: 10),
-                const LabeledTextField(label: 'Enter Your Aadhar Number'),
-                _buildAadharCardUploadSection(),
-                const SizedBox(height: 10),
-                const LabeledTextField(label: 'Enter Your PAN Number'),
-                _buildPANCardUploadSection(),
-                const SizedBox(height: 10),
-                _buildEmployeeTypeSection(),
-              ],
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSectionTitle('Personal Information'),
+                  const SizedBox(height: 20),
+                  _buildNameNumberSection(),
+                  _buildEmailNumberSection(),
+                  _buildPhoneNumberSection(),
+                  _buildVerificationCodeSection(),
+                  _buildDateOfBirthSection(),
+                  _buildAddressSection(),
+                  _buildPinCodeAndNationalitySection(),
+                  _buildAadharNumberSection(),
+                  _buildAadharCardUploadSection(),
+                  _builPanNumberSection(),
+                  _buildPANCardUploadSection(),
+                  _buildEmployeeTypeSection(),
+                ],
+              ),
             ),
           ),
         ),
@@ -106,12 +104,43 @@ class _LoanFormState extends State<LoanForm> {
     );
   }
 
+  Widget _buildNameNumberSection() {
+    return Row(
+      children: [
+        Expanded(
+          child: LabeledTextField(
+            label: 'Full Name',
+            hintText: 'Enter full name as per Aadhar card',
+            regexPattern: LoanFormController.nameRegex,
+            controller: controller.firstNameController,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmailNumberSection() {
+    return Row(
+      children: [
+        Expanded(
+          child: LabeledTextField(
+            label: 'Email',
+            regexPattern: LoanFormController.emailRegex,
+            controller: controller.emailController,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildPhoneNumberSection() {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: LabeledTextField(
             label: 'Phone Number',
+            regexPattern: LoanFormController.phoneNumberRegex,
+            controller: controller.phoneNumberController,
           ),
         ),
         const SizedBox(width: 10),
@@ -120,12 +149,40 @@ class _LoanFormState extends State<LoanForm> {
     );
   }
 
+  Widget _buildAadharNumberSection() {
+    return Row(
+      children: [
+        Expanded(
+          child: LabeledTextField(
+            label: 'Enter Your Aadhar Number',
+            regexPattern: LoanFormController.aadharCardRegex,
+            controller: controller.aadharCardController,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _builPanNumberSection() {
+    return Row(
+      children: [
+        Expanded(
+          child: LabeledTextField(
+            label: 'Enter Your PAN Number',
+            regexPattern: LoanFormController.panCardRegex,
+            controller: controller.panCardController,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildVerificationButton() {
     return ElevatedButton(
       onPressed: () {
-        setState(() {
-          isPhoneNumberVerified = true;
-        });
+        // setState(() {
+        //   isPhoneNumberVerified = true;
+        // });
       },
       style: ElevatedButton.styleFrom(
         primary: AppColor.icon,
@@ -133,16 +190,21 @@ class _LoanFormState extends State<LoanForm> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: const Text('Verify'),
+      child: const Text(
+        'Verify',
+        style: TextStyle(color: AppColor.textLight),
+      ),
     );
   }
 
   Widget _buildVerificationCodeSection() {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: LabeledTextField(
             label: 'Enter Verification Code',
+            regexPattern: LoanFormController.pinCodeRegex,
+            controller: controller.pinCodeController,
           ),
         ),
         const SizedBox(width: 10),
@@ -154,10 +216,8 @@ class _LoanFormState extends State<LoanForm> {
   Widget _buildSubmitButton() {
     return ElevatedButton(
       onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          setState(() {
-            isPhoneNumberVerified = true;
-          });
+        if (formKey.currentState!.validate()) {
+          setState(() {});
         }
       },
       style: ElevatedButton.styleFrom(
@@ -166,7 +226,10 @@ class _LoanFormState extends State<LoanForm> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: const Text('Submit'),
+      child: const Text(
+        'Submit',
+        style: TextStyle(color: AppColor.textLight),
+      ),
     );
   }
 
@@ -176,13 +239,15 @@ class _LoanFormState extends State<LoanForm> {
         Expanded(
           child: LabeledTextField(
             icon: Icons.calendar_month_outlined,
+            iconColor: AppColor.textPrimary,
             label: 'Date of Birth',
-            onTap: () => _selectDate(context),
+            regexPattern: LoanFormController.dateOfBirthRegex,
             controller: TextEditingController(
               text: selectedDate != null
                   ? "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"
                   : '',
             ),
+            onTap: () => _selectDate(context),
           ),
         ),
       ],
@@ -192,26 +257,32 @@ class _LoanFormState extends State<LoanForm> {
   Widget _buildAddressSection() {
     return Container(
       width: double.maxFinite,
-      child: const LabeledTextField(
+      child: LabeledTextField(
         label: 'Address',
+        regexPattern: LoanFormController.addressRegex,
+        controller: controller.addressController,
       ),
     );
   }
 
   Widget _buildPinCodeAndNationalitySection() {
-    return const Row(
+    return Row(
       children: [
         Expanded(
           child: LabeledTextField(
-            label: 'Pin Code',
-            hintText: 'Enter your pin code',
+            label: 'Enter PIN Code',
+            regexPattern: LoanFormController.pinCodeRegex,
+            controller: controller.pinController,
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(
+          width: 10,
+        ),
         Expanded(
           child: LabeledTextField(
             label: 'Nationality',
-            hintText: 'Enter your nationality',
+            regexPattern: LoanFormController.nameRegex,
+            controller: controller.nationalityController,
           ),
         ),
       ],
@@ -288,7 +359,10 @@ class _LoanFormState extends State<LoanForm> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: const Text('View Image'),
+                  child: const Text(
+                    'View Image',
+                    style: TextStyle(color: AppColor.textLight),
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Text(
@@ -331,7 +405,10 @@ class _LoanFormState extends State<LoanForm> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: const Text('Close'),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(color: AppColor.textLight),
+                  ),
                 ),
               ],
             ),
@@ -354,15 +431,22 @@ class _LoanFormState extends State<LoanForm> {
             Expanded(
               child: GestureDetector(
                 child:
-                    _buildCompanyTypeButton('Self Employed', AppColor.primary),
+                    _buildEmployeeTypeButton('Self Employed', AppColor.primary),
               ),
             ),
-            const SizedBox(width: 40),
+            const SizedBox(width: 4),
             Expanded(
               child: GestureDetector(
-                onTap: () {},
-                child: _buildEmployeeTypeButton(
-                    'Company Worker', AppColor.primary),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BottomNavBar(),
+                    ),
+                  );
+                },
+                child:
+                    _buildCompanyTypeButton('Company Worker ', AppColor.primary),
               ),
             ),
             const SizedBox(height: 80),
@@ -375,10 +459,31 @@ class _LoanFormState extends State<LoanForm> {
   Widget _buildEmployeeTypeButton(String text, Color color) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Companyworker()),
-        );
+        if (formKey.currentState!.validate()) {
+          if (_pickedFile == null || _pickedFile2 == null) {
+            const snackBar = SnackBar(
+              content: Text(
+                'Please select both Aadhar Card and PAN Card photos',
+                style: TextStyle(color: AppColor.textLight),
+              ),
+              backgroundColor: AppColor.errorbar,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          } else {
+            const snackBar = SnackBar(
+              content: Text(
+                'Submitting Form',
+                style: TextStyle(color: AppColor.textLight),
+              ),
+              backgroundColor: AppColor.primary,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SelfWorker()),
+            );
+          }
+        }
       },
       style: ElevatedButton.styleFrom(
         primary: color,
@@ -386,17 +491,41 @@ class _LoanFormState extends State<LoanForm> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: const TextStyle(color: AppColor.textLight),
+      ),
     );
   }
 
   Widget _buildCompanyTypeButton(String text, Color color) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SelfWorker()),
-        );
+        if (formKey.currentState!.validate()) {
+          if (_pickedFile == null || _pickedFile2 == null) {
+            const snackBar = SnackBar(
+              content: Text(
+                'Please select both Aadhar Card and PAN Card photos',
+                style: TextStyle(color: AppColor.textLight),
+              ),
+              backgroundColor: AppColor.errorbar,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          } else {
+            const snackBar = SnackBar(
+              content: Text(
+                'Submitting Form',
+                style: TextStyle(color: AppColor.textLight),
+              ),
+              backgroundColor: AppColor.primary,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Companyworker()),
+            );
+          }
+        }
       },
       style: ElevatedButton.styleFrom(
         primary: color,
@@ -404,7 +533,10 @@ class _LoanFormState extends State<LoanForm> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: const TextStyle(color: AppColor.textLight),
+      ),
     );
   }
 }
@@ -416,7 +548,9 @@ class LabeledTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? suffixWidget;
   final TextEditingController? controller;
-  final String? regex;
+  final String? regexPattern;
+  final Color? iconColor;
+  final Color? backgroundColor;
 
   const LabeledTextField({
     required this.label,
@@ -425,7 +559,9 @@ class LabeledTextField extends StatelessWidget {
     this.icon,
     this.suffixWidget,
     this.controller,
-    this.regex,
+    this.regexPattern,
+    this.iconColor,
+    this.backgroundColor,
   });
 
   @override
@@ -442,33 +578,34 @@ class LabeledTextField extends StatelessWidget {
         const SizedBox(height: 5),
         TextFormField(
           controller: controller,
-          onChanged: (value) {
-            if (regex != null) {
-              if (!RegExp(regex!).hasMatch(value)) {
-                // Validation fails
-                controller!.text = value.substring(0, value.length - 1);
-                controller!.selection = TextSelection.fromPosition(
-                  TextPosition(
-                    offset: controller!.text.length,
-                  ),
-                );
-              }
-            }
-          },
           decoration: InputDecoration(
             hintText: hintText,
             border: const OutlineInputBorder(),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.textdivider),
+              borderSide: BorderSide(
+                color: AppColor.textdivider,
+              ),
             ),
             suffixIcon: icon != null
                 ? InkWell(
                     onTap: onTap,
-                    child: Icon(icon),
+                    child: Icon(
+                      icon,
+                      color: iconColor ?? Theme.of(context).iconTheme.color,
+                    ),
                   )
                 : suffixWidget,
           ),
           cursorColor: AppColor.textPrimary,
+          validator: (value) {
+            if (regexPattern != null && value != null) {
+              final RegExp regex = RegExp(regexPattern!);
+              if (!regex.hasMatch(value)) {
+                return 'Invalid format';
+              }
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 10),
       ],

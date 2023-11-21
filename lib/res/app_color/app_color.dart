@@ -9,4 +9,6 @@ class AppColor{
   static const Color subtext = Color(0xFFA8A8A3);
   static const Color icon = Color(0xFF4CAF50);
   static const Color combination = Color(0xDD000000);
+  static const Color errorbar = Color.fromARGB(221, 215, 3, 3);
 }
+

@@ -217,13 +217,165 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void _showAccountInfoBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    isScrollControlled: true,
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      double screenHeight = MediaQuery.of(context).size.height;
+
+      return SingleChildScrollView(
+        child: Container(
+          height: screenHeight * 0.6,
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              gradient: LinearGradient(
+                colors: [AppColor.combination, AppColor.primary],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Container(
+                      height: 5,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Full Name",
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Location",
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.email, color: Colors.white),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.credit_card,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Aadhar Card Number",
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(
+                    Icons.description,
+                    color: Colors.white,
+                  ),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Pan Card Number",
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 66),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+  void _showContactInfoBottomSheet(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.7,
             decoration: const BoxDecoration(
               color: Colors.transparent,
             ),
@@ -233,152 +385,6 @@ class _AccountScreenState extends State<AccountScreen> {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
-                ),
-                gradient: LinearGradient(
-                  colors: [AppColor.combination, AppColor.primary],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Center(
-                      child: Container(
-                        height: 5,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Full Name",
-                        labelStyle: TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.location_on,
-                      color: Colors.white,
-                    ),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Location",
-                        labelStyle: TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                  const ListTile(
-                    leading: Icon(Icons.email, color: Colors.white),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        labelStyle: TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.credit_card,
-                      color: Colors.white,
-                    ),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Aadhar Card Number",
-                        labelStyle: TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.description,
-                      color: Colors.white,
-                    ),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Pan Card Number",
-                        labelStyle: TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 66),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _showContactInfoBottomSheet(BuildContext context) {
-    showBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
                 ),
                 gradient: LinearGradient(
                   colors: [AppColor.combination, AppColor.primary],

@@ -1,6 +1,8 @@
-import 'package:finkin_credential/pages/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../pages/home_screen/home_screen.dart';
 
 class LoginController extends GetxController {
   var authState = ''.obs; // Corrected variable name

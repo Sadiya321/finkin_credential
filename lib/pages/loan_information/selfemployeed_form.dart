@@ -206,7 +206,7 @@ class _SelfWorkerState extends State<SelfWorker> {
               borderRadius: BorderRadius.circular(30.0),
             ),
           ),
-          child: const Text('Submit', style: TextStyle(fontSize: 16)),
+          child: const Text('Submit', style: TextStyle(fontSize: 16,color: AppColor.textLight)),
         ),
       ),
     );
