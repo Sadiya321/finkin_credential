@@ -6,6 +6,8 @@ class ImageAsset {
   static const String money = 'assets/images/money.jpg';
   static const String logout = 'assets/images/logout.svg';
   static const String education = 'assets/images/education.jpg';
-  static const String caros = 'assets/images/caros.jpg';
-  static const String bro = 'assets/images/rpo.jpg';
+  static const String caros = 'assets/images/pro.png';
+  static const String loan2 = 'assets/images/loan2.jpg';
+  static const String loan3 = 'assets/images/loan3.webp';
+  static const String loan5 = 'assets/images/loan5.jpg';
 }
