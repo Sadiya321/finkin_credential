@@ -217,155 +217,155 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void _showAccountInfoBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    isScrollControlled: true,
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context) {
-      double screenHeight = MediaQuery.of(context).size.height;
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        double screenHeight = MediaQuery.of(context).size.height;
 
-      return SingleChildScrollView(
-        child: Container(
-          height: screenHeight * 0.6,
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
-          ),
+        return SingleChildScrollView(
           child: Container(
+            height: screenHeight * 0.6,
             decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              gradient: LinearGradient(
-                colors: [AppColor.combination, AppColor.primary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: Colors.transparent,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Container(
-                      height: 5,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [AppColor.combination, AppColor.primary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Container(
+                        height: 5,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Full Name",
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                  ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Location",
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Full Name",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(Icons.email, color: Colors.white),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.location_on,
+                      color: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                  ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.credit_card,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Aadhar Card Number",
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Location",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
                   ),
-                ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.description,
-                    color: Colors.white,
-                  ),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Pan Card Number",
-                      labelStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                  const ListTile(
+                    leading: Icon(Icons.email, color: Colors.white),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
                     ),
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
                   ),
-                ),
-                const SizedBox(height: 66),
-              ],
+                  const ListTile(
+                    leading: Icon(
+                      Icons.credit_card,
+                      color: Colors.white,
+                    ),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Aadhar Card Number",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                    ),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.description,
+                      color: Colors.white,
+                    ),
+                    title: TextField(
+                      decoration: InputDecoration(
+                        labelText: "Pan Card Number",
+                        labelStyle: TextStyle(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 66),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   void _showContactInfoBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -400,19 +400,17 @@ class _AccountScreenState extends State<AccountScreen> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       height: 5,
-                      width: 40,
+                      width: 20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Center(
-                      child: SizedBox(
-                        height: 150,
-                        width: double.infinity,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
                         child: Image.asset(
                           'assets/images/education.jpg',
                           fit: BoxFit.cover,
@@ -420,162 +418,161 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                     ),
                   ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 4),
-                              child: Icon(
-                                Icons.location_on,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 4),
-                              child: Text(
-                                "Address",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30),
-                        child: Text(
-                          "Beeri, Mangalore 581707",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      InkWell(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 4),
-                              child: Icon(
-                                Icons.email,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 4),
-                              child: Text(
-                                "Email",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30),
-                        child: Text(
-                          "sadiyaayub16@gmai.com",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: SingleChildScrollView(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.textLight,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: AppColor.textdivider,
-                              offset: Offset(0, 2),
-                              blurRadius: 6.0,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: Text(
-                                "Contact Us",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColor.primary,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.person_2_outlined,
-                                color: AppColor.primary,
+                              Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Text(
+                                  "Address",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                              title: const Text(
-                                "8217696772",
-                                style: TextStyle(color: AppColor.textdivider),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  GestureDetector(
-                                    child: const Icon(
-                                      Icons.message,
-                                      color: AppColor.primary,
-                                    ),
-                                    onTap: () {},
-                                  ),
-                                  const SizedBox(width: 10),
-                                  GestureDetector(
-                                    child: const Icon(
-                                      Icons.phone_outlined,
-                                      color: AppColor.primary,
-                                    ),
-                                    onTap: () {
-                                      _makePhoneCall("6363052051");
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.person_2_outlined,
-                                color: AppColor.primary,
-                              ),
-                              title: const Text(
-                                "6363052051",
-                                style: TextStyle(color: AppColor.textdivider),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  GestureDetector(
-                                    child: const Icon(
-                                      Icons.chat,
-                                      color: AppColor.primary,
-                                    ),
-                                    onTap: () {},
-                                  ),
-                                  const SizedBox(width: 10),
-                                  GestureDetector(
-                                    child: const Icon(
-                                      Icons.phone_outlined,
-                                      color: AppColor.primary,
-                                    ),
-                                    onTap: () {
-                                      _makePhoneCall("6363052051");
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Text(
+                            "Beeri, Mangalore 581707",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        InkWell(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Icon(
+                                  Icons.email,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Text(
+                                  "Email",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Text(
+                            "sadiyaayub16@gmail.com",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.textLight,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: AppColor.textdivider,
+                            offset: Offset(0, 2),
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              "Contact Us",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.primary,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.person_2_outlined,
+                              color: AppColor.primary,
+                            ),
+                            title: const Text(
+                              "8217696772",
+                              style: TextStyle(color: AppColor.textdivider),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.message,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {},
+                                ),
+                                const SizedBox(width: 10),
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.phone_outlined,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                    _makePhoneCall("6363052051");
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.person_2_outlined,
+                              color: AppColor.primary,
+                            ),
+                            title: const Text(
+                              "6363052051",
+                              style: TextStyle(color: AppColor.textdivider),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.chat,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {},
+                                ),
+                                const SizedBox(width: 10),
+                                GestureDetector(
+                                  child: const Icon(
+                                    Icons.phone_outlined,
+                                    color: AppColor.primary,
+                                  ),
+                                  onTap: () {
+                                    _makePhoneCall("6363052051");
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

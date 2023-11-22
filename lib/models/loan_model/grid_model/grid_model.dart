@@ -14,12 +14,11 @@ List<Category> categories = [
   Category(
     imagePath: ImageAsset.education,
     text: 'Home Loan',
-    
     onTap: (BuildContext context) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Home Loan'),
+          builder: (context) => LoanForm(title: 'Home Loan'),
         ),
       );
     },
@@ -31,7 +30,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Business Loan'),
+          builder: (context) => LoanForm(title: 'Business Loan'),
         ),
       );
     },
@@ -43,7 +42,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Education Loan'),
+          builder: (context) => LoanForm(title: 'Education Loan'),
         ),
       );
     },
@@ -55,7 +54,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Bank Loan'),
+          builder: (context) => LoanForm(title: 'Bank Loan'),
         ),
       );
     },
@@ -67,7 +66,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Personal Loan'),
+          builder: (context) => LoanForm(title: 'Personal Loan'),
         ),
       );
     },
@@ -79,7 +78,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  LoanForm(title: 'Car Loan'),
+          builder: (context) => LoanForm(title: 'Car Loan'),
         ),
       );
     },
