@@ -1,38 +1,95 @@
+// Import the connectivity package
+import 'dart:async';
+
+import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import '../pages/home_screen/home_screen.dart';
+class LoginController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  var showPrefix = false.obs;
+  var isLogin = true;
+  var phoneNo = "".obs;
+  var otp = "".obs;
+  var isOtpSent = false.obs;
+  var resendAfter = 30.obs;
+  var resendOTP = false.obs;
+  var firebaseVerificationId = "";
+  var statusMessage = "".obs;
+  var statusMessageColor = Colors.black.obs;
 
-class LoginController extends GetxController {
-  var authState = ''.obs; // Corrected variable name
-  String verificationID = '';
-  var auth = FirebaseAuth.instance;
+  var timer;
 
-  verifyPhone(String phone) async {
-    await auth.verifyPhoneNumber(
-      timeout: const Duration(seconds: 60),
-      phoneNumber: phone,
-      verificationCompleted: (AuthCredential authCredential) {},
-      verificationFailed: (authException) {
-        Get.snackbar("error", "problem when send the code");
+  AuthController() {}
+
+  @override
+  onInit() async {
+    super.onInit();
+  }
+
+  getOtp() async {
+    FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+91' + phoneNo.value,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int? resendToken) {
+        firebaseVerificationId = verificationId;
+        isOtpSent.value = true;
+        statusMessage.value = "OTP sent to +91" + phoneNo.value;
+        startResendOtpTimer();
       },
-      codeSent: (String id, int? forceResent) {
-        this.verificationID = id;
-        authState.value = "login success"; // Corrected variable name
-      },
-      codeAutoRetrievalTimeout: (id) {
-        this.verificationID = id;
-      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 
-  verifyOTP(String otp) async {
-    var credential = await auth.signInWithCredential(
-        PhoneAuthProvider.credential(
-            verificationId: this.verificationID, smsCode: otp));
-    if (credential.user != null) {
-      Get.to(HomeScreen());
+  resendOtp() async {
+    resendOTP.value = false;
+    FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+91' + phoneNo.value,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int? resendToken) {
+        firebaseVerificationId = verificationId;
+        isOtpSent.value = true;
+        statusMessage.value = "OTP re-sent to +91" + phoneNo.value;
+        startResendOtpTimer();
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
+  verifyOTP() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    try {
+      statusMessage.value = "Verifying... " + otp.value;
+      // Create a PhoneAuthCredential with the code
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: firebaseVerificationId, smsCode: otp.value);
+      // Sign the user in (or link) with the credential
+      await auth.signInWithCredential(credential);
+      Get.off(BottomNavBar());
+    } catch (e) {
+      statusMessage.value = "Invalid  OTP";
+      statusMessageColor = Colors.red.obs;
     }
+  }
+
+  startResendOtpTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (resendAfter.value != 0) {
+        resendAfter.value--;
+      } else {
+        resendAfter.value = 30;
+        resendOTP.value = true;
+        timer.cancel();
+      }
+      update();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

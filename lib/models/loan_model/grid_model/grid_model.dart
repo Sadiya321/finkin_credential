@@ -18,7 +18,7 @@ List<Category> categories = [
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoanForm(title: 'Home Loan'),
+          builder: (context) => const LoanForm(title: 'Home Loan'),
         ),
       );
     },

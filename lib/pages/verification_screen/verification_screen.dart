@@ -1,152 +1,346 @@
-import 'package:finkin_credential/res/app_color/app_color.dart';
-import 'package:finkin_credential/shared/widgets/custom_button.dart';
+import 'package:finkin_credential/controller/login_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:get/get.dart';
 
-import '../home_screen/bottom_nav.dart';
-
-class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({Key? key}) : super(key: key);
-
-  @override
-  State<VerificationScreen> createState() => _VerificationScreenState();
-}
-
-class _VerificationScreenState extends State<VerificationScreen> {
-  final otp = TextEditingController();
-  // LoginController controller = Get.find();
+class VerificationScreen extends StatelessWidget {
+  final authController = Get.put(LoginController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    const isLoading = false;
-
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: const TextStyle(
-        fontSize: 20,
-        color: AppColor.primary,
-        fontWeight: FontWeight.w600,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColor.primary,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
-
-    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(
-        color: AppColor.primary,
-      ),
-      borderRadius: BorderRadius.circular(8),
-    );
-
-    final submittedPinTheme = defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration?.copyWith(
-        color: AppColor.primary,
-      ),
-    );
-
-    // OTP Verification Section
-    Pinput otpInputWidget = Pinput(
-      length: 6,
-      showCursor: true,
-      defaultPinTheme: PinTheme(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: AppColor.primary,
-          ),
-        ),
-        textStyle: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      // onCompleted: (value) {
-      //   setState(() {
-      //     otp = value;
-      //   });
-      // },
-    );
-
-    CustomButton verifyButton = CustomButton(
-        text: "Verify",
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomNavBar()),
-          );
-        });
-
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(left: 25, right: 25),
-        alignment: Alignment.center,
-        child: isLoading == true
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: AppColor.primary,
-                ),
-              )
-            : SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.only(left: 8),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Image.asset(
-                      'assets/images/money.jpg',
-                      width: 260,
-                      height: 260,
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "OTP Verification",
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "We need to register your phone before getting started!",
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 50),
-                    otpInputWidget,
-                    const SizedBox(height: 25),
-                    verifyButton,
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Didn't receive any code?",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    const Text(
-                      "Resend New Code",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.primary,
-                      ),
-                    ),
-                  ],
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: Stack(children: [
+        Obx(() => authController.isOtpSent.value
+            ? _buildVerifyOtpForm()
+            : _buildGetOtpForm())
+      ]),
+    );
+  }
+
+  Widget _buildGetOtpForm() {
+    return SafeArea(
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Let's Sign in",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Obx(() => Column(
+                      children: [
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          onChanged: (val) {
+                            authController.phoneNo.value = val;
+                            authController.showPrefix.value = val.length > 0;
+                          },
+                          onSaved: (val) => authController.phoneNo.value = val!,
+                          validator: (val) => (val!.isEmpty || val!.length < 10)
+                              ? "Enter valid number"
+                              : null,
+                          decoration: InputDecoration(
+                            hintText: "Mobile Number",
+                            labelText: "Mobile Number",
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black12),
+                                borderRadius: BorderRadius.circular(10)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black12),
+                                borderRadius: BorderRadius.circular(10)),
+                            prefix: authController.showPrefix.value
+                                ? Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8),
+                                    child: Text(
+                                      '(+91)',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                : null,
+                            suffixIcon: _buildSuffixIcon(),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 22,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              final form = _formKey.currentState;
+                              if (form!.validate()) {
+                                form.save();
+                                authController.getOtp();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              // backgroundColor: kPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(14.0),
+                              child: Text(
+                                'Get OTP',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVerifyOtpForm() {
+    List<TextEditingController> otpFieldsControler = [
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController()
+    ];
+
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 0),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: GestureDetector(
+                onTap: () {
+                  authController.isOtpSent.value = false;
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  size: 32,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 180,
+            ),
+            Text(
+              'Verification',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Enter your OTP code number",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black38,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 28,
+            ),
+            Container(
+              padding: EdgeInsets.all(28),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _textFieldOTP(
+                          first: true,
+                          last: false,
+                          controller: otpFieldsControler[0]),
+                      _textFieldOTP(
+                          first: false,
+                          last: false,
+                          controller: otpFieldsControler[1]),
+                      _textFieldOTP(
+                          first: false,
+                          last: false,
+                          controller: otpFieldsControler[2]),
+                      _textFieldOTP(
+                          first: false,
+                          last: false,
+                          controller: otpFieldsControler[3]),
+                      _textFieldOTP(
+                          first: false,
+                          last: false,
+                          controller: otpFieldsControler[4]),
+                      _textFieldOTP(
+                          first: false,
+                          last: true,
+                          controller: otpFieldsControler[5]),
+                    ],
+                  ),
+                  Text(
+                    authController.statusMessage.value,
+                    style: TextStyle(
+                        color: authController.statusMessageColor.value,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 22,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        authController.otp.value = "";
+                        otpFieldsControler.forEach((controller) {
+                          authController.otp.value += controller.text;
+                        });
+                        authController.verifyOTP();
+                      },
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        // backgroundColor:
+                        //     MaterialStateProperty.all<Color>(kPrimaryColor),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.0),
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(14.0),
+                        child: Text(
+                          'Verify',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            Text(
+              "Didn't receive any code?",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black38,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            Obx(
+              () => TextButton(
+                onPressed: () => authController.resendOTP.value
+                    ? authController.resendOtp()
+                    : null,
+                child: Text(
+                  authController.resendOTP.value
+                      ? "Resend New Code"
+                      : "Wait ${authController.resendAfter} seconds",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purple,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSuffixIcon() {
+    return AnimatedOpacity(
+        opacity: authController.phoneNo?.value.length == 10 ? 1.0 : 0.0,
+        duration: const Duration(milliseconds: 250),
+        child: Icon(Icons.check_circle, color: Colors.green, size: 32));
+  }
+
+  Widget _textFieldOTP({bool first = true, last, controller}) {
+    var height = (Get.width - 82) / 6;
+    return Container(
+      height: height,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: TextField(
+          autofocus: true,
+          controller: controller,
+          onChanged: (value) {
+            if (value.length == 1 && last == false) {
+              Get.focusScope?.nextFocus();
+            }
+            if (value.length == 0 && first == false) {
+              Get.focusScope?.previousFocus();
+            }
+          },
+          showCursor: false,
+          readOnly: false,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: height / 2, fontWeight: FontWeight.bold),
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            counter: Offstage(),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2, color: Colors.black12),
+                borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2, color: Colors.purple),
+                borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
       ),
     );
   }

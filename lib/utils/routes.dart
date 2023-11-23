@@ -7,7 +7,6 @@ import 'package:finkin_credential/pages/loan_information/companyworker_form.dart
 import 'package:finkin_credential/pages/loan_information/infodisplay.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
-import 'package:finkin_credential/pages/login_screen/login_screen.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:finkin_credential/welcome_carousal/page1.dart';
 import 'package:finkin_credential/welcome_carousal/page2.dart';
@@ -35,18 +34,20 @@ class MyRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      case '/LoginScreen':
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
-        case '/LoanScreen':
-        return MaterialPageRoute(builder: (context) => const LoanScreen(title: '',));
+      // case '/LoginScreen':
+      //   return MaterialPageRoute(builder: (context) => const LoginScreen());
+      case '/LoanScreen':
+        return MaterialPageRoute(
+            builder: (context) => const LoanScreen(
+                  title: '',
+                ));
       case '/selfworker':
         return MaterialPageRoute(builder: (context) => const SelfWorker());
       case '/page1':
         return MaterialPageRoute(builder: (context) => const Page1());
 
       case '/OtpPage':
-        return MaterialPageRoute(
-            builder: (context) => const VerificationScreen());
+        return MaterialPageRoute(builder: (context) => VerificationScreen());
 
       case '/page2':
         return MaterialPageRoute(builder: (context) => const Page2());
@@ -74,7 +75,7 @@ class MyRoutes {
       case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) =>  WelcomePage());
+        return MaterialPageRoute(builder: (context) => WelcomePage());
     }
   }
 }

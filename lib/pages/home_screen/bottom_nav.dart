@@ -5,6 +5,9 @@ import 'package:finkin_credential/pages/home_screen/loan_screen.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:finkin_credential/res/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controller/login_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -14,6 +17,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  LoginController controller = Get.find();
   List screens = [
     const HomeScreen(),
     const LoanScreen(
@@ -23,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       title: 'Approved',
       status: LoanStatus.approved,
     ),
-     const AccountScreen(),
+    AccountScreen(),
   ];
   int _selectedIndex = 0;
 
