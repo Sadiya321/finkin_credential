@@ -1,7 +1,8 @@
-// Import the connectivity package
+
 import 'dart:async';
 
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,6 +64,7 @@ class LoginController extends GetxController
     FirebaseAuth auth = FirebaseAuth.instance;
     try {
       statusMessage.value = "Verifying... " + otp.value;
+      statusMessageColor = AppColor.textPrimary.obs;
       // Create a PhoneAuthCredential with the code
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: firebaseVerificationId, smsCode: otp.value);
@@ -71,7 +73,7 @@ class LoginController extends GetxController
       Get.off(BottomNavBar());
     } catch (e) {
       statusMessage.value = "Invalid  OTP";
-      statusMessageColor = Colors.red.obs;
+      statusMessageColor = AppColor.textPrimary.obs;
     }
   }
 
