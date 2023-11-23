@@ -75,7 +75,7 @@ class MyRoutes {
       case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => WelcomePage());
+        return MaterialPageRoute(builder: (context) => AgentForm());
     }
   }
 }
