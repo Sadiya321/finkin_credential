@@ -8,9 +8,7 @@ import 'package:finkin_credential/pages/loan_information/infodisplay.dart';
 import 'package:finkin_credential/pages/loan_information/loan_form.dart';
 import 'package:finkin_credential/pages/loan_information/selfemployeed_form.dart';
 import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
-import 'package:finkin_credential/welcome_carousal/page1.dart';
-import 'package:finkin_credential/welcome_carousal/page2.dart';
-import 'package:finkin_credential/welcome_carousal/page3.dart';
+import 'package:finkin_credential/splash/splash_screen.dart';
 import 'package:finkin_credential/welcome_carousal/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +28,11 @@ class MyRoutes {
   static String welcomepage = "/WelcomePage";
   static String infodisplay = "/InfoDisplay";
   static String loanscreen = "/LoanScreen";
+  static String splashscreen = "/splashscreen";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      // case '/LoginScreen':
-      //   return MaterialPageRoute(builder: (context) => const LoginScreen());
       case '/LoanScreen':
         return MaterialPageRoute(
             builder: (context) => const LoanScreen(
@@ -43,25 +40,25 @@ class MyRoutes {
                 ));
       case '/selfworker':
         return MaterialPageRoute(builder: (context) => const SelfWorker());
-      case '/page1':
-        return MaterialPageRoute(builder: (context) => const Page1());
+      case '/splashscreen':
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
 
       case '/OtpPage':
         return MaterialPageRoute(builder: (context) => VerificationScreen());
-
-      case '/page2':
-        return MaterialPageRoute(builder: (context) => const Page2());
       case '/welcomepage':
         return MaterialPageRoute(builder: (context) => WelcomePage());
-
-      case '/page3':
-        return MaterialPageRoute(builder: (context) => const Page3());
       case '/agent':
         return MaterialPageRoute(builder: (context) => const AgentPage());
       case '/agentform':
-        return MaterialPageRoute(builder: (context) => const AgentForm());
+        if (args is String) {
+          return MaterialPageRoute(
+              builder: (context) => AgentForm(agentId: args));
+        } else {
+          return MaterialPageRoute(builder: (context) => const SplashScreen());
+        }
+
       case '/home':
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case '/navBAr':
         return MaterialPageRoute(builder: (context) => const BottomNavBar());
@@ -75,7 +72,7 @@ class MyRoutes {
       case '/companyworker':
         return MaterialPageRoute(builder: (context) => const Companyworker());
       default:
-        return MaterialPageRoute(builder: (context) => AgentForm());
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
     }
   }
 }
