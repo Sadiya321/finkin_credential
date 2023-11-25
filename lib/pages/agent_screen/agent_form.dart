@@ -1,9 +1,10 @@
+import 'dart:io';
 import 'package:finkin_credential/controller/agent_form_controller.dart';
 import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:image_picker/image_picker.dart';
 
 class AgentForm extends StatefulWidget {
   const AgentForm({Key? key}) : super(key: key);
@@ -15,31 +16,79 @@ class AgentForm extends StatefulWidget {
 class _AgentFormState extends State<AgentForm> {
   final formKey = GlobalKey<FormState>();
   final AgentFormController controller = Get.put(AgentFormController());
+  File? _selectedImage;
 
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
+          toolbarHeight: 125.0,
           backgroundColor: AppColor.textLight,
           elevation: 0,
           automaticallyImplyLeading: false,
-          title: const Column(
+          title: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const SizedBox(height: 8),
+              const Text(
                 'Here  To  Get \n Welcome!',
                 style: TextStyle(
                   color: AppColor.primary,
                   fontSize: 26,
                   fontWeight: FontWeight.w400,
                 ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 90),
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        GestureDetector(
+                          onTap: _pickImage,
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: _selectedImage != null
+                                ? FileImage(_selectedImage!)
+                                : const AssetImage(
+                                        'assets/default_profile_image.png')
+                                    as ImageProvider<Object>,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
               ),
             ],
           ),
@@ -75,34 +124,34 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 5,
                 ),
-                 LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Phone Number',
                   hintText: 'Enter Phone Number',
                   // regexPattern: AgentFormController.phoneNumberRegex,
                   // controller: controller.phoneNumberController,
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
-                 LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Your Aadhar card Number',
                   hintText: 'Enter Your Aadhar card Number',
-                //  regexPattern: AgentFormController.aadharCardRegex,
-                //   controller: controller.aadharCardController,
+                  //  regexPattern: AgentFormController.aadharCardRegex,
+                  //   controller: controller.aadharCardController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                 LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Your Pan card Number',
                   hintText: 'Enter Your Pan card Number',
-                //  regexPattern: AgentFormController.panCardRegex,
-                //   controller: controller.panCardController,
+                  //  regexPattern: AgentFormController.panCardRegex,
+                  //   controller: controller.panCardController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                  LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Your Email Id',
                   hintText: 'Enter Your Email Id',
                   // regexPattern: AgentFormController.emailRegex,
@@ -111,11 +160,11 @@ class _AgentFormState extends State<AgentForm> {
                 const SizedBox(
                   height: 10,
                 ),
-                 LabeledTextField(
+                LabeledTextField(
                   label: 'Enter Your Address',
                   hintText: 'Enter Your Address ',
-                //  regexPattern: AgentFormController.phoneNumberRegex,
-                //   controller: controller.addressController,
+                  //  regexPattern: AgentFormController.phoneNumberRegex,
+                  //   controller: controller.addressController,
                 ),
                 SizedBox(
                   height: height * 0.05,
@@ -133,18 +182,21 @@ class _AgentFormState extends State<AgentForm> {
                           ),
                         ],
                       ),
-
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          const snackBar =
-                              SnackBar(content: Text('Submitting Form',style: TextStyle(color: AppColor.textLight),), 
-                              backgroundColor: AppColor.primary, 
-                              );
+                          const snackBar = SnackBar(
+                            content: Text(
+                              'Submitting Form',
+                              style: TextStyle(color: AppColor.textLight),
+                            ),
+                            backgroundColor: AppColor.primary,
+                          );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const BottomNavBar()),
+                              builder: (context) => const BottomNavBar(),
+                            ),
                           );
                         }
                       },

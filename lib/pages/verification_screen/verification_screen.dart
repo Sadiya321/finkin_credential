@@ -14,121 +14,168 @@ class VerificationScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColor.textLight,
-      body: Stack(children: [
-        Obx(() => authController.isOtpSent.value
-            ? _buildVerifyOtpForm()
-            : _buildGetOtpForm())
-      ]),
+      body: Stack(
+        children: [
+          Obx(() => authController.isOtpSent.value
+              ? _buildVerifyOtpForm()
+              : _buildGetOtpForm())
+        ],
+      ),
     );
   }
 
-  Widget _buildGetOtpForm() {
-    return SafeArea(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Let's Sign in",
+ Widget _buildGetOtpForm() {
+  return SafeArea(
+    child: Form(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 45, bottom: 40),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/hill.png',
+                  width: 400,
+                  height: 210,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
+              child: Text(
+                " Sign in",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
-                height: 10,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColor.textLight,
+                borderRadius: BorderRadius.circular(12),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColor.textLight,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Obx(() => Column(
-                      children: [
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          maxLength: 10,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          onChanged: (val) {
-                            authController.phoneNo.value = val;
-                            authController.showPrefix.value = val.length > 0;
-                          },
-                          onSaved: (val) => authController.phoneNo.value = val!,
-                          validator: (val) => (val!.isEmpty || val!.length < 10)
-                              ? "Enter valid number"
-                              : null,
-                          decoration: InputDecoration(
-                            hintText: "Mobile Number",
-                            labelText: "Mobile Number",
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.black12),
-                                borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.black12),
-                                borderRadius: BorderRadius.circular(10)),
-                            prefix: authController.showPrefix.value
-                                ? const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 8),
-                                    child: Text(
-                                      '(+91)',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  )
-                                : null,
-                            suffixIcon: _buildSuffixIcon(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              final form = _formKey.currentState;
-                              if (form!.validate()) {
-                                form.save();
-                                authController.getOtp();
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: AppColor.textLight,
-                              backgroundColor: AppColor.primary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(14.0),
-                              child: Text(
-                                'Get OTP',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-            ],
+              child: Obx(() => Column(
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    onChanged: (val) {
+                      authController.phoneNo.value = val;
+                      authController.showPrefix.value = val.length > 0;
+                    },
+                    onSaved: (val) => authController.phoneNo.value = val!,
+                    validator: (val) =>
+                        (val!.isEmpty || val.length < 10) ? "Enter a valid number" : null,
+                    decoration: InputDecoration(
+  hintText: "Mobile Number",
+  labelText: "Mobile Number",
+  hintStyle: const TextStyle(color: AppColor.textdivider), 
+  labelStyle: const TextStyle(color: AppColor.primary), 
+  floatingLabelBehavior: FloatingLabelBehavior.auto,
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.black12),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.black12),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  prefix: authController.showPrefix.value
+      ? const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            '(+91)',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+        )
+      : null,
+  suffixIcon: _buildSuffixIcon(),
+),
+
+                     cursorColor: AppColor.textPrimary,
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                  ElevatedButton(
+                      onPressed: authController.isButtonClickable.value
+                    ?  () async {
+                      final form = _formKey.currentState;
+                      if (form!.validate()) {
+                        form.save();
+                        await authController.getOtp();
+
+                        // Display the message on the same page
+                        authController.statusMessage.value =
+                            "Sending..... OTP to +91${authController.phoneNo.value}.";
+                        authController.statusMessageColor.value =
+                            AppColor.textPrimary;
+                      }
+                    } : null,
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: AppColor.textLight,
+                     backgroundColor: authController.isButtonClickable.value
+                      ? AppColor.primary
+                     : AppColor.textLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                    ),
+                    
+                    child: const Padding(
+                      padding: EdgeInsets.all(14.0),
+                      child: Text(
+                        'Get OTP',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+            ),
+            const SizedBox(height: 10),
+            Obx(
+              () => Center(
+                child: Text(
+                  authController.statusMessage.value,
+                  style: TextStyle(
+                    color: authController.statusMessageColor.value,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  
+                ),
+                
+              ),
+            ),
+            
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
+
+
+
+//////
   Widget _buildVerifyOtpForm() {
     List<TextEditingController> otpFieldsControler = [
       TextEditingController(),
@@ -151,15 +198,25 @@ class VerificationScreen extends StatelessWidget {
                   authController.isOtpSent.value = false;
                   Get.back();
                 },
-                child: const Icon(
-                  Icons.arrow_back,
-                  size: 32,
-                  color: AppColor.textPrimary
+                child: const Icon(Icons.arrow_back,
+                    size: 32, color: AppColor.textPrimary),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 40),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/caros.jpg',
+                  width: 300,
+                  height: 200,
                 ),
               ),
             ),
             const SizedBox(
-              height: 180,
+              height: 10,
             ),
             const Text(
               'Verification',
@@ -185,7 +242,7 @@ class VerificationScreen extends StatelessWidget {
               height: 28,
             ),
             Container(
-              padding: EdgeInsets.all(28),
+              padding: const EdgeInsets.all(28),
               decoration: BoxDecoration(
                 color: AppColor.textLight,
                 borderRadius: BorderRadius.circular(12),
@@ -225,7 +282,7 @@ class VerificationScreen extends StatelessWidget {
                     authController.statusMessage.value,
                     style: TextStyle(
                         color: authController.statusMessageColor.value,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.normal),
                   ),
                   const SizedBox(
                     height: 22,
@@ -241,10 +298,10 @@ class VerificationScreen extends StatelessWidget {
                         authController.verifyOTP();
                       },
                       style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(AppColor.textLight),
-                            backgroundColor:  MaterialStateProperty.all<Color>(AppColor.primary),
-                       
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            AppColor.textLight),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(AppColor.primary),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -270,10 +327,9 @@ class VerificationScreen extends StatelessWidget {
             const Text(
               "Didn't receive any code?",
               style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColor.primary
-              ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.primary),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -335,17 +391,15 @@ class VerificationScreen extends StatelessWidget {
           maxLength: 1,
           decoration: InputDecoration(
             isDense: true,
-            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
             counter: const Offstage(),
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(width: 2, color: AppColor.primary),
                 borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
-              
                 borderSide: const BorderSide(width: 2, color: AppColor.primary),
                 borderRadius: BorderRadius.circular(12)),
-                
-                
           ),
           cursorColor: AppColor.textPrimary,
         ),
