@@ -1,11 +1,8 @@
-import 'package:finkin_credential/res/app_color/app_color.dart';
-import 'package:finkin_credential/welcome_carousal/page1.dart';
-import 'package:finkin_credential/welcome_carousal/page2.dart';
-import 'package:finkin_credential/welcome_carousal/page3.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../pages/verification_screen/verification_screen.dart';
+const int pageCount = 3;
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -28,87 +25,153 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColor.secondary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      backgroundColor: Colors.blueGrey,
+      body: Stack(
         children: [
-          SizedBox(
-            height: screenHeight * 0.6,
-            child: PageView(
-              controller: _controller,
-              children: const [
-                Page1(),
-                Page2(),
-                Page3(),
-              ],
-            ),
-          ),
-          if (currentPage == 0)
-            const Text(
-              'Sadiya Your Text Here',
-              style: TextStyle(
-                color: AppColor.primary,
-                fontSize: 20,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          if (currentPage == 1)
-            const Text(
-              'hilal Your Text Here',
-              style: TextStyle(
-                color: AppColor.primary,
-                fontSize: 20,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          if (currentPage == 2)
-            const Text(
-              'aleem Your Text Here',
-              style: TextStyle(
-                color: AppColor.primary,
-                fontSize: 20,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          SmoothPageIndicator(
+          PageView(
             controller: _controller,
-            count: 3,
-            effect: const JumpingDotEffect(
-              activeDotColor: AppColor.primary,
-              dotColor: AppColor.textLight,
-              dotHeight: 12,
-              dotWidth: 12,
-              spacing: 12,
-              jumpScale: 3,
-            ),
+            physics: const PageScrollPhysics(parent: BouncingScrollPhysics()),
+            children: [
+              const WelcomePageContent(
+                text:
+                    "Welcome to Finkin Credentials! \n\n We're excited to have you on board. Swipe right to discover the perfect loan solution that suits your needs.",
+                image: AssetImage('assets/images/loan2.jpg'),
+                backgroundColor: Colors.blueGrey,
+                textColor: Colors.white,
+                accessibilityLabel: "Welcome to Finkin Credentials!",
+              ),
+              const WelcomePageContent(
+                text:
+                    "Begin your financial empowerment journey with our tailored loan options.",
+                image: AssetImage('assets/images/loan3.webp'),
+                backgroundColor: Colors.blueGrey,
+                textColor: Colors.white,
+                accessibilityLabel:
+                    "Begin your financial empowerment journey with our tailored loan options.",
+              ),
+              WelcomePageContent(
+                text:
+                    "Let's make your financial dreams a reality with Finkin Credential!",
+                showButton: true,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VerificationScreen()),
+                  );
+                },
+                image: const AssetImage('assets/images/money.jpg'),
+                backgroundColor: Colors.blueGrey,
+                textColor: Colors.white,
+                accessibilityLabel:
+                    "Let's make your financial dreams a reality with Finkin Credential!",
+              ),
+            ],
           ),
-          if (currentPage == 2)
-            Padding(
-              padding: EdgeInsets.all(screenHeight * 0.02),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VerificationScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: AppColor.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: const Text('Get Started',
-                      style: TextStyle(color: AppColor.textLight)),
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: SmoothPageIndicator(
+                controller: _controller,
+                count: pageCount,
+                effect: ExpandingDotsEffect(
+                  activeDotColor: Colors.white,
+                  dotColor: Colors.white.withOpacity(0.3),
+                  dotHeight: 12,
+                  dotWidth: 12,
+                  spacing: 8,
                 ),
               ),
             ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class WelcomePageContent extends StatelessWidget {
+  final String text;
+  final bool showButton;
+  final VoidCallback? onPressed;
+  final ImageProvider image;
+  final Color backgroundColor;
+  final Color textColor;
+  final String accessibilityLabel;
+
+  const WelcomePageContent({
+    Key? key,
+    required this.text,
+    this.showButton = false,
+    this.onPressed,
+    required this.image,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.accessibilityLabel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: accessibilityLabel,
+      child: Container(
+        color: backgroundColor,
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: image,
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+            Text(
+              text,
+              style: TextStyle(
+                color: textColor,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 32),
+            if (showButton)
+              ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.blueGrey,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                  child: Text(
+                    'Get Started',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

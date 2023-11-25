@@ -5,18 +5,20 @@ import 'package:finkin_credential/res/image_asset/image_asset.dart';
 import 'package:finkin_credential/shared/widgets/Account_Tracking_Widget/accout_track.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../verification_screen/verification_screen.dart';
+
 class AccountScreen extends StatefulWidget {
-  AccountScreen({super.key});
+  const AccountScreen({super.key});
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  var auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   File? _selectedImage;
 
   void _openGallery() async {
@@ -140,8 +142,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                 icon: ImageAsset.logout,
                                 text: "Log Out",
                                 press: () {
-                                  auth.signOut();
-                                  // _showLogoutConfirmationDialog(context);
+                                  // auth.signOut();
+                                  _showLogoutConfirmationDialog(context);
                                 },
                               ),
                             ],
@@ -157,6 +159,16 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _signOut() async {
+    try {
+      await _auth.signOut();
+      print("User signed out");
+      Get.offAll(VerificationScreen());
+    } catch (e) {
+      print("Error signing out: $e");
+    }
   }
 
   void _showLogoutConfirmationDialog(BuildContext context) {
@@ -206,7 +218,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       child: const Text("Yes"),
                       onPressed: () {
-                        SystemNavigator.pop();
+                        _signOut();
                       },
                     ),
                   ],

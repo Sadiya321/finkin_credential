@@ -1,4 +1,5 @@
 import 'package:finkin_credential/controller/login_controller.dart';
+import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,16 +7,20 @@ class VerificationScreen extends StatelessWidget {
   final authController = Get.put(LoginController());
   final _formKey = GlobalKey<FormState>();
 
+  VerificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body: Stack(children: [
-        Obx(() => authController.isOtpSent.value
-            ? _buildVerifyOtpForm()
-            : _buildGetOtpForm())
-      ]),
+      backgroundColor: AppColor.textLight,
+      body: Stack(
+        children: [
+          Obx(() => authController.isOtpSent.value
+              ? _buildVerifyOtpForm()
+              : _buildGetOtpForm())
+        ],
+      ),
     );
   }
 
@@ -24,24 +29,39 @@ class VerificationScreen extends StatelessWidget {
       child: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Let's Sign in",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 45, bottom: 40),
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/hill.png',
+                    width: 400,
+                    height: 210,
+                  ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
+                height: 10,
+              ),
+              const Center(
+                child: Text(
+                  " Sign in",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
                 height: 10,
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColor.textLight,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Obx(() => Column(
@@ -49,7 +69,7 @@ class VerificationScreen extends StatelessWidget {
                         TextFormField(
                           keyboardType: TextInputType.number,
                           maxLength: 10,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -58,21 +78,29 @@ class VerificationScreen extends StatelessWidget {
                             authController.showPrefix.value = val.length > 0;
                           },
                           onSaved: (val) => authController.phoneNo.value = val!,
-                          validator: (val) => (val!.isEmpty || val!.length < 10)
-                              ? "Enter valid number"
+                          validator: (val) => (val!.isEmpty || val.length < 10)
+                              ? "Enter a valid number"
                               : null,
                           decoration: InputDecoration(
                             hintText: "Mobile Number",
                             labelText: "Mobile Number",
+                            hintStyle:
+                                const TextStyle(color: AppColor.textdivider),
+                            labelStyle:
+                                const TextStyle(color: AppColor.primary),
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
-                                borderRadius: BorderRadius.circular(10)),
+                              borderSide:
+                                  const BorderSide(color: Colors.black12),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
-                                borderRadius: BorderRadius.circular(10)),
+                              borderSide:
+                                  const BorderSide(color: Colors.black12),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             prefix: authController.showPrefix.value
-                                ? Padding(
+                                ? const Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 8),
                                     child: Text(
@@ -86,38 +114,59 @@ class VerificationScreen extends StatelessWidget {
                                 : null,
                             suffixIcon: _buildSuffixIcon(),
                           ),
+                          cursorColor: AppColor.textPrimary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 22,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              final form = _formKey.currentState;
-                              if (form!.validate()) {
-                                form.save();
-                                authController.getOtp();
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              // backgroundColor: kPrimaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(14.0),
-                              child: Text(
-                                'Get OTP',
-                                style: TextStyle(fontSize: 16),
-                              ),
+                        ElevatedButton(
+                          onPressed: authController.isButtonClickable.value
+                              ? () async {
+                                  final form = _formKey.currentState;
+                                  if (form!.validate()) {
+                                    form.save();
+                                    await authController.getOtp();
+
+                                    // Display the message on the same page
+                                    authController.statusMessage.value =
+                                        "Sending..... OTP to +91${authController.phoneNo.value}.";
+                                    authController.statusMessageColor.value =
+                                        AppColor.textPrimary;
+                                  }
+                                }
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: AppColor.textLight,
+                            backgroundColor:
+                                authController.isButtonClickable.value
+                                    ? AppColor.primary
+                                    : AppColor.textLight,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24.0),
                             ),
                           ),
-                        )
+                          child: const Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Get OTP',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
                       ],
                     )),
+              ),
+              const SizedBox(height: 10),
+              Obx(
+                () => Center(
+                  child: Text(
+                    authController.statusMessage.value,
+                    style: TextStyle(
+                      color: authController.statusMessageColor.value,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -126,6 +175,7 @@ class VerificationScreen extends StatelessWidget {
     );
   }
 
+//////
   Widget _buildVerifyOtpForm() {
     List<TextEditingController> otpFieldsControler = [
       TextEditingController(),
@@ -138,7 +188,7 @@ class VerificationScreen extends StatelessWidget {
 
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 0),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 0),
         child: Column(
           children: [
             Align(
@@ -148,42 +198,53 @@ class VerificationScreen extends StatelessWidget {
                   authController.isOtpSent.value = false;
                   Get.back();
                 },
-                child: Icon(
-                  Icons.arrow_back,
-                  size: 32,
-                  color: Colors.black54,
+                child: const Icon(Icons.arrow_back,
+                    size: 32, color: AppColor.textPrimary),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 40),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/caros.jpg',
+                  width: 300,
+                  height: 200,
                 ),
               ),
             ),
-            SizedBox(
-              height: 180,
+            const SizedBox(
+              height: 10,
             ),
-            Text(
+            const Text(
               'Verification',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
+                color: AppColor.primary,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Enter your OTP code number",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: Colors.black38,
+                color: AppColor.primary,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 28,
             ),
             Container(
-              padding: EdgeInsets.all(28),
+              padding: const EdgeInsets.all(28),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColor.textLight,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -221,9 +282,9 @@ class VerificationScreen extends StatelessWidget {
                     authController.statusMessage.value,
                     style: TextStyle(
                         color: authController.statusMessageColor.value,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.normal),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
                   SizedBox(
@@ -234,13 +295,14 @@ class VerificationScreen extends StatelessWidget {
                         otpFieldsControler.forEach((controller) {
                           authController.otp.value += controller.text;
                         });
-                        authController.verifyOTP();
+                        authController.verifyOTP(
+                            agentId: authController.agentId.value);
                       },
                       style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        // backgroundColor:
-                        //     MaterialStateProperty.all<Color>(kPrimaryColor),
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            AppColor.textLight),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(AppColor.primary),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -248,7 +310,7 @@ class VerificationScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.all(14.0),
                         child: Text(
                           'Verify',
@@ -260,19 +322,18 @@ class VerificationScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 18,
             ),
-            Text(
+            const Text(
               "Didn't receive any code?",
               style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black38,
-              ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.primary),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 18,
             ),
             Obx(
@@ -284,10 +345,10 @@ class VerificationScreen extends StatelessWidget {
                   authController.resendOTP.value
                       ? "Resend New Code"
                       : "Wait ${authController.resendAfter} seconds",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.purple,
+                    color: AppColor.primary,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -303,12 +364,12 @@ class VerificationScreen extends StatelessWidget {
     return AnimatedOpacity(
         opacity: authController.phoneNo?.value.length == 10 ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 250),
-        child: Icon(Icons.check_circle, color: Colors.green, size: 32));
+        child: const Icon(Icons.check_circle, color: AppColor.icon, size: 32));
   }
 
   Widget _textFieldOTP({bool first = true, last, controller}) {
     var height = (Get.width - 82) / 6;
-    return Container(
+    return SizedBox(
       height: height,
       child: AspectRatio(
         aspectRatio: 1,
@@ -323,7 +384,7 @@ class VerificationScreen extends StatelessWidget {
               Get.focusScope?.previousFocus();
             }
           },
-          showCursor: false,
+          showCursor: true,
           readOnly: false,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: height / 2, fontWeight: FontWeight.bold),
@@ -331,15 +392,17 @@ class VerificationScreen extends StatelessWidget {
           maxLength: 1,
           decoration: InputDecoration(
             isDense: true,
-            contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            counter: Offstage(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            counter: const Offstage(),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
+                borderSide: const BorderSide(width: 2, color: AppColor.primary),
                 borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.purple),
+                borderSide: const BorderSide(width: 2, color: AppColor.primary),
                 borderRadius: BorderRadius.circular(12)),
           ),
+          cursorColor: AppColor.textPrimary,
         ),
       ),
     );

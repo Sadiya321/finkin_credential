@@ -1,4 +1,7 @@
-import 'package:finkin_credential/utils/routes.dart';
+import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
+import 'package:finkin_credential/pages/verification_screen/verification_screen.dart';
+import 'package:finkin_credential/repository/agent_repository/authentication_repository.dart';
+import 'package:finkin_credential/welcome_carousal/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +14,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
+            options: DefaultFirebaseOptions.currentPlatform)
+        .then((value) => Get.put(AuthenticationRepository()));
   } catch (e) {
     print('Firebase initialization failed: $e');
   }
@@ -34,7 +38,13 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: MyRoutes.generateRoute,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => VerificationScreen(), // or any other initial screen
+        '/welcome': (context) => WelcomePage(),
+        '/bottomNavBar': (context) => BottomNavBar(),
+        // ... other routes
+      },
     );
   }
 }
