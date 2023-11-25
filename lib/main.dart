@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      // initialRoute: MyRoutes. splashscreen,
+      initialRoute: MyRoutes. splashscreen,
       onGenerateRoute: MyRoutes.generateRoute,
     );
   }

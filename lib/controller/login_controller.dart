@@ -34,7 +34,6 @@ class LoginController extends GetxController
 
  void startTimer() {
     _timer = Timer(Duration(seconds: 30), () {
-      // Timer callback to reset the button clickability after 30 seconds
       isButtonClickable.value = true;
     });
   }
