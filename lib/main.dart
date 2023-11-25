@@ -1,4 +1,3 @@
-
 import 'package:finkin_credential/utils/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
+            options: DefaultFirebaseOptions.currentPlatform)
+        .then((value) => Get.put(AuthenticationRepository()));
   } catch (e) {
     print('Firebase initialization failed: $e');
   }
@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes. splashscreen,
       onGenerateRoute: MyRoutes.generateRoute,
     );
   }

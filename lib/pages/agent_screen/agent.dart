@@ -1,5 +1,6 @@
 import 'package:finkin_credential/pages/agent_screen/agent_form.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomRadio extends StatelessWidget {
@@ -76,13 +77,13 @@ class AgentPage extends StatefulWidget {
 
 class _AgentPageState extends State<AgentPage> {
   String? selectedAgentType;
-  Color buttonColor = AppColor.secondary; 
-  String? errorMessage; 
+  Color buttonColor = AppColor.secondary;
+  String? errorMessage;
 
   void _handleCustomRadioChange(String? value) {
     setState(() {
       selectedAgentType = value;
-      errorMessage = null; 
+      errorMessage = null;
     });
   }
 
@@ -91,15 +92,36 @@ class _AgentPageState extends State<AgentPage> {
       setState(() {
         buttonColor = AppColor.icon;
       });
+      try {
+        // Retrieve the currently authenticated user
+        User? user = FirebaseAuth.instance.currentUser;
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const AgentForm(),
-        ),
-      );
+        if (user != null) {
+          String agentId = user.uid; // Use the UID as the agentId
+
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AgentForm(
+                agentId: agentId,
+              ),
+            ),
+          );
+        } else {
+          // Handle the case where the user is not authenticated
+          // (You might want to redirect to the login screen or handle it differently)
+          setState(() {
+            errorMessage = "User not authenticated!";
+          });
+        }
+      } catch (e) {
+        // Handle any potential errors
+        setState(() {
+          errorMessage = "Error: $e";
+        });
+      }
     } else {
       setState(() {
-        errorMessage = "Select your category !";
+        errorMessage = "Select your category!";
       });
     }
   }

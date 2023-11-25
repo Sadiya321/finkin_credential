@@ -50,8 +50,15 @@ class MyRoutes {
       case '/agent':
         return MaterialPageRoute(builder: (context) => const AgentPage());
       case '/agentform':
-        return MaterialPageRoute(builder: (context) => const AgentForm());
+        if (args is String) {
+          return MaterialPageRoute(
+              builder: (context) => AgentForm(agentId: args));
+        } else {
+          return MaterialPageRoute(builder: (context) => const SplashScreen());
+        }
+
       case '/home':
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
         return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case '/navBAr':

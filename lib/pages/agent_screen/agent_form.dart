@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'package:finkin_credential/controller/agent_form_controller.dart';
-import 'package:finkin_credential/pages/home_screen/bottom_nav.dart';
 import 'package:finkin_credential/res/app_color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class AgentForm extends StatefulWidget {
-  const AgentForm({Key? key}) : super(key: key);
+  const AgentForm({Key? key, required String agentId}) : super(key: key);
 
   @override
   State<AgentForm> createState() => _AgentFormState();
@@ -28,11 +26,25 @@ class _AgentFormState extends State<AgentForm> {
       });
     }
   }
+  final LoginController loginController = Get.put(LoginController());
+  File? _selectedImage;
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
     return Scaffold(
       key: _scaffoldKey,
@@ -40,9 +52,11 @@ class _AgentFormState extends State<AgentForm> {
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
           toolbarHeight: 125.0,
+          toolbarHeight: 125.0,
           backgroundColor: AppColor.textLight,
           elevation: 0,
           automaticallyImplyLeading: false,
+          title: Row(
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -54,6 +68,41 @@ class _AgentFormState extends State<AgentForm> {
                   fontSize: 26,
                   fontWeight: FontWeight.w400,
                 ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 90),
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        GestureDetector(
+                          onTap: _pickImage,
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: _selectedImage != null
+                                ? FileImage(_selectedImage!)
+                                : const AssetImage(
+                                        'assets/default_profile_image.png')
+                                    as ImageProvider<Object>,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -195,8 +244,7 @@ class _AgentFormState extends State<AgentForm> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const BottomNavBar(),
-                            ),
+                                builder: (context) => const BottomNavBar()),
                           );
                         }
                       },
